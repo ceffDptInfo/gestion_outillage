@@ -3,11 +3,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:gestion_outillage/domain/outils/i_outils_repository.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
+import 'package:injectable/injectable.dart';
 
 part 'outil_actor_bloc.freezed.dart';
 part 'outil_actor_event.dart';
 part 'outil_actor_state.dart';
 
+@injectable
 class OutilActorBloc extends Bloc<OutilActorEvent, OutilActorState> {
   final IOutilsRepository _outilsRepository;
   OutilActorBloc(this._outilsRepository)
@@ -33,7 +35,7 @@ class OutilActorBloc extends Bloc<OutilActorEvent, OutilActorState> {
       },
       update: (e) async* {
         yield const OutilActorState.actionInProgress();
-        final possibleFailure = await _outilsRepository.update(event.outils);
+        final possibleFailure = await _outilsRepository.update(e.outils);
         yield possibleFailure.fold(
           (f) => const OutilActorState.updatedFailure(),
           (_) => const OutilActorState.updatedSuccess(),
@@ -41,7 +43,7 @@ class OutilActorBloc extends Bloc<OutilActorEvent, OutilActorState> {
       },
       create: (e) async* {
         yield const OutilActorState.actionInProgress();
-        final possibleFailure = await _outilsRepository.create(event.outils);
+        final possibleFailure = await _outilsRepository.create(e.outils);
         yield possibleFailure.fold(
           (f) => const OutilActorState.createFailure(),
           (_) => const OutilActorState.createSuccess(),

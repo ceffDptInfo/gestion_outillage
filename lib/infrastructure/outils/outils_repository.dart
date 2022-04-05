@@ -1,17 +1,21 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:gestion_outillage/domain/auth/i_auth_facade.dart';
+import 'package:gestion_outillage/domain/core/errors.dart';
 import 'package:gestion_outillage/domain/outils/i_outils_repository.dart';
 import 'package:gestion_outillage/domain/outils/outils_failure.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
+import 'package:gestion_outillage/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
+import 'package:kt_dart/kt.dart';
 
 import 'outils_dtos.dart';
 
 @LazySingleton(as: IOutilsRepository)
 class Outilsrepository implements IOutilsRepository {
-  // final FirebaseFirestore _firestore;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Outilsrepository(this._firestore);
 
@@ -137,11 +141,61 @@ class Outilsrepository implements IOutilsRepository {
   }
 
   @override
-  Future<Either<OutilsFailure, Unit>> create(Outils outils) {
+  Stream<Either<OutilsFailure, KtList<Outils>>> watchBorrowedOutils() async* {
+    final userOption = await getIt<IAuthFacade>().getSignedInUser();
+    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+    final userDoc = user.id.getOrCrash();
+
+    yield* _firestore
+        .collection("users/$userDoc/outils_empruntées")
+        .where("status", isEqualTo: "Emprunté")
+        .snapshots()
+        .map(
+          (snapshot) => right<OutilsFailure, KtList<Outils>>(
+            snapshot.docs
+                .map((doc) => OutilsDto.fromFirestore(doc).toDomain())
+                .toImmutableList(),
+          ),
+        );
+    //     . onErrorReturnWith(
+    // (e, s) {
+    //   if (e is FirebaseException &&
+    //       e.message!.contains('PERMISSION DENIED')) {
+    //     return left(const OutilsFailure.insufficientPermission());
+    //   } else {
+    //     return left(
+    //       const OutilsFailure.unexpected(),
+    //     );
+    //   }
+    // },
+    //     );
+  }
+
+  @override
+  Future<Either<OutilsFailure, Unit>> create(Outils outil) async {
+    final userOption = await getIt<IAuthFacade>().getSignedInUser();
+    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+    final userDoc = user.id.getOrCrash();
     try {
-      // final outilDoc = await _fi
-    } on FirebaseException catch (e) {}
-    throw UnimplementedError();
+      final outilDto = OutilsDto.fromDomain(outil);
+
+      await _firestore
+          .collection("users/$userDoc/outils_empruntées/")
+          .doc(outilDto.id)
+          .set(outilDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message!.contains('PERMISSION DENIED')) {
+        return left(
+          const OutilsFailure.insufficientPermission(),
+        );
+      } else {
+        return left(
+          const OutilsFailure.unexpected(),
+        );
+      }
+    }
   }
 
   @override
@@ -151,9 +205,27 @@ class Outilsrepository implements IOutilsRepository {
   }
 
   @override
-  Future<Either<OutilsFailure, Unit>> update(Outils outils) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<OutilsFailure, Unit>> update(Outils outil) async {
+    final userOption = await getIt<IAuthFacade>().getSignedInUser();
+    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+    final userDoc = user.id.getOrCrash();
+    print("mais");
+    try {
+      final outilDto = OutilsDto.fromDomain(outil);
+      // print(outilDto.id);
+      await _firestore
+          .collection("users/$userDoc/outils_empruntées/")
+          .doc(outilDto.id)
+          .set(outilDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message!.contains('PERMISSION DENIED')) {
+        return left(const OutilsFailure.insufficientPermission());
+      } else {
+        return left(const OutilsFailure.unexpected());
+      }
+    }
   }
 
   Stream<List<OutilsDto>> fetchAllOutils() async* {

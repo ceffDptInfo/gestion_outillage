@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/auth/auth_bloc.dart';
 
 import 'package:gestion_outillage/application/nav_drawer/nav_drawer_bloc.dart';
+import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
+import 'package:gestion_outillage/application/outils/outils_watcher/user_outils_watcher/user_outils_watcher_bloc.dart';
 
 import '../routes/router.gr.dart';
 import '../../injection.dart';
@@ -48,10 +50,17 @@ class AppWidget extends StatelessWidget {
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
         ),
         BlocProvider(
+          create: (context) => getIt<UserOutilsWatcherBloc>()
+            ..add(
+              const UserOutilsWatcherEvent.watchUserOutilsStarted(),
+            ),
+        ),
+        BlocProvider(
           create: (context) =>
               getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
         ),
         BlocProvider(create: (context) => getIt<NavDrawerBloc>()),
+        BlocProvider(create: (context) => getIt<OutilActorBloc>()),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
