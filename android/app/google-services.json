@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "464064095381",
+    "project_id": "gestion-outillage-b8f87",
+    "storage_bucket": "gestion-outillage-b8f87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464064095381:android:d54731a652779df930679c",
+        "android_client_info": {
+          "package_name": "ch.ceff.flutter.gestion_outillage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464064095381-fbg9o0in5uthhm4mrumdkq8md6cqkhuu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_VBj4tM5z0H5O2J53Xeb4aueq26n6bE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464064095381-fbg9o0in5uthhm4mrumdkq8md6cqkhuu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
