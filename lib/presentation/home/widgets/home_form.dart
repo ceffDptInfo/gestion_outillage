@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
+import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
@@ -150,10 +151,12 @@ class HomeStartForm extends StatelessWidget {
                           // context.router.push(OutilsMesurePage());
                           if (index == 0) {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        CategoriesOutilsMesurePage()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CategoriesOutilsMesurePage(),
+                              ),
+                            );
                           }
                           if (index == 1) {
                             Navigator.push(
@@ -203,6 +206,7 @@ class HomeStartForm extends StatelessWidget {
       // snapshot: snapshot,
       index: index,
       context: context,
+      // id: snapshot.data![index].id,
       // id: snapshot.data![index].id,
       login: snapshot.data![index].login.toString(),
       noInventaire: snapshot.data![index].noInventaire.toString(),

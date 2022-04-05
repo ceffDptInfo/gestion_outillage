@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
+import 'package:gestion_outillage/domain/core/value_objects.dart';
+import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
@@ -10,6 +14,7 @@ import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 import 'package:gestion_outillage/presentation/outils_add/widgets/outils_choice_chip.dart';
 
 class OutilsMesureListDetailPage extends StatefulWidget {
+  // String id;
   String designation;
   String complement;
   String emplacement;
@@ -28,6 +33,7 @@ class OutilsMesureListDetailPage extends StatefulWidget {
   String categorie;
 
   OutilsMesureListDetailPage(
+    // this.id,
     this.designation,
     this.complement,
     this.emplacement,
@@ -71,6 +77,23 @@ class _OutilsMesureListDetailPageState
 
   String emplacementSub = "";
 
+  Outils outilborrowed = new Outils(
+      id: UniqueId(),
+      noInventaire: "",
+      designation: "",
+      dimmm1: "",
+      dimmm2: "",
+      dimangle1: "",
+      dimangle2: "",
+      complement: "",
+      emplacement: "",
+      etat: "",
+      login: "",
+      status: "",
+      nameImg: "",
+      arborescence: "",
+      categorie: "");
+
   @override
   void initState() {
     super.initState();
@@ -80,7 +103,6 @@ class _OutilsMesureListDetailPageState
     _emplacementController.text = widget.emplacement;
     _dimensionController.text = widget.dimangle1 + " / " + widget.dimangle2;
     _dimensionSecondController.text = widget.dimm1 + " / " + widget.dimm2;
-
     emplacementSub = widget.emplacement.substring(9);
   }
 
@@ -145,46 +167,100 @@ class _OutilsMesureListDetailPageState
         preferredSize: const Size.fromHeight(50),
         child: appBarReturn(context),
       ),
-      floatingActionButton: edit == false
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                setState(() {
-                  edit = true;
-                });
-              },
-              label: Text("Passer en mode edition"),
-              icon: Icon(Icons.edit),
-              backgroundColor: Colors.blueGrey,
-              foregroundColor: Colors.white,
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    setState(() {
-                      edit = false;
-                    });
-                  },
-                  label: Text("Annuler"),
-                  icon: Icon(Icons.close),
-                  backgroundColor: Colors.red,
+      floatingActionButton:
+          // edit == false
+          // ?
+          FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            // edit = true;
+            if (widget.statut == "Emprunté") {
+              BlocProvider.of<OutilActorBloc>(context).add(
+                OutilActorEvent.update(
+                  outilborrowed.copyWith(
+                    // id: UniqueId.fromUniqueString(widget.id),
+                    noInventaire: "",
+                    designation: widget.designation,
+                    dimmm1: _dimensionController.text,
+                    dimmm2: _dimensionSecondController.text,
+                    dimangle1: widget.dimangle1,
+                    dimangle2: widget.dimangle2,
+                    complement: widget.complement,
+                    emplacement: widget.emplacement,
+                    etat: widget.etat,
+                    login: "",
+                    status: "Disponible",
+                    // nameImg: widget.nameimg,
+                    // arborescence: widget.arborescence,
+                    // categorie: widget.categorie,
+                  ),
                 ),
-                SizedBox(
-                  width: 20,
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    setState(() {
-                      edit = false;
-                    });
-                  },
-                  label: Text("Sauvegarder"),
-                  icon: Icon(Icons.save),
-                  backgroundColor: Colors.green,
-                )
-              ],
-            ),
+              );
+            }
+            // else if (widget.statut == "Disponible") {
+            //   BlocProvider.of<OutilActorBloc>(context).add(
+            //     OutilActorEvent.create(
+            //       outilborrowed.copyWith(
+            //         id: UniqueId.fromUniqueString(widget.id),
+            //         noInventaire: "",
+            //         designation: widget.designation,
+            //         dimmm1: _dimensionController.text,
+            //         dimmm2: _dimensionSecondController.text,
+            //         dimangle1: widget.dimangle1,
+            //         dimangle2: widget.dimangle2,
+            //         complement: widget.complement,
+            //         emplacement: widget.emplacement,
+            //         etat: widget.etat,
+            //         login: "",
+            //         status: "Emprunté",
+            //         nameImg: widget.nameimg,
+            //         arborescence: widget.arborescence,
+            //         categorie: widget.categorie,
+            //       ),
+            //     ),
+            //   );
+            // }
+          });
+        },
+        label: widget.statut == "Emprunté"
+            ? Text("Rendre l'outil")
+            : Text("Emprunter"),
+        // icon: Icon(Icons.edit),
+        backgroundColor: Colors.blueGrey,
+        foregroundColor: Colors.white,
+      ),
+      // :
+      // Row(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       FloatingActionButton.extended(
+      //         onPressed: () {
+      //           setState(() {
+      //             // edit = false;
+      //             BlocProvider.of<OutilActorBloc>(context).add(
+      //               OutilActorEvent.create(outilborrowed),
+      //             );
+      //           });
+      //         },
+      //         label: Text("Annuler"),
+      //         icon: Icon(Icons.close),
+      //         backgroundColor: Colors.red,
+      //       ),
+      //       SizedBox(
+      //         width: 20,
+      //       ),
+      //       FloatingActionButton.extended(
+      //         onPressed: () {
+      //           setState(() {
+      //             edit = false;
+      //           });
+      //         },
+      //         label: Text("Sauvegarder"),
+      //         icon: Icon(Icons.save),
+      //         backgroundColor: Colors.green,
+      //       )
+      //     ],
+      //   ),
       body: Container(
           color: Colors.black12,
           width: MediaQuery.of(context).size.width,

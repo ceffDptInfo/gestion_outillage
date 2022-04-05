@@ -367,6 +367,7 @@ class _LayetteFormState extends State<LayetteForm> {
           context,
           MaterialPageRoute(
             builder: (context) => OutilsMesureListDetailPage(
+              // snapshot.datat![index].id,
               snapshot.data![index].designation,
               snapshot.data![index].complement,
               snapshot.data![index].emplacement,

@@ -54,169 +54,169 @@ class CardItemOuils extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OutilsMesureListDetailPage(
-                  designation,
-                  complement,
-                  emplacement,
-                  etat,
-                  statut,
-                  index,
-                  dimangle1,
-                  dimangle2,
-                  dimmm1,
-                  dimmm2,
-                  nameImg,
-                  arborescence,
-                  categorie,
-                ),
-              ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OutilsMesureListDetailPage(
+            designation,
+            complement,
+            emplacement,
+            etat,
+            statut,
+            index,
+            dimangle1,
+            dimangle2,
+            dimmm1,
+            dimmm2,
+            nameImg,
+            arborescence,
+            categorie,
+          ),
+        ),
+      ),
+      onLongPress: () {
+        // print('save');
+        // saveData(index);
+      },
+      // child:
+      // Container(
+      // direction: DismissDirection.down,
+      // background: Container(
+      //   padding: const EdgeInsets.only(right: 20.0),
+      //   alignment: Alignment.topCenter,
+      //   color: statut == 'Emprunté' ? Colors.green : Colors.red,
+      //   child: Text(
+      //     statut == 'Disponible' ? 'L\'emprunter' : 'Le rendre',
+      //     textAlign: TextAlign.right,
+      //     style: const TextStyle(color: Colors.white, fontSize: 24),
+      //   ),
+      // ),
+      // key: Key(index.toString()),
+      // onDismissed: (direction) {
+      //   statut == 'Emprunté'
+      //       ? ScaffoldMessenger.of(context).showSnackBar(
+      //           SnackBar(content: Text(designation + ' rendu')))
+      //       : ScaffoldMessenger.of(context).showSnackBar(
+      //           SnackBar(content: Text(designation + ' emprunté')));
+      // },
+      child: Card(
+        // elevation: 6.0,
+        semanticContainer: true,
+        // elevation: 20,
+        // shape: RoundedRectangleBorder(
+        //   // side: BorderSide(color: Colors.black),
+        //   borderRadius: BorderRadius.circular(20),
+        // ),
+        margin: const EdgeInsets.all(10),
+        child: Container(
+          // decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.all(Radius.circular(8))),
+          // height: MediaQuery.of(context).size.height * 0.3,
+          foregroundDecoration: RotatedCornerDecoration(
+            color: statut == "Disponible" ? Colors.green : Colors.red,
+            geometry: const BadgeGeometry(
+              width: 58,
+              height: 58,
+              // cornerRadius: 20,
             ),
-        onLongPress: () {
-          // print('save');
-          // saveData(index);
-        },
-        child: Dismissible(
-          direction: DismissDirection.down,
-          background: Container(
-            padding: const EdgeInsets.only(right: 20.0),
-            alignment: Alignment.topCenter,
-            color: statut == 'Emprunté' ? Colors.green : Colors.red,
-            child: Text(
-              statut == 'Disponible' ? 'L\'emprunter' : 'Le rendre',
-              textAlign: TextAlign.right,
-              style: const TextStyle(color: Colors.white, fontSize: 24),
+            labelInsets: const LabelInsets(baselineShift: 0),
+            textSpan: TextSpan(
+              text: statut,
+              style: const TextStyle(
+                fontSize: 10,
+                letterSpacing: 0,
+                fontWeight: FontWeight.bold,
+                // backgroundColor: Colors.red,
+              ),
             ),
           ),
-          key: Key(index.toString()),
-          onDismissed: (direction) {
-            statut == 'Emprunté'
-                ? ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(designation + ' rendu')))
-                : ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(designation + ' emprunté')));
-          },
-          child: Card(
-            // elevation: 6.0,
-            semanticContainer: true,
-            // elevation: 20,
-            // shape: RoundedRectangleBorder(
-            //   // side: BorderSide(color: Colors.black),
-            //   borderRadius: BorderRadius.circular(20),
-            // ),
-            margin: const EdgeInsets.all(10),
-            child: Container(
-              // decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.all(Radius.circular(8))),
-              // height: MediaQuery.of(context).size.height * 0.3,
-              foregroundDecoration: RotatedCornerDecoration(
-                color: statut == "Disponible" ? Colors.green : Colors.red,
-                geometry: const BadgeGeometry(
-                  width: 58,
-                  height: 58,
-                  // cornerRadius: 20,
-                ),
-                labelInsets: const LabelInsets(baselineShift: 0),
-                textSpan: TextSpan(
-                  text: statut,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    letterSpacing: 0,
-                    fontWeight: FontWeight.bold,
-                    // backgroundColor: Colors.red,
-                  ),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Center(
-                    child: Align(
-                      child: ClipRRect(
-                        // borderRadius: BorderRadius.circular(16.0),
-                        // borderRadius: const BorderRadius.only(
-                        //   topLeft: Radius.circular(20),
-                        //   topRight: Radius.circular(20),
-                        // ),
-                        child: FittedBox(
-                          child: Image.asset(
-                            "assets/images/image_outils/" + nameImg,
-                            fit: BoxFit.fill,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            width: MediaQuery.of(context).size.width * 0.12,
-                          ),
-                        ),
+          child: Column(
+            children: [
+              Center(
+                child: Align(
+                  child: ClipRRect(
+                    // borderRadius: BorderRadius.circular(16.0),
+                    // borderRadius: const BorderRadius.only(
+                    //   topLeft: Radius.circular(20),
+                    //   topRight: Radius.circular(20),
+                    // ),
+                    child: FittedBox(
+                      child: Image.asset(
+                        "assets/images/image_outils/" + nameImg,
+                        fit: BoxFit.fill,
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.12,
                       ),
                     ),
                   ),
-                  Align(
-                    child: SizedBox(
-                      // margin: EdgeInsets.only(top: 10),
-                      // color: Colors.blue,
-                      width: 150,
-                      height: 64,
-                      // child: FittedBox(
-                      // alignment: Alignment.center,
-                      // fit: BoxFit.fitWidth,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: Text(designation + "\n" + complement,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                          // SizedBox(
-                          //   height: 16,
-                          // ),
-                          const Divider(),
-                          dimmm1 != "0" || dimmm2 != "0"
-                              ? Text(
-                                  "Dim [mm]: " + dimmm1 + " / " + dimmm2,
-                                )
-                              : Container(),
-                          dimangle1 != "0" || dimangle2 != "0"
-                              ? Text(
-                                  "Dim angle: " + dimangle1 + " / " + dimangle2,
-                                )
-                              : Container(),
-                        ],
+                ),
+              ),
+              Align(
+                child: SizedBox(
+                  // margin: EdgeInsets.only(top: 10),
+                  // color: Colors.blue,
+                  width: 150,
+                  height: 64,
+                  // child: FittedBox(
+                  // alignment: Alignment.center,
+                  // fit: BoxFit.fitWidth,
+                  child: Column(
+                    children: [
+                      Flexible(
+                        child: Text(designation + "\n" + complement,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ),
+                      // SizedBox(
+                      //   height: 16,
                       // ),
-                    ),
+                      const Divider(),
+                      dimmm1 != "0" || dimmm2 != "0"
+                          ? Text(
+                              "Dim [mm]: " + dimmm1 + " / " + dimmm2,
+                            )
+                          : Container(),
+                      dimangle1 != "0" || dimangle2 != "0"
+                          ? Text(
+                              "Dim angle: " + dimangle1 + " / " + dimangle2,
+                            )
+                          : Container(),
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                  // ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: 80,
+                  height: 30,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      width: 80,
-                      height: 30,
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        child: Container(
-                          color: etat == "Usagé" ? Colors.orange : Colors.green,
-                          child: Center(
-                            child: Text(
-                              etat,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                              // textAlign: TextAlign.left,
-                            ),
+                      color: etat == "Usagé" ? Colors.orange : Colors.green,
+                      child: Center(
+                        child: Text(
+                          etat,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
+                          // textAlign: TextAlign.left,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget returnCardItemOutils(var snapshot) => CardItemOuils(

@@ -66,6 +66,7 @@ abstract class OutilsDto implements _$OutilsDto {
   }
 
   factory OutilsDto.fromDomain(Outils outil) {
+    print(outil.id.getOrCrash());
     return OutilsDto(
       id: outil.id.getOrCrash(),
       name_img: outil.nameImg,
