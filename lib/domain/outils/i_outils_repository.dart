@@ -6,7 +6,7 @@ import 'package:kt_dart/kt.dart';
 import 'outils.dart';
 
 abstract class IOutilsRepository {
-  Stream<Either<OutilsFailure, Stream<List<OutilsDto>>>> watchAllOutils();
+  Future<Either<OutilsFailure, KtList<Outils>>> watchAllOutils();
   Stream<Either<OutilsFailure, KtList<Outils>>> watchBorrowedOutils();
   Future<Either<OutilsFailure, Unit>> create(Outils outils);
   Future<Either<OutilsFailure, Unit>> update(Outils outils);

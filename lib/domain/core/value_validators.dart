@@ -32,7 +32,7 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
 //8 caractères : 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial
 Either<ValueFailure<String>, String> validatePassword(String input) {
   const passwordRegex =
-      r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+      r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{2,}$";
   if (RegExp(passwordRegex).hasMatch(input)) {
     return right(input);
   } else {

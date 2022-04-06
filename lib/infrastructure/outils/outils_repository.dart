@@ -10,6 +10,7 @@ import 'package:gestion_outillage/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 import 'package:kt_dart/kt.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'outils_dtos.dart';
 
@@ -156,19 +157,44 @@ class Outilsrepository implements IOutilsRepository {
                 .map((doc) => OutilsDto.fromFirestore(doc).toDomain())
                 .toImmutableList(),
           ),
-        );
-    //     . onErrorReturnWith(
-    // (e, s) {
-    //   if (e is FirebaseException &&
-    //       e.message!.contains('PERMISSION DENIED')) {
-    //     return left(const OutilsFailure.insufficientPermission());
-    //   } else {
-    //     return left(
-    //       const OutilsFailure.unexpected(),
-    //     );
-    //   }
-    // },
-    //     );
+        )
+        .onErrorReturnWith(
+      (e, s) {
+        if (e is FirebaseException &&
+            e.message!.contains('PERMISSION DENIED')) {
+          return left(const OutilsFailure.insufficientPermission());
+        } else {
+          return left(
+            const OutilsFailure.unexpected(),
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  Future<Either<OutilsFailure, KtList<Outils>>> watchAllOutils() async {
+    const url = "https://monceff.cidisi.ch/json/outillage.json.php";
+    try {
+      final response = await http.get(Uri.parse(url));
+      List<Outils> list = [];
+      if (response.statusCode == 200) {
+        String responsebody = response.body;
+        dynamic jsonresponse = json.decode(responsebody);
+        dynamic outilsResponse =
+            jsonresponse.map((outilsI) => Outils.fromJson(outilsI)).toList();
+        outilsResponse.forEach((outils) {
+          list.add(outils);
+        });
+      }
+      return right(list.toImmutableList());
+    } on FormatException catch (e) {
+      if (e.message.contains('PERMISSION DENIED')) {
+        return left(const OutilsFailure.insufficientPermission());
+      } else {
+        return left(const OutilsFailure.unexpected());
+      }
+    }
   }
 
   @override
@@ -199,9 +225,25 @@ class Outilsrepository implements IOutilsRepository {
   }
 
   @override
-  Future<Either<OutilsFailure, Unit>> delete(Outils outils) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<OutilsFailure, Unit>> delete(Outils outil) async {
+    try {
+      final outilDto = OutilsDto.fromDomain(outil);
+      final userOption = await getIt<IAuthFacade>().getSignedInUser();
+      final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+      final userDoc = user.id.getOrCrash();
+      await _firestore
+          .collection("users/$userDoc/outils_empruntées/")
+          .doc(outilDto.id)
+          .delete();
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message!.contains('PERMISSION DENIED')) {
+        return left(const OutilsFailure.insufficientPermission());
+      } else {
+        return left(const OutilsFailure.unexpected());
+      }
+    }
   }
 
   @override
@@ -209,10 +251,8 @@ class Outilsrepository implements IOutilsRepository {
     final userOption = await getIt<IAuthFacade>().getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
     final userDoc = user.id.getOrCrash();
-    print("mais");
     try {
       final outilDto = OutilsDto.fromDomain(outil);
-      // print(outilDto.id);
       await _firestore
           .collection("users/$userDoc/outils_empruntées/")
           .doc(outilDto.id)
@@ -225,41 +265,6 @@ class Outilsrepository implements IOutilsRepository {
       } else {
         return left(const OutilsFailure.unexpected());
       }
-    }
-  }
-
-  Stream<List<OutilsDto>> fetchAllOutils() async* {
-    const url = "https://monceff.cidisi.ch/json/outillage.json.php";
-
-    // var response = await Dio().get
-
-    final response = await http.get(Uri.parse(url));
-
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      // print(list);
-      yield list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-
-  @override
-  Stream<Either<OutilsFailure, Stream<List<OutilsDto>>>>
-      watchAllOutils() async* {
-    try {
-      final _fetchAllOutils = fetchAllOutils();
-      // print(_fetchAllOutils);
-      yield right(_fetchAllOutils);
-    } on FormatException catch (_) {
-      yield left(const OutilsFailure.unexpected());
     }
   }
 }

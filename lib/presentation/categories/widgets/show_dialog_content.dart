@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gestion_outillage/domain/outils/outils.dart';
 // import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 // import 'card_item_outils.dart';
@@ -9,10 +11,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // ignore: must_be_immutable
 class MyDialogContent extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
-  var snapshot;
+  KtList<Outils> outils;
   int activeIndex;
 
-  MyDialogContent(this.snapshot, this.activeIndex, {Key? key})
+  MyDialogContent(this.outils, this.activeIndex, {Key? key})
       : super(key: key);
 
   @override
@@ -52,7 +54,7 @@ class _MyDialogContentState extends State<MyDialogContent> {
             margin: const EdgeInsets.symmetric(vertical: 14),
             // color: Colors.blue,
             child: CarouselSlider.builder(
-                itemCount: widget.snapshot.data?.length,
+                itemCount: widget.outils.size,
                 options: CarouselOptions(
                   viewportFraction: 0.3,
                   // autoPlay: true,
@@ -88,7 +90,7 @@ class _MyDialogContentState extends State<MyDialogContent> {
               // print(index);
             },
             activeIndex: widget.activeIndex,
-            count: widget.snapshot.data!.length,
+            count: widget.outils.size,
             effect: const WormEffect(
               dotWidth: 20,
               dotHeight: 20,

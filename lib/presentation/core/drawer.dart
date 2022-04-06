@@ -170,9 +170,9 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
           ),
         ),
-        data.header == true
-            ? Positioned(right: 10, top: 10, child: notifBadge())
-            : Container(),
+        // data.header == true
+        //     ? Positioned(right: 10, top: 10, child: notifBadge())
+        //     : Container(),
       ],
     );
   }
@@ -254,18 +254,18 @@ class NavigationDrawerWidget extends StatelessWidget {
       );
 }
 
-Widget notifBadge() {
-  return Badge(
-    badgeColor: Colors.red,
-    badgeContent: const Text(
-      '4',
-      style: TextStyle(
-        color: Colors.white,
-      ),
-    ),
-    // child: Icon(Icons.person, size: 30),
-  );
-}
+// Widget notifBadge() {
+//   return Badge(
+//     badgeColor: Colors.red,
+//     badgeContent: const Text(
+//       '4',
+//       style: TextStyle(
+//         color: Colors.white,
+//       ),
+//     ),
+//     // child: Icon(Icons.person, size: 30),
+//   );
+// }
 
 class _NavigationItem {
   final bool header;

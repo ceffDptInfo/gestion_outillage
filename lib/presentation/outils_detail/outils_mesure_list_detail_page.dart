@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
 import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
+import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
@@ -14,39 +15,41 @@ import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 import 'package:gestion_outillage/presentation/outils_add/widgets/outils_choice_chip.dart';
 
 class OutilsMesureListDetailPage extends StatefulWidget {
-  // String id;
-  String designation;
-  String complement;
-  String emplacement;
-  String etat;
-  String statut;
+  Outils outil;
+  // UniqueId id;
+  // String designation;
+  // String complement;
+  // String emplacement;
+  // String etat;
+  // String statut;
 
-  int index;
-  String dimangle1;
-  String dimangle2;
-  String dimm1;
-  String dimm2;
+  // int index;
+  // String dimangle1;
+  // String dimangle2;
+  // String dimm1;
+  // String dimm2;
 
-  String nameimg;
-  String arborescence;
+  // String nameimg;
+  // String arborescence;
 
-  String categorie;
+  // String categorie;
 
   OutilsMesureListDetailPage(
+    this.outil,
     // this.id,
-    this.designation,
-    this.complement,
-    this.emplacement,
-    this.etat,
-    this.statut,
-    this.index,
-    this.dimangle1,
-    this.dimangle2,
-    this.dimm1,
-    this.dimm2,
-    this.nameimg,
-    this.arborescence,
-    this.categorie,
+    // this.designation,
+    // this.complement,
+    // this.emplacement,
+    // this.etat,
+    // this.statut,
+    // this.index,
+    // this.dimangle1,
+    // this.dimangle2,
+    // this.dimm1,
+    // this.dimm2,
+    // this.nameimg,
+    // this.arborescence,
+    // this.categorie,
   );
 
   @override
@@ -77,7 +80,7 @@ class _OutilsMesureListDetailPageState
 
   String emplacementSub = "";
 
-  Outils outilborrowed = new Outils(
+  Outils outilborrowed = Outils(
       id: UniqueId(),
       noInventaire: "",
       designation: "",
@@ -97,13 +100,14 @@ class _OutilsMesureListDetailPageState
   @override
   void initState() {
     super.initState();
-    _designationController.text = widget.designation;
-    _complementController.text = widget.complement;
-    _statutController.text = widget.statut;
-    _emplacementController.text = widget.emplacement;
-    _dimensionController.text = widget.dimangle1 + " / " + widget.dimangle2;
-    _dimensionSecondController.text = widget.dimm1 + " / " + widget.dimm2;
-    emplacementSub = widget.emplacement.substring(9);
+    // outils = outilborrowe
+    // _designationController.text = widget.designation;
+    // _complementController.text = widget.complement;
+    // _statutController.text = widget.statut;
+    // _emplacementController.text = widget.emplacement;
+    // _dimensionController.text = widget.dimangle1 + " / " + widget.dimangle2;
+    // _dimensionSecondController.text = widget.dimm1 + " / " + widget.dimm2;
+    // emplacementSub = widget.emplacement.substring(9);
   }
 
   @override
@@ -122,7 +126,6 @@ class _OutilsMesureListDetailPageState
         }
       });
     }
-
     // Future<Null> _cropImage() async {
     //   File? croppedFile = await ImageCropper.cropImage(
     //     sourcePath: _pickedImageFile!.path,
@@ -174,55 +177,37 @@ class _OutilsMesureListDetailPageState
         onPressed: () {
           setState(() {
             // edit = true;
-            if (widget.statut == "Emprunté") {
+            if (widget.outil.status == "Emprunté") {
               BlocProvider.of<OutilActorBloc>(context).add(
-                OutilActorEvent.update(
-                  outilborrowed.copyWith(
-                    // id: UniqueId.fromUniqueString(widget.id),
-                    noInventaire: "",
-                    designation: widget.designation,
-                    dimmm1: _dimensionController.text,
-                    dimmm2: _dimensionSecondController.text,
-                    dimangle1: widget.dimangle1,
-                    dimangle2: widget.dimangle2,
-                    complement: widget.complement,
-                    emplacement: widget.emplacement,
-                    etat: widget.etat,
-                    login: "",
-                    status: "Disponible",
-                    // nameImg: widget.nameimg,
-                    // arborescence: widget.arborescence,
-                    // categorie: widget.categorie,
+                OutilActorEvent.deleted(widget.outil),
+              );
+            } else if (widget.outil.status == "Disponible") {
+              BlocProvider.of<OutilActorBloc>(context).add(
+                OutilActorEvent.create(
+                  widget.outil.copyWith(
+                    id: widget.outil.id,
+                    noInventaire: widget.outil.noInventaire,
+                    designation: widget.outil.designation,
+                    dimmm1: widget.outil.dimmm1,
+                    dimmm2: widget.outil.dimmm2,
+                    dimangle1: widget.outil.dimangle1,
+                    dimangle2: widget.outil.dimangle2,
+                    complement: widget.outil.complement,
+                    emplacement: widget.outil.emplacement,
+                    etat: widget.outil.etat,
+                    login: widget.outil.login,
+                    status: "Emprunté",
+                    nameImg: widget.outil.nameImg,
+                    arborescence: widget.outil.arborescence,
+                    categorie: widget.outil.categorie,
                   ),
                 ),
               );
             }
-            // else if (widget.statut == "Disponible") {
-            //   BlocProvider.of<OutilActorBloc>(context).add(
-            //     OutilActorEvent.create(
-            //       outilborrowed.copyWith(
-            //         id: UniqueId.fromUniqueString(widget.id),
-            //         noInventaire: "",
-            //         designation: widget.designation,
-            //         dimmm1: _dimensionController.text,
-            //         dimmm2: _dimensionSecondController.text,
-            //         dimangle1: widget.dimangle1,
-            //         dimangle2: widget.dimangle2,
-            //         complement: widget.complement,
-            //         emplacement: widget.emplacement,
-            //         etat: widget.etat,
-            //         login: "",
-            //         status: "Emprunté",
-            //         nameImg: widget.nameimg,
-            //         arborescence: widget.arborescence,
-            //         categorie: widget.categorie,
-            //       ),
-            //     ),
-            //   );
-            // }
+            Navigator.of(context).pop();
           });
         },
-        label: widget.statut == "Emprunté"
+        label: widget.outil.status == "Emprunté"
             ? Text("Rendre l'outil")
             : Text("Emprunter"),
         // icon: Icon(Icons.edit),
@@ -288,7 +273,7 @@ class _OutilsMesureListDetailPageState
                             child: PhotoView(
                               imageProvider: AssetImage(
                                   'assets/images/image_outils/' +
-                                      widget.nameimg.toString()),
+                                      widget.outil.nameImg.toString()),
                               // maxScale: PhotoViewComputedScale.covered,
                               // filterQuality: FilterQuality.low,
                               backgroundDecoration:
@@ -299,7 +284,7 @@ class _OutilsMesureListDetailPageState
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (_) {
-                                return DetailScreen(widget.nameimg);
+                                return DetailScreen(widget.outil.nameImg);
                               }));
                             },
                           ),
@@ -325,14 +310,17 @@ class _OutilsMesureListDetailPageState
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        listInformation("Désignation", widget.designation,
+                        listInformation("Désignation", widget.outil.designation,
                             Colors.black, edit, _designationController),
 
                         // ignore: unnecessary_null_comparison
-                        widget.dimangle1 != "0" || widget.dimangle2 != "0"
+                        widget.outil.dimangle1 != "0" ||
+                                widget.outil.dimangle2 != "0"
                             ? listInformation(
                                 "Dimension °",
-                                widget.dimangle1 + " / " + widget.dimangle2,
+                                widget.outil.dimangle1! +
+                                    " / " +
+                                    widget.outil.dimangle2!,
                                 Colors.black,
                                 edit,
                                 _dimensionController)
@@ -343,18 +331,21 @@ class _OutilsMesureListDetailPageState
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              widget.dimm1 != "0" || widget.dimm2 != "0"
+                              widget.outil.dimmm1 != "0" ||
+                                      widget.outil.dimmm2 != "0"
                                   ? listInformation(
                                       "Dimension [mm]",
-                                      widget.dimm1 + " / " + widget.dimm2,
+                                      widget.outil.dimmm1! +
+                                          " / " +
+                                          widget.outil.dimmm2!,
                                       Colors.black,
                                       edit,
                                       _dimensionSecondController)
                                   : Container(),
-                              widget.complement != ""
+                              widget.outil.complement != ""
                                   ? listInformation(
                                       "Complément",
-                                      widget.complement,
+                                      widget.outil.complement,
                                       Colors.black,
                                       edit,
                                       _complementController)
@@ -363,18 +354,21 @@ class _OutilsMesureListDetailPageState
                           )
                         : Row(
                             children: [
-                              widget.dimm1 != "0" || widget.dimm2 != "0"
+                              widget.outil.dimmm1 != "0" ||
+                                      widget.outil.dimmm2 != "0"
                                   ? listInformation(
                                       "Dimension [mm]",
-                                      widget.dimm1 + " / " + widget.dimm2,
+                                      widget.outil.dimmm1! +
+                                          " / " +
+                                          widget.outil.dimmm2!,
                                       Colors.black,
                                       edit,
                                       _dimensionSecondController)
                                   : Container(),
-                              widget.complement != ""
+                              widget.outil.complement != ""
                                   ? listInformation(
                                       "Complément",
-                                      widget.complement,
+                                      widget.outil.complement,
                                       Colors.black,
                                       edit,
                                       _complementController)
@@ -384,7 +378,7 @@ class _OutilsMesureListDetailPageState
                     Divider(),
                     Column(
                       children: [
-                        widget.etat != ""
+                        widget.outil.etat != ""
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -400,7 +394,7 @@ class _OutilsMesureListDetailPageState
                                   ),
 
                                   edit == false
-                                      ? chipInfo(widget.etat, "")
+                                      ? chipInfo(widget.outil.etat, "")
                                       : Container(
                                           child: Row(
                                             mainAxisAlignment:
@@ -408,12 +402,18 @@ class _OutilsMesureListDetailPageState
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              ChoiceChipItemEtat("Neuf",
-                                                  Colors.green, widget.etat),
-                                              ChoiceChipItemEtat("Usagé",
-                                                  Colors.amber, widget.etat),
-                                              ChoiceChipItemEtat("Défectueux",
-                                                  Colors.red, widget.etat),
+                                              ChoiceChipItemEtat(
+                                                  "Neuf",
+                                                  Colors.green,
+                                                  widget.outil.etat),
+                                              ChoiceChipItemEtat(
+                                                  "Usagé",
+                                                  Colors.amber,
+                                                  widget.outil.etat),
+                                              ChoiceChipItemEtat(
+                                                  "Défectueux",
+                                                  Colors.red,
+                                                  widget.outil.etat),
                                             ],
                                           ),
                                         ),
@@ -435,7 +435,7 @@ class _OutilsMesureListDetailPageState
                               ),
                             ),
                             edit == false
-                                ? chipInfo("", widget.statut)
+                                ? chipInfo("", widget.outil.status)
                                 : Container(
                                     child: Row(
                                       mainAxisAlignment:
@@ -446,13 +446,14 @@ class _OutilsMesureListDetailPageState
                                         ChoiceChipItemStatut(
                                             "Disponible",
                                             Colors.green,
-                                            widget.etat,
-                                            widget.statut),
+                                            widget.outil.etat,
+                                            widget.outil.status),
                                         ChoiceChipItemStatut(
-                                            "Emprunté",
-                                            Colors.amber,
-                                            widget.etat,
-                                            widget.statut),
+                                          "Emprunté",
+                                          Colors.amber,
+                                          widget.outil.etat,
+                                          widget.outil.status,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -482,8 +483,12 @@ class _OutilsMesureListDetailPageState
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: listInformation("Emplacement", widget.emplacement,
-                          Colors.black, edit, _emplacementController),
+                      child: listInformation(
+                          "Emplacement",
+                          widget.outil.emplacement,
+                          Colors.black,
+                          edit,
+                          _emplacementController),
                     ),
                     // Text("Emplacement : " + emplacementSub),
                     gridEmplacement(context),
