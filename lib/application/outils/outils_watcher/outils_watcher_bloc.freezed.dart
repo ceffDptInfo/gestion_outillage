@@ -22,7 +22,7 @@ class _$OutilsWatcherEventTearOff {
   }
 
   _OutilsReceived outilsReceived(
-      Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils) {
+      Either<OutilsFailure, KtList<Outils>> failuresOrOutils) {
     return _OutilsReceived(
       failuresOrOutils,
     );
@@ -38,23 +38,21 @@ mixin _$OutilsWatcherEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() watchOutilsStarted,
     required TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)
+            Either<OutilsFailure, KtList<Outils>> failuresOrOutils)
         outilsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
     required TResult orElse(),
   }) =>
@@ -139,7 +137,7 @@ class _$_WatchOutilsStarted implements _WatchOutilsStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() watchOutilsStarted,
     required TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)
+            Either<OutilsFailure, KtList<Outils>> failuresOrOutils)
         outilsReceived,
   }) {
     return watchOutilsStarted();
@@ -149,8 +147,7 @@ class _$_WatchOutilsStarted implements _WatchOutilsStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
   }) {
     return watchOutilsStarted?.call();
@@ -160,8 +157,7 @@ class _$_WatchOutilsStarted implements _WatchOutilsStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
     required TResult orElse(),
   }) {
@@ -212,7 +208,7 @@ abstract class _$OutilsReceivedCopyWith<$Res> {
   factory _$OutilsReceivedCopyWith(
           _OutilsReceived value, $Res Function(_OutilsReceived) then) =
       __$OutilsReceivedCopyWithImpl<$Res>;
-  $Res call({Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils});
+  $Res call({Either<OutilsFailure, KtList<Outils>> failuresOrOutils});
 }
 
 /// @nodoc
@@ -234,7 +230,7 @@ class __$OutilsReceivedCopyWithImpl<$Res>
       failuresOrOutils == freezed
           ? _value.failuresOrOutils
           : failuresOrOutils // ignore: cast_nullable_to_non_nullable
-              as Either<OutilsFailure, Stream<List<OutilsDto>>>,
+              as Either<OutilsFailure, KtList<Outils>>,
     ));
   }
 }
@@ -245,7 +241,7 @@ class _$_OutilsReceived implements _OutilsReceived {
   const _$_OutilsReceived(this.failuresOrOutils);
 
   @override
-  final Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils;
+  final Either<OutilsFailure, KtList<Outils>> failuresOrOutils;
 
   @override
   String toString() {
@@ -276,7 +272,7 @@ class _$_OutilsReceived implements _OutilsReceived {
   TResult when<TResult extends Object?>({
     required TResult Function() watchOutilsStarted,
     required TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)
+            Either<OutilsFailure, KtList<Outils>> failuresOrOutils)
         outilsReceived,
   }) {
     return outilsReceived(failuresOrOutils);
@@ -286,8 +282,7 @@ class _$_OutilsReceived implements _OutilsReceived {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
   }) {
     return outilsReceived?.call(failuresOrOutils);
@@ -297,8 +292,7 @@ class _$_OutilsReceived implements _OutilsReceived {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchOutilsStarted,
-    TResult Function(
-            Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils)?
+    TResult Function(Either<OutilsFailure, KtList<Outils>> failuresOrOutils)?
         outilsReceived,
     required TResult orElse(),
   }) {
@@ -342,10 +336,10 @@ class _$_OutilsReceived implements _OutilsReceived {
 
 abstract class _OutilsReceived implements OutilsWatcherEvent {
   const factory _OutilsReceived(
-          Either<OutilsFailure, Stream<List<OutilsDto>>> failuresOrOutils) =
+          Either<OutilsFailure, KtList<Outils>> failuresOrOutils) =
       _$_OutilsReceived;
 
-  Either<OutilsFailure, Stream<List<OutilsDto>>> get failuresOrOutils =>
+  Either<OutilsFailure, KtList<Outils>> get failuresOrOutils =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$OutilsReceivedCopyWith<_OutilsReceived> get copyWith =>
@@ -364,7 +358,7 @@ class _$OutilsWatcherStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(Stream<List<OutilsDto>> listOutils) {
+  _LoadSuccess loadSuccess(KtList<Outils> listOutils) {
     return _LoadSuccess(
       listOutils,
     );
@@ -386,7 +380,7 @@ mixin _$OutilsWatcherState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(Stream<List<OutilsDto>> listOutils) loadSuccess,
+    required TResult Function(KtList<Outils> listOutils) loadSuccess,
     required TResult Function(OutilsFailure outilsFailure) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -394,7 +388,7 @@ mixin _$OutilsWatcherState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -402,7 +396,7 @@ mixin _$OutilsWatcherState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -491,7 +485,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(Stream<List<OutilsDto>> listOutils) loadSuccess,
+    required TResult Function(KtList<Outils> listOutils) loadSuccess,
     required TResult Function(OutilsFailure outilsFailure) loadFailure,
   }) {
     return initial();
@@ -502,7 +496,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
   }) {
     return initial?.call();
@@ -513,7 +507,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -607,7 +601,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(Stream<List<OutilsDto>> listOutils) loadSuccess,
+    required TResult Function(KtList<Outils> listOutils) loadSuccess,
     required TResult Function(OutilsFailure outilsFailure) loadFailure,
   }) {
     return loadInProgress();
@@ -618,7 +612,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -629,7 +623,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -686,7 +680,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({Stream<List<OutilsDto>> listOutils});
+  $Res call({KtList<Outils> listOutils});
 }
 
 /// @nodoc
@@ -708,7 +702,7 @@ class __$LoadSuccessCopyWithImpl<$Res>
       listOutils == freezed
           ? _value.listOutils
           : listOutils // ignore: cast_nullable_to_non_nullable
-              as Stream<List<OutilsDto>>,
+              as KtList<Outils>,
     ));
   }
 }
@@ -719,7 +713,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.listOutils);
 
   @override
-  final Stream<List<OutilsDto>> listOutils;
+  final KtList<Outils> listOutils;
 
   @override
   String toString() {
@@ -749,7 +743,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(Stream<List<OutilsDto>> listOutils) loadSuccess,
+    required TResult Function(KtList<Outils> listOutils) loadSuccess,
     required TResult Function(OutilsFailure outilsFailure) loadFailure,
   }) {
     return loadSuccess(listOutils);
@@ -760,7 +754,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
   }) {
     return loadSuccess?.call(listOutils);
@@ -771,7 +765,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -820,10 +814,9 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements OutilsWatcherState {
-  const factory _LoadSuccess(Stream<List<OutilsDto>> listOutils) =
-      _$_LoadSuccess;
+  const factory _LoadSuccess(KtList<Outils> listOutils) = _$_LoadSuccess;
 
-  Stream<List<OutilsDto>> get listOutils => throw _privateConstructorUsedError;
+  KtList<Outils> get listOutils => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -906,7 +899,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(Stream<List<OutilsDto>> listOutils) loadSuccess,
+    required TResult Function(KtList<Outils> listOutils) loadSuccess,
     required TResult Function(OutilsFailure outilsFailure) loadFailure,
   }) {
     return loadFailure(outilsFailure);
@@ -917,7 +910,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
   }) {
     return loadFailure?.call(outilsFailure);
@@ -928,7 +921,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(Stream<List<OutilsDto>> listOutils)? loadSuccess,
+    TResult Function(KtList<Outils> listOutils)? loadSuccess,
     TResult Function(OutilsFailure outilsFailure)? loadFailure,
     required TResult orElse(),
   }) {
