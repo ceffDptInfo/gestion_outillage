@@ -50,9 +50,13 @@ class _HomePageState extends State<HomePage> {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               state.maybeMap(
-                unauthenticated: (_) =>
-                    context.router.replace(const SignInRoute()),
-                orElse: () {},
+                unauthenticated: (_) {
+                  print("unauthentificated");
+                  context.router.replace(const SignInRoute());
+                },
+                orElse: () {
+                  print("authentificated");
+                },
               );
             },
           ),
