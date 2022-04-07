@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gestion_outillage/application/nav_drawer/nav_drawer_bloc.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
+import 'package:gestion_outillage/presentation/routes/router.gr.dart';
+
+import '../../application/auth/auth_bloc.dart';
 
 // ignore: must_be_immutable
 class NavigationDrawerWidget extends StatelessWidget {
@@ -57,7 +60,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    email != "" ? Text("email: $email") : Container(),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[600],
@@ -67,15 +73,20 @@ class NavigationDrawerWidget extends StatelessWidget {
                       ),
                       // color: Colors.grey[600],
                       // width: Me,
-                      height: MediaQuery.of(context).size.height * 1,
+                      height: MediaQuery.of(context).size.height * 0.5,
                       child: ListView.builder(
                         padding: const EdgeInsets.all(0),
                         // itemCount: isAuth == true
                         //     ? _listItemsAuth.length
                         //     : _listItemsVisitor.length,
-                        itemCount: user.currentUser == null
-                            ? _listItemsVisitor.length
-                            : _listItemsAuth.length,
+                        // itemCount: user.currentUser == null
+                        // ? _listItemsVisitor.length
+                        // : _listItemsAuth.length,
+                        itemCount: email == "prof@ceff.ch"
+                            ? _listItemsProf.length
+                            : email == "eleve@ceff.ch"
+                                ? _listItemsEleve.length
+                                : _listItemsVisitor.length,
                         itemBuilder: (context, index) =>
                             BlocBuilder<NavDrawerBloc, NavDrawerState>(builder:
                                 (BuildContext context, NavDrawerState state) {
@@ -83,9 +94,14 @@ class NavigationDrawerWidget extends StatelessWidget {
                               // isAuth == true
                               //     ? _listItemsAuth[index]
                               //     : _listItemsVisitor[index],
-                              user.currentUser == null
-                                  ? _listItemsVisitor[index]
-                                  : _listItemsAuth[index],
+                              // user.currentUser == null
+                              //     ? _listItemsVisitor[index]
+                              //     : _listItemsAuth[index],
+                              email == "prof@ceff.ch"
+                                  ? _listItemsProf[index]
+                                  : email == "eleve@ceff.ch"
+                                      ? _listItemsEleve[index]
+                                      : _listItemsVisitor[index],
                               state);
                           // _listItems[index].title != 'Layette'
                           //     ? _buildItem(_listItems[index], state)
@@ -93,6 +109,40 @@ class NavigationDrawerWidget extends StatelessWidget {
                         }),
                       ),
                     ),
+                    user.currentUser == null
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: TextButton(
+                                onPressed: () {
+                                  context.router.replace(const SignInRoute());
+                                },
+                                child: const Text(
+                                  'Se connecter',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 64.0),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: TextButton(
+                                onPressed: () {
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(const AuthEvent.signedOut());
+                                  context.router.replace(const SignInRoute());
+                                },
+                                child: const Text(
+                                  'Se déconnecter',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ],
@@ -111,8 +161,8 @@ class NavigationDrawerWidget extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 10),
           child: Card(
             color: Colors.grey[600],
-            shape: const ContinuousRectangleBorder(
-                borderRadius: BorderRadius.zero),
+            // shape: const ContinuousRectangleBorder(
+            //     borderRadius: BorderRadius.zero),
             borderOnForeground: true,
             elevation: 0,
             margin: EdgeInsets.zero,
@@ -236,7 +286,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         ),
       );
 
-  final List<_NavigationItem> _listItemsVisitor = [
+  final List<_NavigationItem> _listItemsProf = [
     _NavigationItem(
       NavItem.homePage,
       "Home",
@@ -261,16 +311,32 @@ class NavigationDrawerWidget extends StatelessWidget {
         const Icon(null)),
   ];
 
-  final List<_NavigationItem> _listItemsAuth = [
+  final List<_NavigationItem> _listItemsVisitor = [
+    // _NavigationItem(
+    //   NavItem.homePage,
+    //   "Home",
+    //   const ImageIcon(AssetImage(''), color: Colors.white),
+    //   const Icon(
+    //     Icons.house,
+    //     // color:? Colors.white : Colors.black,
+    //   ),
+    // ),
     _NavigationItem(
-      NavItem.homePage,
-      "Home",
+      NavItem.categoryPage,
+      "Outils",
       const ImageIcon(AssetImage(''), color: Colors.white),
-      const Icon(
-        Icons.house,
-        // color:? Colors.white : Colors.black,
-      ),
+      const Icon(Icons.construction),
     ),
+    _NavigationItem(
+        NavItem.layettePage,
+        "Layette",
+        const ImageIcon(
+          AssetImage('assets/images/image_outils/layette.png'),
+        ),
+        const Icon(null)),
+  ];
+
+  final List<_NavigationItem> _listItemsEleve = [
     _NavigationItem(
       NavItem.dashboadPage,
       "Tableau de bord",
@@ -293,19 +359,6 @@ class NavigationDrawerWidget extends StatelessWidget {
   ];
 }
 
-// Widget notifBadge() {
-//   return Badge(
-//     badgeColor: Colors.red,
-//     badgeContent: const Text(
-//       '4',
-//       style: TextStyle(
-//         color: Colors.white,
-//       ),
-//     ),
-//     // child: Icon(Icons.person, size: 30),
-//   );
-// }
-
 class _NavigationItem {
   // final bool header;
   final NavItem item;
@@ -314,4 +367,3 @@ class _NavigationItem {
   final Icon icons;
   _NavigationItem(this.item, this.title, this.icon, this.icons);
 }
-
