@@ -209,16 +209,31 @@ class SignInForm extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 128, vertical: 8),
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    context.read<SignInFormBloc>().add(
-                                          const SignInFormEvent
-                                              .signInWithEmailAndPasswordPressed(),
-                                        );
-                                  },
-                                  child: const Text(
-                                    "Se connecter",
-                                  ),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        context.read<SignInFormBloc>().add(
+                                              const SignInFormEvent
+                                                  .signInWithEmailAndPasswordPressed(),
+                                            );
+                                      },
+                                      child: const Text(
+                                        "Se connecter",
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 20),
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                            textStyle:
+                                                const TextStyle(fontSize: 20)),
+                                        onPressed: () {},
+                                        child: const Text(
+                                            'Se connecter en tant que visiteur'),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

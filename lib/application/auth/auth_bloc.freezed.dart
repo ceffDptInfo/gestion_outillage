@@ -309,6 +309,10 @@ class _$AuthStateTearOff {
   _Unauthenticated unauthenticated() {
     return const _Unauthenticated();
   }
+
+  _AuthAsVisitor authAsVisitor() {
+    return const _AuthAsVisitor();
+  }
 }
 
 /// @nodoc
@@ -321,6 +325,7 @@ mixin _$AuthState {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authAsVisitor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -328,6 +333,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -335,6 +341,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -343,6 +350,7 @@ mixin _$AuthState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_AuthAsVisitor value) authAsVisitor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -350,6 +358,7 @@ mixin _$AuthState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -357,6 +366,7 @@ mixin _$AuthState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -417,6 +427,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authAsVisitor,
   }) {
     return initial();
   }
@@ -427,6 +438,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
   }) {
     return initial?.call();
   }
@@ -437,6 +449,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -451,6 +464,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_AuthAsVisitor value) authAsVisitor,
   }) {
     return initial(this);
   }
@@ -461,6 +475,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
   }) {
     return initial?.call(this);
   }
@@ -471,6 +486,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -560,6 +576,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authAsVisitor,
   }) {
     return authenticated(user);
   }
@@ -570,6 +587,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
   }) {
     return authenticated?.call(user);
   }
@@ -580,6 +598,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -594,6 +613,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_AuthAsVisitor value) authAsVisitor,
   }) {
     return authenticated(this);
   }
@@ -604,6 +624,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
   }) {
     return authenticated?.call(this);
   }
@@ -614,6 +635,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -674,6 +696,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function() authAsVisitor,
   }) {
     return unauthenticated();
   }
@@ -684,6 +707,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
   }) {
     return unauthenticated?.call();
   }
@@ -694,6 +718,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -708,6 +733,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_AuthAsVisitor value) authAsVisitor,
   }) {
     return unauthenticated(this);
   }
@@ -718,6 +744,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
   }) {
     return unauthenticated?.call(this);
   }
@@ -728,6 +755,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -739,4 +767,119 @@ class _$_Unauthenticated implements _Unauthenticated {
 
 abstract class _Unauthenticated implements AuthState {
   const factory _Unauthenticated() = _$_Unauthenticated;
+}
+
+/// @nodoc
+abstract class _$AuthAsVisitorCopyWith<$Res> {
+  factory _$AuthAsVisitorCopyWith(
+          _AuthAsVisitor value, $Res Function(_AuthAsVisitor) then) =
+      __$AuthAsVisitorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AuthAsVisitorCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthAsVisitorCopyWith<$Res> {
+  __$AuthAsVisitorCopyWithImpl(
+      _AuthAsVisitor _value, $Res Function(_AuthAsVisitor) _then)
+      : super(_value, (v) => _then(v as _AuthAsVisitor));
+
+  @override
+  _AuthAsVisitor get _value => super._value as _AuthAsVisitor;
+}
+
+/// @nodoc
+
+class _$_AuthAsVisitor implements _AuthAsVisitor {
+  const _$_AuthAsVisitor();
+
+  @override
+  String toString() {
+    return 'AuthState.authAsVisitor()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _AuthAsVisitor);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(User user) authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function() authAsVisitor,
+  }) {
+    return authAsVisitor();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
+  }) {
+    return authAsVisitor?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(User user)? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function()? authAsVisitor,
+    required TResult orElse(),
+  }) {
+    if (authAsVisitor != null) {
+      return authAsVisitor();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_AuthAsVisitor value) authAsVisitor,
+  }) {
+    return authAsVisitor(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
+  }) {
+    return authAsVisitor?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_AuthAsVisitor value)? authAsVisitor,
+    required TResult orElse(),
+  }) {
+    if (authAsVisitor != null) {
+      return authAsVisitor(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthAsVisitor implements AuthState {
+  const factory _AuthAsVisitor() = _$_AuthAsVisitor;
 }
