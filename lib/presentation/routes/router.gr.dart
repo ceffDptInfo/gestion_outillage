@@ -13,6 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i11;
 import 'package:flutter/material.dart' as _i12;
 
+import '../../domain/outils/outils.dart' as _i13;
 import '../categories/categories_page.dart' as _i8;
 import '../dashboard/dashboard_page.dart' as _i6;
 import '../home.dart' as _i3;
@@ -78,20 +79,7 @@ class AppRouter extends _i11.RootStackRouter {
       final args = routeData.argsAs<OutilsMesureListDetailRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i9.OutilsMesureListDetailPage(
-              args.designation,
-              args.complement,
-              args.emplacement,
-              args.etat,
-              args.statut,
-              args.index,
-              args.dimangle1,
-              args.dimangle2,
-              args.dimm1,
-              args.dimm2,
-              args.nameimg,
-              args.arborescence,
-              args.categorie));
+          child: _i9.OutilsMesureListDetailPage(args.outil));
     },
     OutilsAddRoute.name: (routeData) {
       return _i11.MaterialPageX<dynamic>(
@@ -208,85 +196,22 @@ class CategoriesOutilsMesureRoute extends _i11.PageRouteInfo<void> {
 /// [_i9.OutilsMesureListDetailPage]
 class OutilsMesureListDetailRoute
     extends _i11.PageRouteInfo<OutilsMesureListDetailRouteArgs> {
-  OutilsMesureListDetailRoute(
-      {required String designation,
-      required String complement,
-      required String emplacement,
-      required String etat,
-      required String statut,
-      required int index,
-      required String dimangle1,
-      required String dimangle2,
-      required String dimm1,
-      required String dimm2,
-      required String nameimg,
-      required String arborescence,
-      required String categorie})
+  OutilsMesureListDetailRoute({required _i13.Outils outil})
       : super(OutilsMesureListDetailRoute.name,
             path: 'outils-mesure-list-detail-page',
-            args: OutilsMesureListDetailRouteArgs(
-                designation: designation,
-                complement: complement,
-                emplacement: emplacement,
-                etat: etat,
-                statut: statut,
-                index: index,
-                dimangle1: dimangle1,
-                dimangle2: dimangle2,
-                dimm1: dimm1,
-                dimm2: dimm2,
-                nameimg: nameimg,
-                arborescence: arborescence,
-                categorie: categorie));
+            args: OutilsMesureListDetailRouteArgs(outil: outil));
 
   static const String name = 'OutilsMesureListDetailRoute';
 }
 
 class OutilsMesureListDetailRouteArgs {
-  const OutilsMesureListDetailRouteArgs(
-      {required this.designation,
-      required this.complement,
-      required this.emplacement,
-      required this.etat,
-      required this.statut,
-      required this.index,
-      required this.dimangle1,
-      required this.dimangle2,
-      required this.dimm1,
-      required this.dimm2,
-      required this.nameimg,
-      required this.arborescence,
-      required this.categorie});
+  const OutilsMesureListDetailRouteArgs({required this.outil});
 
-  final String designation;
-
-  final String complement;
-
-  final String emplacement;
-
-  final String etat;
-
-  final String statut;
-
-  final int index;
-
-  final String dimangle1;
-
-  final String dimangle2;
-
-  final String dimm1;
-
-  final String dimm2;
-
-  final String nameimg;
-
-  final String arborescence;
-
-  final String categorie;
+  final _i13.Outils outil;
 
   @override
   String toString() {
-    return 'OutilsMesureListDetailRouteArgs{designation: $designation, complement: $complement, emplacement: $emplacement, etat: $etat, statut: $statut, index: $index, dimangle1: $dimangle1, dimangle2: $dimangle2, dimm1: $dimm1, dimm2: $dimm2, nameimg: $nameimg, arborescence: $arborescence, categorie: $categorie}';
+    return 'OutilsMesureListDetailRouteArgs{outil: $outil}';
   }
 }
 

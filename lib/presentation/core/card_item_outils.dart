@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
 import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
@@ -10,45 +11,48 @@ import '../outils_detail/outils_mesure_list_detail_page.dart';
 
 // ignore: must_be_immutable
 class CardItemOuils extends StatelessWidget {
+  Outils outil;
   // var snapshot;
-  int index;
-  BuildContext context;
-  // String id;
-  String noInventaire;
-  String etat;
-  String designation;
-  String complement;
-  String emplacement;
-  String statut;
-  String dimangle1;
-  String dimangle2;
-  String dimmm1;
-  String dimmm2;
-  String nameImg;
-  String arborescence;
-  String categorie;
-  String login;
+  // int index;
+  // BuildContext context;
+  // UniqueId id;
+  // String noInventaire;
+  // String etat;
+  // String designation;
+  // String complement;
+  // String emplacement;
+  // String statut;
+  // String dimangle1;
+  // String dimangle2;
+  // String dimmm1;
+  // String dimmm2;
+  // String nameImg;
+  // String arborescence;
+  // String categorie;
+  // String login;
 
   CardItemOuils({
+    
     Key? key,
+    required this.outil,
     // required this.snapshot,
-    required this.index,
-    required this.context,
+    // required this.index,
+    // required this.context,
     // required this.id,
-    required this.noInventaire,
-    required this.etat,
-    required this.designation,
-    required this.complement,
-    required this.emplacement,
-    required this.statut,
-    required this.dimangle1,
-    required this.dimangle2,
-    required this.dimmm1,
-    required this.dimmm2,
-    required this.nameImg,
-    required this.arborescence,
-    required this.categorie,
-    required this.login,
+    // required this.noInventaire,
+    // required this.etat,
+    // required this.designation,
+    // required this.complement,
+    // required this.emplacement,
+    // required this.statut,
+    // required this.dimangle1,
+    // required this.dimangle2,
+    // required this.dimmm1,
+    // required this.dimmm2,
+    // required this.nameImg,
+    // required this.arborescence,
+    // required this.categorie,
+    // required this.login,
   }) : super(key: key);
 
   @override
@@ -58,19 +62,21 @@ class CardItemOuils extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => OutilsMesureListDetailPage(
-            designation,
-            complement,
-            emplacement,
-            etat,
-            statut,
-            index,
-            dimangle1,
-            dimangle2,
-            dimmm1,
-            dimmm2,
-            nameImg,
-            arborescence,
-            categorie,
+            outil
+            // id,
+            // designation,
+            // complement,
+            // emplacement,
+            // etat,
+            // statut,
+            // index,
+            // dimangle1,
+            // dimangle2,
+            // dimmm1,
+            // dimmm2,
+            // nameImg,
+            // arborescence,
+            // categorie,
           ),
         ),
       ),
@@ -113,7 +119,7 @@ class CardItemOuils extends StatelessWidget {
           //     borderRadius: BorderRadius.all(Radius.circular(8))),
           // height: MediaQuery.of(context).size.height * 0.3,
           foregroundDecoration: RotatedCornerDecoration(
-            color: statut == "Disponible" ? Colors.green : Colors.red,
+            color: outil.status == "Disponible" ? Colors.green : Colors.red,
             geometry: const BadgeGeometry(
               width: 58,
               height: 58,
@@ -121,7 +127,7 @@ class CardItemOuils extends StatelessWidget {
             ),
             labelInsets: const LabelInsets(baselineShift: 0),
             textSpan: TextSpan(
-              text: statut,
+              text: outil.status,
               style: const TextStyle(
                 fontSize: 10,
                 letterSpacing: 0,
@@ -142,7 +148,7 @@ class CardItemOuils extends StatelessWidget {
                     // ),
                     child: FittedBox(
                       child: Image.asset(
-                        "assets/images/image_outils/" + nameImg,
+                        "assets/images/image_outils/" + outil.nameImg,
                         fit: BoxFit.fill,
                         height: MediaQuery.of(context).size.height * 0.15,
                         width: MediaQuery.of(context).size.width * 0.12,
@@ -163,7 +169,7 @@ class CardItemOuils extends StatelessWidget {
                   child: Column(
                     children: [
                       Flexible(
-                        child: Text(designation + "\n" + complement,
+                        child: Text(outil.designation + "\n" + outil.complement,
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold)),
                       ),
@@ -171,14 +177,14 @@ class CardItemOuils extends StatelessWidget {
                       //   height: 16,
                       // ),
                       const Divider(),
-                      dimmm1 != "0" || dimmm2 != "0"
+                      outil.dimmm1 != "0" || outil.dimmm2 != "0"
                           ? Text(
-                              "Dim [mm]: " + dimmm1 + " / " + dimmm2,
+                              "Dim [mm]: " + outil.dimmm1! + " / " + outil.dimmm2!,
                             )
                           : Container(),
-                      dimangle1 != "0" || dimangle2 != "0"
+                      outil.dimangle1 != "0" || outil.dimangle2 != "0"
                           ? Text(
-                              "Dim angle: " + dimangle1 + " / " + dimangle2,
+                              "Dim angle: " + outil.dimangle1! + " / " + outil.dimangle2!,
                             )
                           : Container(),
                     ],
@@ -195,10 +201,10 @@ class CardItemOuils extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     child: Container(
-                      color: etat == "Usagé" ? Colors.orange : Colors.green,
+                      color: outil.etat == "Usagé" ? Colors.orange : Colors.green,
                       child: Center(
                         child: Text(
-                          etat,
+                          outil.etat,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -219,24 +225,26 @@ class CardItemOuils extends StatelessWidget {
     );
   }
 
-  Widget returnCardItemOutils(var snapshot) => CardItemOuils(
+  Widget returnCardItemOutils(Outils outil) => CardItemOuils(
+        outil: outil,
         // snapshot: snapshot,
-        index: index,
-        context: context,
-        // id: UniqueId.fromUniqueString(snapshot.data![index].id).toString(),
-        login: snapshot.data![index].login,
-        noInventaire: snapshot.data![index].noInventaire.toString(),
-        etat: snapshot.data![index].etat.toString(),
-        designation: snapshot.data![index].designation.toString(),
-        complement: snapshot.data![index].complement.toString(),
-        emplacement: snapshot.data![index].emplacement.toString(),
-        statut: snapshot.data![index].status.toString(),
-        dimangle1: snapshot.data![index].dim_angle_1.toString(),
-        dimangle2: snapshot.data![index].dim_angle_2.toString(),
-        dimmm1: snapshot.data![index].dim_mm_1.toString(),
-        dimmm2: snapshot.data![index].dim_mm_2.toString(),
-        nameImg: snapshot.data![index].name_img.toString(),
-        arborescence: snapshot.data![index].arborescence.toString(),
-        categorie: snapshot.data![index].categorie.toString(),
+        // index: index,
+        // context: context,
+        // id:UniqueId(),
+        // // id: UniqueId.fromUniqueString(snapshot.data![index].id).toString(),
+        // login: outil.login!,
+        // noInventaire: outil.noInventaire.toString(),
+        // etat: outil.etat.toString(),
+        // designation: outil.designation.toString(),
+        // complement: outil.complement.toString(),
+        // emplacement: outil.emplacement.toString(),
+        // statut: outil.status.toString(),
+        // dimangle1: outil.dimangle1.toString(),
+        // dimangle2: outil.dimangle2.toString(),
+        // dimmm1: outil.dimmm1.toString(),
+        // dimmm2: outil.dimmm2.toString(),
+        // nameImg: outil.nameImg.toString(),
+        // arborescence: outil.arborescence.toString(),
+        // categorie: outil.categorie.toString(),
       );
 }

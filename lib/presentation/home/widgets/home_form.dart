@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
+import 'package:gestion_outillage/domain/core/value_objects.dart';
+import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
 import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
 import 'package:gestion_outillage/presentation/tiroir/tiroir_page.dart';
+import 'package:kt_dart/kt.dart';
 
 class HomeStartForm extends StatelessWidget {
   const HomeStartForm({Key? key}) : super(key: key);
@@ -17,53 +20,96 @@ class HomeStartForm extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return BlocBuilder<OutilsWatcherBloc, OutilsWatcherState>(
-        builder: (context, state) {
-      return state.maybeMap(
-        loadFailure: (value) => const Center(
-          child: Text("Erreur de chargement"),
-        ),
-        loadInProgress: (value) => const Center(
-          child: CircularProgressIndicator(),
-        ),
-        loadSuccess: (value) =>
-            // return Container();
-            StreamBuilder<List<OutilsDto>>(
-                stream: value.listOutils,
-                builder: (context, AsyncSnapshot<List<OutilsDto>> snapshot) {
-                  if (snapshot.hasData) {
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // ElevatedButton(
-                          //   onPressed: loadData,
-                          //   child: Text('load'),
-                          // ),
-                          // listViewItems(
-                          //     empruntes, context, snapshot, width, height),
-                          Divider(
-                            height: height * 0.05,
-                          ),
-                          listViewItems(
-                              usages, context, snapshot, width, height),
-                          Divider(
-                            height: height * 0.05,
-                          ),
-                          listViewItems(
-                              recents, context, snapshot, width, height),
-                        ],
+      builder: (context, state) {
+        return state.maybeMap(
+          loadFailure: (value) => const Center(
+            child: Text("Erreur de chargement"),
+          ),
+          loadInProgress: (value) {
+            print("non");
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          loadSuccess: (outils) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print("login");
+                        },
+                        child: Text('Se connecter'),
                       ),
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                }),
-        orElse: () => Container(),
-      );
-    });
+                    ),
+                  ),
+                  // listViewItems(
+                  //     empruntes, context, snapshot, width, height),
+                  Divider(
+                    height: height * 0.05,
+                  ),
+                  listViewItems(
+                      usages, context, outils.listOutils, width, height),
+                  Divider(
+                    height: height * 0.05,
+                  ),
+                  listViewItems(recents, context, outils.listOutils, width, height),
+                ],
+              ),
+            );
+          },
+          orElse: () => Container(),
+        );
+
+        //   return Container();
+        //   StreamBuilder<List<OutilsDto>>(
+        //       stream: value.listOutils,
+        //       builder: (context, AsyncSnapshot<List<OutilsDto>> snapshot) {
+        //         if (snapshot.hasData) {
+        //           return SingleChildScrollView(
+        //             child: Column(
+        //               children: [
+        //             Padding(
+        //               padding: const EdgeInsets.all(8.0),
+        //               child: Align(
+        //                 alignment: Alignment.centerRight,
+        //                 child: ElevatedButton(
+        //                   onPressed: (){print("login");},
+        //                   child: Text('Se connecter'),
+        //                 ),
+        //               ),
+        //             ),
+        //             // listViewItems(
+        //             //     empruntes, context, snapshot, width, height),
+        //             Divider(
+        //               height: height * 0.05,
+        //             ),
+        //             listViewItems(
+        //                 usages, context, snapshot, width, height),
+        //             Divider(
+        //               height: height * 0.05,
+        //             ),
+        //             listViewItems(
+        //                 recents, context, snapshot, width, height),
+        //           ],
+        //         ),
+        //       );
+        //     } else {
+        //       return const Center(child: CircularProgressIndicator());
+        //     }
+        //   }),
+        //   orElse: () => Container(),
+        // );
+      },
+    );
   }
 
-  Widget listViewItems(
-          String title, context, snapshot, double width, double height) =>
+  Widget listViewItems(String title, context, KtList<Outils> outils,
+          double width, double height) =>
       SizedBox(
         height: MediaQuery.of(context).size.height * 0.4,
         child: Stack(
@@ -87,25 +133,23 @@ class HomeStartForm extends StatelessWidget {
               right: 0,
               top: 30,
               child: SizedBox(
-                // color: Colors.blue,
-                // width: width *,
                 height: MediaQuery.of(context).size.height * 0.36,
                 child: Scrollbar(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.length,
+                      itemCount: outils.size,
                       itemBuilder: (context, index) {
                         return title == 'LES RÉCENTS'
-                            ? cardItem(context, index, snapshot)
+                            ? cardItem(context, index, outils[index])
                             : title == 'LES USAGÉS'
-                                ? snapshot.data![index].etat.toString() ==
-                                        'Usagé'
-                                    ? cardItem(context, index, snapshot)
+                                ? outils[index].etat.toString() == 'Usagé'
+                                    ? cardItem(context, index, outils[index])
                                     : Container()
                                 : title == 'LES EMPRUNTÉS'
-                                    ? snapshot.data![index].status.toString() ==
+                                    ? outils[index].status.toString() ==
                                             'Emprunté'
-                                        ? cardItem(context, index, snapshot)
+                                        ? cardItem(
+                                            context, index, outils[index])
                                         : Container()
                                     : Container();
                       }),
@@ -120,9 +164,6 @@ class HomeStartForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            // margin: EdgeInsets.only(left: width * 0.05),
-            // color: Colors.blue,
-            // width: width * 0.1,
             height: height * 0.07,
             child: const Text(
               'Listes des catégories',
@@ -133,7 +174,6 @@ class HomeStartForm extends StatelessWidget {
             ),
           ),
           SizedBox(
-            // color: Colors.green,
             width: width,
             height: MediaQuery.of(context).size.height * 0.3,
             child: Center(
@@ -147,8 +187,6 @@ class HomeStartForm extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          // print(index);
-                          // context.router.push(OutilsMesurePage());
                           if (index == 0) {
                             Navigator.push(
                               context,
@@ -201,27 +239,29 @@ class HomeStartForm extends StatelessWidget {
         ],
       );
 
-  Widget cardItem(context, index, snapshot) {
+  Widget cardItem(context, index, Outils outil) {
     return CardItemOuils(
+      outil: outil,
       // snapshot: snapshot,
-      index: index,
-      context: context,
-      // id: snapshot.data![index].id,
-      // id: snapshot.data![index].id,
-      login: snapshot.data![index].login.toString(),
-      noInventaire: snapshot.data![index].noInventaire.toString(),
-      etat: snapshot.data![index].etat.toString(),
-      designation: snapshot.data![index].designation.toString(),
-      complement: snapshot.data![index].complement.toString(),
-      emplacement: snapshot.data![index].emplacement.toString(),
-      statut: snapshot.data![index].status.toString(),
-      dimangle1: snapshot.data![index].dim_angle_1.toString(),
-      dimangle2: snapshot.data![index].dim_angle_2.toString(),
-      dimmm1: snapshot.data![index].dim_mm_1.toString(),
-      dimmm2: snapshot.data![index].dim_mm_2.toString(),
-      nameImg: snapshot.data![index].name_img.toString(),
-      arborescence: snapshot.data![index].arborescence.toString(),
-      categorie: snapshot.data![index].categorie.toString(),
+      // index: index,
+      // context: context,
+      // id: UniqueId(),
+      // // id: snapshot.data![index].id,
+      // // id: snapshot.data![index].id,
+      // login: snapshot.data![index].login.toString(),
+      // noInventaire: snapshot.data![index].noInventaire.toString(),
+      // etat: snapshot.data![index].etat.toString(),
+      // designation: snapshot.data![index].designation.toString(),
+      // complement: snapshot.data![index].complement.toString(),
+      // emplacement: snapshot.data![index].emplacement.toString(),
+      // statut: snapshot.data![index].status.toString(),
+      // dimangle1: snapshot.data![index].dim_angle_1.toString(),
+      // dimangle2: snapshot.data![index].dim_angle_2.toString(),
+      // dimmm1: snapshot.data![index].dim_mm_1.toString(),
+      // dimmm2: snapshot.data![index].dim_mm_2.toString(),
+      // nameImg: snapshot.data![index].name_img.toString(),
+      // arborescence: snapshot.data![index].arborescence.toString(),
+      // categorie: snapshot.data![index].categorie.toString(),
     );
   }
 }

@@ -4,10 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gestion_outillage/domain/outils/i_outils_repository.dart';
+import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:gestion_outillage/domain/outils/outils_failure.dart';
+import 'package:kt_dart/kt.dart';
 
 part 'outils_watcher_bloc.freezed.dart';
 part 'outils_watcher_event.dart';
@@ -20,7 +22,7 @@ class OutilsWatcherBloc extends Bloc<OutilsWatcherEvent, OutilsWatcherState> {
     this._iOutilsrepository,
   ) : super(const OutilsWatcherState.initial());
 
-  StreamSubscription<Either<OutilsFailure, Stream<List<OutilsDto>>>>?
+  StreamSubscription<Either<OutilsFailure, KtList<Outils>>>?
       _outilsStreamSubscription;
 
   @override
@@ -31,7 +33,7 @@ class OutilsWatcherBloc extends Bloc<OutilsWatcherEvent, OutilsWatcherState> {
       watchOutilsStarted: (e) async* {
         yield const OutilsWatcherState.loadInProgress();
         await _outilsStreamSubscription?.cancel();
-        _outilsStreamSubscription = _iOutilsrepository.watchAllOutils().listen(
+        _outilsStreamSubscription = _iOutilsrepository.watchAllOutils().asStream().listen(
               (failureOrOutils) =>
                   add(OutilsWatcherEvent.outilsReceived(failureOrOutils)),
             );
@@ -43,5 +45,11 @@ class OutilsWatcherBloc extends Bloc<OutilsWatcherEvent, OutilsWatcherState> {
         );
       },
     );
+  }
+
+  @override
+  Future<void> close() async {
+    await _outilsStreamSubscription?.cancel();
+    return super.close();
   }
 }

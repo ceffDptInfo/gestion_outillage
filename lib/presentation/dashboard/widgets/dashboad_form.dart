@@ -186,29 +186,30 @@ class DashboardForm extends StatelessWidget {
 
 Widget cardItem(context, index, Outils outil) {
   return CardItemOuils(
+    outil: outil,
     // snapshot: snapshot,
-    index: index,
-    context: context,
-    // id: outil.id.toString(),
-    // id: UniqueId.fromUniqueString(snapshot.data![index].id).toString(),
-    login: outil.login!,
-    noInventaire:
-        outil.noInventaire!, //snapshot.data![index].noInventaire.toString(),
-    etat: outil.etat, //snapshot.data![index].etat.toString(),
-    designation:
-        outil.designation, //snapshot.data![index].designation.toString(),
-    complement: outil.complement, //snapshot.data![index].complement.toString(),
-    emplacement:
-        outil.emplacement, //snapshot.data![index].emplacement.toString(),
-    statut: outil.status, //snapshot.data![index].status.toString(),
-    dimangle1: outil.dimangle1!, //snapshot.data![index].dim_angle_1.toString(),
-    dimangle2: outil.dimangle2!, //snapshot.data![index].dim_angle_2.toString(),
-    dimmm1: outil.dimmm1!, // snapshot.data![index].dim_mm_1.toString(),
-    dimmm2: outil.dimmm2!, //snapshot.data![index].dim_mm_2.toString(),
-    nameImg: outil.nameImg, // snapshot.data![index].name_img.toString(),
-    arborescence:
-        outil.arborescence, //snapshot.data![index].arborescence.toString(),
-    categorie: outil.categorie, //snapshot.data![index].categorie.toString(),
+    // index: index,
+    // context: context,
+    // id: outil.id,
+    // // id: UniqueId.fromUniqueString(snapshot.data![index].id).toString(),
+    // login: outil.login!,
+    // noInventaire:
+    //     outil.noInventaire!, //snapshot.data![index].noInventaire.toString(),
+    // etat: outil.etat, //snapshot.data![index].etat.toString(),
+    // designation:
+    //     outil.designation, //snapshot.data![index].designation.toString(),
+    // complement: outil.complement, //snapshot.data![index].complement.toString(),
+    // emplacement:
+    //     outil.emplacement, //snapshot.data![index].emplacement.toString(),
+    // statut: outil.status, //snapshot.data![index].status.toString(),
+    // dimangle1: outil.dimangle1!, //snapshot.data![index].dim_angle_1.toString(),
+    // dimangle2: outil.dimangle2!, //snapshot.data![index].dim_angle_2.toString(),
+    // dimmm1: outil.dimmm1!, // snapshot.data![index].dim_mm_1.toString(),
+    // dimmm2: outil.dimmm2!, //snapshot.data![index].dim_mm_2.toString(),
+    // nameImg: outil.nameImg, // snapshot.data![index].name_img.toString(),
+    // arborescence:
+    //     outil.arborescence, //snapshot.data![index].arborescence.toString(),
+    // categorie: outil.categorie, //snapshot.data![index].categorie.toString(),
   );
 }
 
