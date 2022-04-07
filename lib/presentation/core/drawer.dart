@@ -1,61 +1,24 @@
-import 'package:badges/badges.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gestion_outillage/application/nav_drawer/nav_drawer_bloc.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
 
+// ignore: must_be_immutable
 class NavigationDrawerWidget extends StatelessWidget {
-  final List<_NavigationItem> _listItems = [
-    _NavigationItem(
-      false,
-      NavItem.homePage,
-      "Home",
-      const ImageIcon(AssetImage(''), color: Colors.white),
-      const Icon(
-        Icons.house,
-        // color:? Colors.white : Colors.black,
-      ),
-    ),
-    _NavigationItem(
-      true,
-      NavItem.dashboadPage,
-      "Tableau de bord",
-      const ImageIcon(AssetImage(''), color: Colors.white),
-      const Icon(Icons.dashboard),
-    ),
-    _NavigationItem(
-      false,
-      NavItem.categoryPage,
-      "Outils",
-      const ImageIcon(AssetImage(''), color: Colors.white),
-      const Icon(Icons.construction),
-    ),
-    _NavigationItem(
-        false,
-        NavItem.layettePage,
-        "Layette",
-        const ImageIcon(
-          AssetImage('assets/images/image_outils/layette.png'),
-        ),
-        const Icon(null)),
+  bool isAuth;
 
-    // _NavigationItem(
-    //     false,
-    //     NavItem.layettePage,
-    //     "Layette",
-    //     ImageIcon(AssetImage('assets/images/imagerandom/layette.png'),
-    //         color: Colors.white),
-    //     Icon(null)),
-  ];
-
-  NavigationDrawerWidget({Key? key}) : super(key: key);
+  NavigationDrawerWidget({
+    Key? key,
+    required this.isAuth,
+  }) : super(key: key);
 
   @override
   Widget build(context) {
     // return BlocBuilder<NavDrawerBloc, NavDrawerState>(
     //     builder: (context, NavDrawerState state) {
-
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return SafeArea(
       // right: false,
       child: Container(
@@ -99,11 +62,23 @@ class NavigationDrawerWidget extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 1,
                       child: ListView.builder(
                         padding: const EdgeInsets.all(0),
-                        itemCount: _listItems.length,
+                        // itemCount: isAuth == true
+                        //     ? _listItemsAuth.length
+                        //     : _listItemsVisitor.length,
+                        itemCount: _auth.currentUser == null
+                            ? _listItemsVisitor.length
+                            : _listItemsAuth.length,
                         itemBuilder: (context, index) =>
                             BlocBuilder<NavDrawerBloc, NavDrawerState>(builder:
                                 (BuildContext context, NavDrawerState state) {
-                          return _buildItem(_listItems[index], state);
+                          return _buildItem(
+                              // isAuth == true
+                              //     ? _listItemsAuth[index]
+                              //     : _listItemsVisitor[index],
+                              _auth.currentUser == null
+                                  ? _listItemsVisitor[index]
+                                  : _listItemsAuth[index],
+                              state);
                           // _listItems[index].title != 'Layette'
                           //     ? _buildItem(_listItems[index], state)
                           //     : items(context, _listItems[index], state);
@@ -252,6 +227,62 @@ class NavigationDrawerWidget extends StatelessWidget {
           ],
         ),
       );
+
+  final List<_NavigationItem> _listItemsVisitor = [
+    _NavigationItem(
+      NavItem.homePage,
+      "Home",
+      const ImageIcon(AssetImage(''), color: Colors.white),
+      const Icon(
+        Icons.house,
+        // color:? Colors.white : Colors.black,
+      ),
+    ),
+    _NavigationItem(
+      NavItem.categoryPage,
+      "Outils",
+      const ImageIcon(AssetImage(''), color: Colors.white),
+      const Icon(Icons.construction),
+    ),
+    _NavigationItem(
+        NavItem.layettePage,
+        "Layette",
+        const ImageIcon(
+          AssetImage('assets/images/image_outils/layette.png'),
+        ),
+        const Icon(null)),
+  ];
+
+  final List<_NavigationItem> _listItemsAuth = [
+    _NavigationItem(
+      NavItem.homePage,
+      "Home",
+      const ImageIcon(AssetImage(''), color: Colors.white),
+      const Icon(
+        Icons.house,
+        // color:? Colors.white : Colors.black,
+      ),
+    ),
+    _NavigationItem(
+      NavItem.dashboadPage,
+      "Tableau de bord",
+      const ImageIcon(AssetImage(''), color: Colors.white),
+      const Icon(Icons.dashboard),
+    ),
+    _NavigationItem(
+      NavItem.categoryPage,
+      "Outils",
+      const ImageIcon(AssetImage(''), color: Colors.white),
+      const Icon(Icons.construction),
+    ),
+    _NavigationItem(
+        NavItem.layettePage,
+        "Layette",
+        const ImageIcon(
+          AssetImage('assets/images/image_outils/layette.png'),
+        ),
+        const Icon(null)),
+  ];
 }
 
 // Widget notifBadge() {
@@ -268,12 +299,12 @@ class NavigationDrawerWidget extends StatelessWidget {
 // }
 
 class _NavigationItem {
-  final bool header;
+  // final bool header;
   final NavItem item;
   final String title;
   final ImageIcon icon;
   final Icon icons;
-  _NavigationItem(this.header, this.item, this.title, this.icon, this.icons);
+  _NavigationItem(this.item, this.title, this.icon, this.icons);
 }
 
 // import 'package:flutter/material.dart';
