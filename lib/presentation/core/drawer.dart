@@ -63,7 +63,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    email != "" ? Text("email: $email") : Container(),
+                    email != "" ? Text("Utilisateur : $email") : Container(),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[600],
@@ -367,3 +367,5 @@ class _NavigationItem {
   final Icon icons;
   _NavigationItem(this.item, this.title, this.icon, this.icons);
 }
+
+

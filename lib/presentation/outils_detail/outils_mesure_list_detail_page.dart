@@ -146,7 +146,7 @@ class _OutilsMesureListDetailPageState
       floatingActionButton:
           // edit == false
           // ?
-          FloatingActionButton.extended(
+        widget.user.currentUser!=null? FloatingActionButton.extended(
         onPressed: () {
           setState(() {
             // edit = true;
@@ -186,7 +186,7 @@ class _OutilsMesureListDetailPageState
         // icon: Icon(Icons.edit),
         backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
-      ),
+      ):null,
       // :
       // Row(
       //     mainAxisAlignment: MainAxisAlignment.end,
@@ -277,7 +277,7 @@ class _OutilsMesureListDetailPageState
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                     ),
                     Row(
