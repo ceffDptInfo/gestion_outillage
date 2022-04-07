@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
@@ -8,8 +9,12 @@ import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
+import 'package:gestion_outillage/presentation/routes/router.gr.dart';
 import 'package:gestion_outillage/presentation/tiroir/tiroir_page.dart';
 import 'package:kt_dart/kt.dart';
+import 'package:auto_route/auto_route.dart';
+
+import '../../../application/auth/auth_bloc.dart';
 
 class HomeStartForm extends StatelessWidget {
   const HomeStartForm({Key? key}) : super(key: key);
@@ -18,7 +23,7 @@ class HomeStartForm extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return BlocBuilder<OutilsWatcherBloc, OutilsWatcherState>(
       builder: (context, state) {
         return state.maybeMap(
@@ -26,7 +31,7 @@ class HomeStartForm extends StatelessWidget {
             child: Text("Erreur de chargement"),
           ),
           loadInProgress: (value) {
-            print("non");
+            // print("non");
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -35,17 +40,42 @@ class HomeStartForm extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          print("login");
-                        },
-                        child: Text('Se connecter'),
-                      ),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _auth.currentUser != null
+                          ? PopupMenuButton(
+                              onSelected: (value) {
+                                context
+                                    .read<AuthBloc>()
+                                    .add(const AuthEvent.signedOut());
+                              },
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  child: Row(
+                                    children: const [
+                                      Icon(Icons.logout_rounded),
+                                      Text("Se déconnecter"),
+                                    ],
+                                  ),
+                                  value: 2,
+                                ),
+                              ],
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    print("login");
+                                    context.router.replace(const SignInRoute());
+                                  },
+                                  child: const Text('Se connecter'),
+                                ),
+                              ),
+                            ),
+                    ],
                   ),
                   // listViewItems(
                   //     empruntes, context, snapshot, width, height),
@@ -57,7 +87,8 @@ class HomeStartForm extends StatelessWidget {
                   Divider(
                     height: height * 0.05,
                   ),
-                  listViewItems(recents, context, outils.listOutils, width, height),
+                  listViewItems(
+                      recents, context, outils.listOutils, width, height),
                 ],
               ),
             );

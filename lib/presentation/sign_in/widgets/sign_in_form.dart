@@ -22,17 +22,17 @@ class SignInForm extends StatelessWidget {
         (either) => either.fold(
           (failure) {
             Flushbar(
-              title: "AppLocalizations.of(context)!.flushbar_title",
+              title: "FlushBar",
               message: failure.map(
-                  serverError: (_) =>
-                      "AppLocalizations.of(context)!.server_error_message",
+                  serverError: (_) => "server_error_message",
                   invalidEmailAndPasswordCombination: (_) =>
-                      "AppLocalizations.of(context)!.sign_in_error_message"),
+                      "sign_in_error_message"),
               duration: const Duration(seconds: 3),
             ).show(context);
           },
           (_) {
             context.router.replace(const SplashRoute());
+            print("AuthCheckRequested");
             BlocProvider.of<AuthBloc>(context, listen: false)
                 .add(const AuthEvent.authCheckRequested());
           },
@@ -228,7 +228,12 @@ class SignInForm extends StatelessWidget {
                                         style: TextButton.styleFrom(
                                             textStyle:
                                                 const TextStyle(fontSize: 20)),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context.read<AuthBloc>().add(
+                                              const AuthEvent.signAsVisitor());
+                                          context.router
+                                              .replace(const HomeRoute());
+                                        },
                                         child: const Text(
                                             'Se connecter en tant que visiteur'),
                                       ),

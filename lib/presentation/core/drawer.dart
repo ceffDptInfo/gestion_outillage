@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,18 +8,25 @@ import 'package:gestion_outillage/infrastructure/core/data.dart';
 
 // ignore: must_be_immutable
 class NavigationDrawerWidget extends StatelessWidget {
-  bool isAuth;
+  FirebaseAuth user;
 
   NavigationDrawerWidget({
     Key? key,
-    required this.isAuth,
+    required this.user,
   }) : super(key: key);
 
   @override
   Widget build(context) {
     // return BlocBuilder<NavDrawerBloc, NavDrawerState>(
     //     builder: (context, NavDrawerState state) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    String? email;
+    if (user.currentUser != null) {
+      email = user.currentUser!.email;
+    } else {
+      email = "";
+    }
+
     return SafeArea(
       // right: false,
       child: Container(
@@ -65,7 +73,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                         // itemCount: isAuth == true
                         //     ? _listItemsAuth.length
                         //     : _listItemsVisitor.length,
-                        itemCount: _auth.currentUser == null
+                        itemCount: user.currentUser == null
                             ? _listItemsVisitor.length
                             : _listItemsAuth.length,
                         itemBuilder: (context, index) =>
@@ -75,7 +83,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                               // isAuth == true
                               //     ? _listItemsAuth[index]
                               //     : _listItemsVisitor[index],
-                              _auth.currentUser == null
+                              user.currentUser == null
                                   ? _listItemsVisitor[index]
                                   : _listItemsAuth[index],
                               state);

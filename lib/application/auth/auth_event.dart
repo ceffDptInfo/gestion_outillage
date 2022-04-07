@@ -4,4 +4,6 @@ part of 'auth_bloc.dart';
 class AuthEvent with _$AuthEvent {
   const factory AuthEvent.authCheckRequested() = _AuthCheckRequested;
   const factory AuthEvent.signedOut() = _SignedOut;
+
+  const factory AuthEvent.signAsVisitor() = _SignAsVisitor;
 }

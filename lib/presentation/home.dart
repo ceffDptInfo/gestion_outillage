@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/auth/auth_bloc.dart';
@@ -30,6 +31,10 @@ class _HomePageState extends State<HomePage> {
   late Widget _content;
   bool isMenuFixed = false;
 
+  bool isAuth = false;
+
+  final FirebaseAuth _user = FirebaseAuth.instance;
+
   @override
   void initState() {
     super.initState();
@@ -52,11 +57,17 @@ class _HomePageState extends State<HomePage> {
               state.maybeMap(
                 unauthenticated: (_) {
                   print("unauthentificated");
+
                   context.router.replace(const SignInRoute());
                 },
-                orElse: () {
-                  print("authentificated");
+                authenticated: (_) {
+                  isAuth = true;
                 },
+                authAsVisitor: (_) {
+                  print("AuthAsVisitor");
+                  context.router.replace(const HomeRoute());
+                },
+                orElse: () {},
               );
             },
           ),
@@ -83,7 +94,9 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       isMenuFixed == false
-                          ? NavigationDrawerWidget()
+                          ? NavigationDrawerWidget(
+                              user: _user,
+                            )
                           : Container(),
                       Expanded(
                         child: SafeArea(
@@ -123,7 +136,7 @@ class _HomePageState extends State<HomePage> {
       case NavItem.categoryPage:
         return const CategoriesOutilsMesurePage();
       default:
-        return const HomePage();
+        return const HomeStartPage();
     }
   }
 }
