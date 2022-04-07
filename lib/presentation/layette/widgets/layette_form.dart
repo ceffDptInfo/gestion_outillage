@@ -9,7 +9,11 @@ import 'package:gestion_outillage/presentation/outils_detail/outils_mesure_list_
 import '../../../application/outils/outils_watcher/outils_watcher_bloc.dart';
 
 class LayetteForm extends StatefulWidget {
-  const LayetteForm({Key? key}) : super(key: key);
+  FirebaseAuth user;
+   LayetteForm({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   State<LayetteForm> createState() => _LayetteFormState();
@@ -179,7 +183,7 @@ class _LayetteFormState extends State<LayetteForm> {
                             itemCount: outils.listOutils.size,
                             itemBuilder: (context, index) {
                               return item(
-                                  index, outils.listOutils[index], context);
+                                  index, outils.listOutils[index], widget.user, context);
                             }),
                       ),
                     ],
@@ -346,7 +350,7 @@ class _LayetteFormState extends State<LayetteForm> {
 //     });
 //   }
 
-Widget item(int index, Outils outil, BuildContext context) {
+Widget item(int index, Outils outil, user, BuildContext context) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16.0),
     height: MediaQuery.of(context).size.height * 0.1,
@@ -354,7 +358,7 @@ Widget item(int index, Outils outil, BuildContext context) {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OutilsMesureListDetailPage(outil),
+          builder: (context) => OutilsMesureListDetailPage(outil,user),
         ),
       ),
       child: Card(

@@ -17,7 +17,8 @@ import 'package:auto_route/auto_route.dart';
 import '../../../application/auth/auth_bloc.dart';
 
 class HomeStartForm extends StatelessWidget {
-  const HomeStartForm({Key? key}) : super(key: key);
+  FirebaseAuth user;
+  HomeStartForm(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -171,16 +172,16 @@ class HomeStartForm extends StatelessWidget {
                       itemCount: outils.size,
                       itemBuilder: (context, index) {
                         return title == 'LES RÉCENTS'
-                            ? cardItem(context, index, outils[index])
+                            ? cardItem(context, index,  outils[index],user,)
                             : title == 'LES USAGÉS'
                                 ? outils[index].etat.toString() == 'Usagé'
-                                    ? cardItem(context, index, outils[index])
+                                    ? cardItem(context, index, outils[index],user)
                                     : Container()
                                 : title == 'LES EMPRUNTÉS'
                                     ? outils[index].status.toString() ==
                                             'Emprunté'
                                         ? cardItem(
-                                            context, index, outils[index])
+                                            context, index, outils[index],user)
                                         : Container()
                                     : Container();
                       }),
@@ -270,29 +271,10 @@ class HomeStartForm extends StatelessWidget {
         ],
       );
 
-  Widget cardItem(context, index, Outils outil) {
+  Widget cardItem(context, index, Outils outil, FirebaseAuth user) {
     return CardItemOuils(
       outil: outil,
-      // snapshot: snapshot,
-      // index: index,
-      // context: context,
-      // id: UniqueId(),
-      // // id: snapshot.data![index].id,
-      // // id: snapshot.data![index].id,
-      // login: snapshot.data![index].login.toString(),
-      // noInventaire: snapshot.data![index].noInventaire.toString(),
-      // etat: snapshot.data![index].etat.toString(),
-      // designation: snapshot.data![index].designation.toString(),
-      // complement: snapshot.data![index].complement.toString(),
-      // emplacement: snapshot.data![index].emplacement.toString(),
-      // statut: snapshot.data![index].status.toString(),
-      // dimangle1: snapshot.data![index].dim_angle_1.toString(),
-      // dimangle2: snapshot.data![index].dim_angle_2.toString(),
-      // dimmm1: snapshot.data![index].dim_mm_1.toString(),
-      // dimmm2: snapshot.data![index].dim_mm_2.toString(),
-      // nameImg: snapshot.data![index].name_img.toString(),
-      // arborescence: snapshot.data![index].arborescence.toString(),
-      // categorie: snapshot.data![index].categorie.toString(),
+      user: user,
     );
   }
 }

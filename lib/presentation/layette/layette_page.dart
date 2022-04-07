@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,8 +8,10 @@ import '../../application/outils/outils_watcher/outils_watcher_bloc.dart';
 import '../../injection.dart';
 
 class LayettePage extends StatelessWidget {
-  const LayettePage({
+  FirebaseAuth user;
+   LayettePage({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -17,7 +20,7 @@ class LayettePage extends StatelessWidget {
           create: (context) => getIt<OutilsWatcherBloc>()
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
           child:
-        const LayetteForm()
+        LayetteForm(user: user,)
     ,
     );
   }

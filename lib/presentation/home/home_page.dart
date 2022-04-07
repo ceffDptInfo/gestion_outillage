@@ -1,13 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
 
 import '../../injection.dart';
 import 'widgets/home_form.dart';
 
 class HomeStartPage extends StatelessWidget {
-  const HomeStartPage({
+   FirebaseAuth user;
+   HomeStartPage({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -17,7 +21,7 @@ class HomeStartPage extends StatelessWidget {
           create: (context) => getIt<OutilsWatcherBloc>()
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
           child:
-        const HomeStartForm()
+         HomeStartForm(user)
     ,
     );
   }

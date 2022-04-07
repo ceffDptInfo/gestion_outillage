@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,40 +17,12 @@ import 'package:gestion_outillage/presentation/outils_add/widgets/outils_choice_
 
 class OutilsMesureListDetailPage extends StatefulWidget {
   Outils outil;
-  // UniqueId id;
-  // String designation;
-  // String complement;
-  // String emplacement;
-  // String etat;
-  // String statut;
-
-  // int index;
-  // String dimangle1;
-  // String dimangle2;
-  // String dimm1;
-  // String dimm2;
-
-  // String nameimg;
-  // String arborescence;
-
-  // String categorie;
+  FirebaseAuth user;
+  
 
   OutilsMesureListDetailPage(
     this.outil,
-    // this.id,
-    // this.designation,
-    // this.complement,
-    // this.emplacement,
-    // this.etat,
-    // this.statut,
-    // this.index,
-    // this.dimangle1,
-    // this.dimangle2,
-    // this.dimm1,
-    // this.dimm2,
-    // this.nameimg,
-    // this.arborescence,
-    // this.categorie,
+    this.user
   );
 
   @override

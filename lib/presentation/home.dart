@@ -126,17 +126,49 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getContentForState(NavItem state) {
-    switch (state) {
-      case NavItem.homePage:
-        return const HomeStartPage();
-      case NavItem.dashboadPage:
-        return const DashboardPage();
-      case NavItem.layettePage:
-        return const LayettePage();
-      case NavItem.categoryPage:
-        return const CategoriesOutilsMesurePage();
-      default:
-        return const HomeStartPage();
+    FirebaseAuth _user = FirebaseAuth.instance;
+
+    if (_user.currentUser == null) {
+      switch (state) {
+        // case NavItem.homePage:
+        //   return const HomeStartPage();
+        // case NavItem.dashboadPage:
+        //   return const DashboardPage();
+        case NavItem.layettePage:
+          return  LayettePage(user: _user,);
+        case NavItem.categoryPage:
+          return const CategoriesOutilsMesurePage();
+        default:
+          return const CategoriesOutilsMesurePage();
+      }
+    } else if (_user.currentUser!.email == "prof@ceff.ch") {
+      switch (state) {
+        case NavItem.homePage:
+          return  HomeStartPage(user: _user,);
+        // case NavItem.dashboadPage:
+        //   return const DashboardPage();
+        case NavItem.layettePage:
+          return  LayettePage(user: _user,);
+        case NavItem.categoryPage:
+          return const CategoriesOutilsMesurePage();
+        default:
+          return  HomeStartPage(user: _user,);
+      }
+    } else if (_user.currentUser!.email == "eleve@ceff.ch") {
+      switch (state) {
+        // case NavItem.homePage:
+        //   return const HomeStartPage();
+        case NavItem.dashboadPage:
+          return  DashboardPage(user: _user,);
+        case NavItem.layettePage:
+          return  LayettePage(user: _user,);
+        case NavItem.categoryPage:
+          return const CategoriesOutilsMesurePage();
+        default:
+          return  DashboardPage(user: _user,);
+      }
     }
   }
+
+
 }

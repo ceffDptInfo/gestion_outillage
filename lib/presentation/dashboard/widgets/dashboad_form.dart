@@ -1,11 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:gestion_outillage/application/auth/auth_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/user_outils_watcher/user_outils_watcher_bloc.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:gestion_outillage/infrastructure/outils/outils_repository.dart';
-// import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
+import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
 import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
 import 'package:kt_dart/kt.dart';
@@ -14,7 +16,11 @@ import '../../../application/outils/outils_watcher/outils_watcher_bloc.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
 class DashboardForm extends StatelessWidget {
-  const DashboardForm({Key? key}) : super(key: key);
+  FirebaseAuth auth;
+   DashboardForm({
+    Key? key,
+    required this.auth,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +124,7 @@ class DashboardForm extends StatelessWidget {
                             // listViewMesOutils(context, outils.listOutils, width,
                             //     height, 'Mon historique'),
                             listViewMesOutils(context, outils.listOutils, width,
-                                height, 'Mes outils empruntés'),
+                                height, 'Mes outils empruntés',auth),
                           ],
                         ),
                       ),
@@ -147,7 +153,7 @@ class DashboardForm extends StatelessWidget {
   }
 
   Widget listViewMesOutils(context, KtList<Outils> outils, double width,
-          double height, String title) =>
+          double height, String title, user) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -174,9 +180,9 @@ class DashboardForm extends StatelessWidget {
               itemBuilder: (context, index) {
                 return title == 'Mes outils actuels'
                     ? outils[index].status.toString() == 'Emprunté'
-                        ? cardItem(context, index, outils[index])
+                        ? cardItem(context, index, outils[index],user)
                         : Container()
-                    : cardItem(context, index, outils[index]);
+                    : cardItem(context, index, outils[index],user);
               },
             ),
           ),
@@ -184,9 +190,10 @@ class DashboardForm extends StatelessWidget {
       );
 }
 
-Widget cardItem(context, index, Outils outil) {
+Widget cardItem(context, index, Outils outil, FirebaseAuth user) {
   return CardItemOuils(
     outil: outil,
+    user:user ,
     // snapshot: snapshot,
     // index: index,
     // context: context,

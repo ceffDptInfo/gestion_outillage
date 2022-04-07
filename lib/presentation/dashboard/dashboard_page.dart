@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,8 +7,10 @@ import '../../injection.dart';
 import 'widgets/dashboad_form.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({
+  FirebaseAuth user;
+  DashboardPage({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -16,6 +19,6 @@ class DashboardPage extends StatelessWidget {
           create: (context) => getIt<OutilsWatcherBloc>()
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
           child:
-        const DashboardForm(),);
+         DashboardForm(auth: user,),);
   }
 }

@@ -1,58 +1,25 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
-import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../outils_detail/outils_mesure_list_detail_page.dart';
 
 // ignore: must_be_immutable
 class CardItemOuils extends StatelessWidget {
   Outils outil;
-  // var snapshot;
-  // int index;
-  // BuildContext context;
-  // UniqueId id;
-  // String noInventaire;
-  // String etat;
-  // String designation;
-  // String complement;
-  // String emplacement;
-  // String statut;
-  // String dimangle1;
-  // String dimangle2;
-  // String dimmm1;
-  // String dimmm2;
-  // String nameImg;
-  // String arborescence;
-  // String categorie;
-  // String login;
+  FirebaseAuth user;
 
   CardItemOuils({
-    
     Key? key,
     required this.outil,
-    // required this.snapshot,
-    // required this.index,
-    // required this.context,
-    // required this.id,
-    // required this.noInventaire,
-    // required this.etat,
-    // required this.designation,
-    // required this.complement,
-    // required this.emplacement,
-    // required this.statut,
-    // required this.dimangle1,
-    // required this.dimangle2,
-    // required this.dimmm1,
-    // required this.dimmm2,
-    // required this.nameImg,
-    // required this.arborescence,
-    // required this.categorie,
-    // required this.login,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -62,21 +29,8 @@ class CardItemOuils extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => OutilsMesureListDetailPage(
-            outil
-            // id,
-            // designation,
-            // complement,
-            // emplacement,
-            // etat,
-            // statut,
-            // index,
-            // dimangle1,
-            // dimangle2,
-            // dimmm1,
-            // dimmm2,
-            // nameImg,
-            // arborescence,
-            // categorie,
+            outil,
+            user
           ),
         ),
       ),
@@ -225,26 +179,8 @@ class CardItemOuils extends StatelessWidget {
     );
   }
 
-  Widget returnCardItemOutils(Outils outil) => CardItemOuils(
+  Widget returnCardItemOutils(Outils outil, FirebaseAuth user) => CardItemOuils(
         outil: outil,
-        // snapshot: snapshot,
-        // index: index,
-        // context: context,
-        // id:UniqueId(),
-        // // id: UniqueId.fromUniqueString(snapshot.data![index].id).toString(),
-        // login: outil.login!,
-        // noInventaire: outil.noInventaire.toString(),
-        // etat: outil.etat.toString(),
-        // designation: outil.designation.toString(),
-        // complement: outil.complement.toString(),
-        // emplacement: outil.emplacement.toString(),
-        // statut: outil.status.toString(),
-        // dimangle1: outil.dimangle1.toString(),
-        // dimangle2: outil.dimangle2.toString(),
-        // dimmm1: outil.dimmm1.toString(),
-        // dimmm2: outil.dimmm2.toString(),
-        // nameImg: outil.nameImg.toString(),
-        // arborescence: outil.arborescence.toString(),
-        // categorie: outil.categorie.toString(),
+        user: user,
       );
 }
