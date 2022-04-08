@@ -5,6 +5,7 @@ import 'package:gestion_outillage/application/auth/auth_bloc.dart';
 
 import 'package:gestion_outillage/application/nav_drawer/nav_drawer_bloc.dart';
 import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
+import 'package:gestion_outillage/application/outils/outils_watcher/outils_firebase/outils_firebase_watcher_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/user_outils_watcher/user_outils_watcher_bloc.dart';
 
@@ -48,6 +49,10 @@ class AppWidget extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<OutilsWatcherBloc>()
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
+        ),
+         BlocProvider(
+          create: (context) => getIt<OutilsFirebaseWatcherBloc>()
+            ..add(const OutilsFirebaseWatcherEvent.watchOutilsStarted()),
         ),
         BlocProvider(
           create: (context) => getIt<UserOutilsWatcherBloc>()
