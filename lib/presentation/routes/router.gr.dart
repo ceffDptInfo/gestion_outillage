@@ -73,14 +73,17 @@ class AppRouter extends _i11.RootStackRouter {
           child: _i6.DashboardPage(key: args.key, user: args.user));
     },
     TiroirRoute.name: (routeData) {
-      final args = routeData.argsAs<TiroirRouteArgs>(
-          orElse: () => const TiroirRouteArgs());
+      final args = routeData.argsAs<TiroirRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i7.TiroirPage(key: args.key));
+          routeData: routeData,
+          child: _i7.TiroirPage(key: args.key, user: args.user));
     },
     CategoriesOutilsMesureRoute.name: (routeData) {
+      final args = routeData.argsAs<CategoriesOutilsMesureRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.CategoriesOutilsMesurePage());
+          routeData: routeData,
+          child:
+              _i8.CategoriesOutilsMesurePage(key: args.key, user: args.user));
     },
     OutilsMesureListDetailRoute.name: (routeData) {
       final args = routeData.argsAs<OutilsMesureListDetailRouteArgs>();
@@ -218,32 +221,49 @@ class DashboardRouteArgs {
 /// generated route for
 /// [_i7.TiroirPage]
 class TiroirRoute extends _i11.PageRouteInfo<TiroirRouteArgs> {
-  TiroirRoute({_i12.Key? key})
+  TiroirRoute({_i12.Key? key, required _i13.FirebaseAuth user})
       : super(TiroirRoute.name,
-            path: 'tiroir-page', args: TiroirRouteArgs(key: key));
+            path: 'tiroir-page', args: TiroirRouteArgs(key: key, user: user));
 
   static const String name = 'TiroirRoute';
 }
 
 class TiroirRouteArgs {
-  const TiroirRouteArgs({this.key});
+  const TiroirRouteArgs({this.key, required this.user});
 
   final _i12.Key? key;
 
+  final _i13.FirebaseAuth user;
+
   @override
   String toString() {
-    return 'TiroirRouteArgs{key: $key}';
+    return 'TiroirRouteArgs{key: $key, user: $user}';
   }
 }
 
 /// generated route for
 /// [_i8.CategoriesOutilsMesurePage]
-class CategoriesOutilsMesureRoute extends _i11.PageRouteInfo<void> {
-  const CategoriesOutilsMesureRoute()
+class CategoriesOutilsMesureRoute
+    extends _i11.PageRouteInfo<CategoriesOutilsMesureRouteArgs> {
+  CategoriesOutilsMesureRoute({_i12.Key? key, required _i13.FirebaseAuth user})
       : super(CategoriesOutilsMesureRoute.name,
-            path: 'categories-outils-mesure-page');
+            path: 'categories-outils-mesure-page',
+            args: CategoriesOutilsMesureRouteArgs(key: key, user: user));
 
   static const String name = 'CategoriesOutilsMesureRoute';
+}
+
+class CategoriesOutilsMesureRouteArgs {
+  const CategoriesOutilsMesureRouteArgs({this.key, required this.user});
+
+  final _i12.Key? key;
+
+  final _i13.FirebaseAuth user;
+
+  @override
+  String toString() {
+    return 'CategoriesOutilsMesureRouteArgs{key: $key, user: $user}';
+  }
 }
 
 /// generated route for

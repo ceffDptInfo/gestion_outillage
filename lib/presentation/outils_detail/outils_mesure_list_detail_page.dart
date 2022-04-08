@@ -51,7 +51,7 @@ class _OutilsMesureListDetailPageState
 
   Outils outilborrowed = Outils(
       id: UniqueId(),
-      userId:"",
+      userId: "",
       noInventaire: "",
       designation: "",
       dimmm1: "",
@@ -107,6 +107,7 @@ class _OutilsMesureListDetailPageState
         }
       });
     }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
@@ -139,43 +140,45 @@ class _OutilsMesureListDetailPageState
                 if (widget.user.currentUser!.email!.contains("eleve")) ...[
                   FloatingActionButton.extended(
                     onPressed: () {
-                      setState(() {
-                        if (widget.outil.status == "Emprunté") {
-                          if (isBrocken) {
-                            etat = "Usagé";
-                          }
-                          BlocProvider.of<OutilActorBloc>(context).add(
-                            OutilActorEvent.update(
-                              widget.outil
-                                  .copyWith(etat: etat, status: "Disponible"),
-                            ),
-                          );
-                        } else if (widget.outil.status == "Disponible") {
-                          BlocProvider.of<OutilActorBloc>(context).add(
-                            OutilActorEvent.create(
-                              widget.outil.copyWith(
-                                id: widget.outil.id,
-                                userId: widget.user.currentUser!.uid,
-                                noInventaire: widget.outil.noInventaire,
-                                designation: widget.outil.designation,
-                                dimmm1: widget.outil.dimmm1,
-                                dimmm2: widget.outil.dimmm2,
-                                dimangle1: widget.outil.dimangle1,
-                                dimangle2: widget.outil.dimangle2,
-                                complement: widget.outil.complement,
-                                emplacement: widget.outil.emplacement,
-                                etat: widget.outil.etat,
-                                login: widget.outil.login,
-                                status: "Emprunté",
-                                nameImg: widget.outil.nameImg,
-                                arborescence: widget.outil.arborescence,
-                                categorie: widget.outil.categorie,
+                      setState(
+                        () {
+                          if (widget.outil.status == "Emprunté") {
+                            if (isBrocken) {
+                              etat = "Usagé";
+                            }
+                            BlocProvider.of<OutilActorBloc>(context).add(
+                              OutilActorEvent.update(
+                                widget.outil
+                                    .copyWith(etat: etat, status: "Disponible"),
                               ),
-                            ),
-                          );
-                        }
-                        Navigator.of(context).pop();
-                      });
+                            );
+                          } else if (widget.outil.status == "Disponible") {
+                            BlocProvider.of<OutilActorBloc>(context).add(
+                              OutilActorEvent.create(
+                                widget.outil.copyWith(
+                                  id: widget.outil.id,
+                                  userId: widget.user.currentUser!.uid,
+                                  noInventaire: widget.outil.noInventaire,
+                                  designation: widget.outil.designation,
+                                  dimmm1: widget.outil.dimmm1,
+                                  dimmm2: widget.outil.dimmm2,
+                                  dimangle1: widget.outil.dimangle1,
+                                  dimangle2: widget.outil.dimangle2,
+                                  complement: widget.outil.complement,
+                                  emplacement: widget.outil.emplacement,
+                                  etat: widget.outil.etat,
+                                  login: widget.outil.login,
+                                  status: "Emprunté",
+                                  nameImg: widget.outil.nameImg,
+                                  arborescence: widget.outil.arborescence,
+                                  categorie: widget.outil.categorie,
+                                ),
+                              ),
+                            );
+                          }
+                          Navigator.of(context).pop();
+                        },
+                      );
                     },
                     label: widget.outil.status == "Emprunté"
                         ? const Text("Rendre l'outil")
@@ -482,6 +485,7 @@ class _OutilsMesureListDetailPageState
                     ),
                     // Text("Emplacement : " + emplacementSub),
                     gridEmplacement(context),
+                    // Text("Emprunté par ${widget.outil.userId.toString()}")
                   ],
                 ),
               ),
@@ -634,7 +638,7 @@ Widget gridEmplacement(context) => Container(
       // color: Colors.black38,
       margin: EdgeInsets.only(left: 70),
       width: MediaQuery.of(context).size.height / 2,
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.5,
       child: GridView.builder(
           itemCount: 35,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

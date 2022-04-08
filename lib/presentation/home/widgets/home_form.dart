@@ -131,7 +131,7 @@ class HomeStartForm extends StatelessWidget {
                 child: Scrollbar(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: outils.size,
+                      itemCount: outils.size < 20 ? outils.size : 20,
                       itemBuilder: (context, index) {
                         // if(title==usages){
                         //   return cardItem(context, index, outils[index],user);

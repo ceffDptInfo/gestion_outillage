@@ -42,6 +42,6 @@ String nonFonctionnel = "Les non-fonctionnels";
 // String nonFonctionnel = "Les non-fonctionnels";
 
 String empruntes = 'LES EMPRUNTÉS';
-String usages = 'LES USAGÉS';
+String usages = 'LES NON-FONCTIONNELS';
 String recents = 'LES RÉCENTS';
 String metrologie = 'Outils de métrologies';
