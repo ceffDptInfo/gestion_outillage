@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestion_outillage/application/outils/outils_watcher/outils_firebase/outils_firebase_watcher_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
+import 'package:gestion_outillage/application/outils/outils_watcher/user_outils_watcher/user_outils_watcher_bloc.dart';
 import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
@@ -20,12 +22,14 @@ class HomeStartForm extends StatelessWidget {
   FirebaseAuth user;
   HomeStartForm(this.user);
 
+  
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    return BlocBuilder<OutilsWatcherBloc, OutilsWatcherState>(
+    return BlocBuilder<OutilsFirebaseWatcherBloc, OutilsFirebaseWatcherState>(
       builder: (context, state) {
         return state.maybeMap(
           loadFailure: (value) => const Center(
@@ -78,18 +82,16 @@ class HomeStartForm extends StatelessWidget {
                             ),
                     ],
                   ),
-                  // listViewItems(
-                  //     empruntes, context, snapshot, width, height),
                   Divider(
                     height: height * 0.05,
                   ),
                   listViewItems(
-                      usages, context, outils.listOutils, width, height),
+                      usages, context, outils.listOutils.filter((outils) => outils.etat =="Usagé"), width, height),
                   Divider(
                     height: height * 0.05,
                   ),
                   listViewItems(
-                      recents, context, outils.listOutils, width, height),
+                      empruntes, context, outils.listOutils.filter((outils) => outils.status =="Emprunté"), width, height),
                 ],
               ),
             );
@@ -106,19 +108,19 @@ class HomeStartForm extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.4,
         child: Stack(
           children: <Widget>[
-            // Container(
-            //   margin: EdgeInsets.only(left: width * 0.05),
-            //   // color: Colors.green,
-            //   width: width * 0.8,
-            //   height: height * 0.08,
-            //   child: Text(
-            //     title,
-            //     style: const TextStyle(
-            //         fontSize: 45,
-            //         fontWeight: FontWeight.bold,
-            //         color: Colors.grey),
-            //   ),
-            // ),
+            Container(
+              margin: EdgeInsets.only(left: width * 0.05),
+              // color: Colors.green,
+              width: width * 0.8,
+              height: height * 0.08,
+              child: Text(
+                title,
+                style: const TextStyle(
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey),
+              ),
+            ),
             Positioned(
               bottom: 0,
               left: 0,
@@ -131,19 +133,24 @@ class HomeStartForm extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: outils.size,
                       itemBuilder: (context, index) {
-                        return title == 'LES RÉCENTS'
-                            ? cardItem(context, index,  outils[index],user,)
-                            : title == 'LES USAGÉS'
-                                ? outils[index].etat.toString() == 'Usagé'
-                                    ? cardItem(context, index, outils[index],user)
-                                    : Container()
-                                : title == 'LES EMPRUNTÉS'
-                                    ? outils[index].status.toString() ==
-                                            'Emprunté'
-                                        ? cardItem(
-                                            context, index, outils[index],user)
-                                        : Container()
-                                    : Container();
+                        // if(title==usages){
+                        //   return cardItem(context, index, outils[index],user);
+                        // }
+                        return cardItem(context, index, outils[index],user);
+                        // title == 'LES RÉCENTS'
+                        //     ? cardItem(context, index,  outils[index],user,)
+                        // //     :
+                        //      title == 'LES USAGÉS'
+                        //         // ? outils[index].etat.toString() == 'Usagé'
+                        //             ? cardItem(context, index, outils[index],user)
+                        //             : Container()
+                        //         : title == 'LES EMPRUNTÉS'
+                        //             ? outils[index].status.toString() ==
+                        //                     'Emprunté'
+                        //                 ? cardItem(
+                        //                     context, index, outils[index],user)
+                        //                 : Container()
+                        //             : Container();
                       }),
                 ),
               ),

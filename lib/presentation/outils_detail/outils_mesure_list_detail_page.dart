@@ -66,6 +66,12 @@ class _OutilsMesureListDetailPageState
       arborescence: "",
       categorie: "");
 
+  bool isBrocken = false;
+  bool isDispo = false;
+  String etat = "Usagé";
+  String statue = "Disponible";
+  String stateEtat = "Fonctionnel";
+
   @override
   void initState() {
     super.initState();
@@ -77,13 +83,15 @@ class _OutilsMesureListDetailPageState
     // _dimensionController.text = widget.dimangle1 + " / " + widget.dimangle2;
     // _dimensionSecondController.text = widget.dimm1 + " / " + widget.dimm2;
     // emplacementSub = widget.emplacement.substring(9);
+    if (widget.outil.etat == "Usagé") {
+      isBrocken = true;
+    } else {
+      isBrocken = false;
+    }
   }
 
-  bool isBrocken = false;
-  String etat = "Usagé";
   @override
   Widget build(BuildContext context) {
-    // bool isBrocken = false;
     File? _pickedImageFile;
 
     Future _pickImage(ImageSource source) async {
@@ -98,44 +106,6 @@ class _OutilsMesureListDetailPageState
         }
       });
     }
-    // Future<Null> _cropImage() async {
-    //   File? croppedFile = await ImageCropper.cropImage(
-    //     sourcePath: _pickedImageFile!.path,
-    //     aspectRatioPresets: Platform.isAndroid
-    //         ? [
-    //             CropAspectRatioPreset.square,
-    //             CropAspectRatioPreset.ratio3x2,
-    //             CropAspectRatioPreset.original,
-    //             CropAspectRatioPreset.ratio4x3,
-    //             CropAspectRatioPreset.ratio16x9
-    //           ]
-    //         : [
-    //             CropAspectRatioPreset.original,
-    //             CropAspectRatioPreset.square,
-    //             CropAspectRatioPreset.ratio3x2,
-    //             CropAspectRatioPreset.ratio4x3,
-    //             CropAspectRatioPreset.ratio5x3,
-    //             CropAspectRatioPreset.ratio5x4,
-    //             CropAspectRatioPreset.ratio7x5,
-    //             CropAspectRatioPreset.ratio16x9
-    //           ],
-    //     androidUiSettings: AndroidUiSettings(
-    //       toolbarTitle: 'Cropper',
-    //       toolbarColor: Colors.deepOrange,
-    //       toolbarWidgetColor: Colors.white,
-    //       initAspectRatio: CropAspectRatioPreset.original,
-    //       lockAspectRatio: false,
-    //     ),
-    //     iosUiSettings: IOSUiSettings(title: 'Cropper'),
-    //   );
-    //   if (croppedFile != null) {
-    //     _pickedImageFile = croppedFile;
-    //     // setState(() {
-
-    //     // });
-    //   }
-    // }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
@@ -146,105 +116,122 @@ class _OutilsMesureListDetailPageState
           ? Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                widget.outil.etat != "Usagé"
-                    ? FloatingActionButton.extended(
-                        onPressed: () {
-                          setState(() {
-                            isBrocken = !isBrocken;
-                          });
-                        },
-                        label:
-                            Text(isBrocken ? "Fonctionnel" : "Non-fonctionnel"),
-                        backgroundColor:
-                            !isBrocken ? Colors.orange.shade200 : Colors.orange,
-                        elevation: 0,
-                      )
-                    : const Text(""),
+                if (widget.user.currentUser!.email!.contains("eleve")) ...[
+                  if (widget.outil.status == "Emprunté") ...[
+                    FloatingActionButton.extended(
+                      onPressed: () {
+                        setState(() {
+                          isBrocken = !isBrocken;
+                        });
+                      },
+                      label:
+                          Text(isBrocken ? "Fonctionnel" : "Non-fonctionnel"),
+                      backgroundColor:
+                          !isBrocken ? Colors.orange.shade200 : Colors.orange,
+                      elevation: 0,
+                    )
+                  ],
+                ],
                 const SizedBox(
                   width: 20,
                 ),
-                widget.outil.etat != "Usagé"
-                    ? FloatingActionButton.extended(
-                        onPressed: () {
-                          setState(() {
-                            if (widget.outil.status == "Emprunté") {
-                              if (isBrocken) {
-                                etat = "Usagé";
-                              }
-                              BlocProvider.of<OutilActorBloc>(context).add(
-                                OutilActorEvent.update(
-                                  widget.outil.copyWith(
-                                      etat: etat, status: "Disponible"),
-                                ),
-                              );
-                            } else if (widget.outil.status == "Disponible") {
-                              BlocProvider.of<OutilActorBloc>(context).add(
-                                OutilActorEvent.create(
-                                  widget.outil.copyWith(
-                                    id: widget.outil.id,
-                                    noInventaire: widget.outil.noInventaire,
-                                    designation: widget.outil.designation,
-                                    dimmm1: widget.outil.dimmm1,
-                                    dimmm2: widget.outil.dimmm2,
-                                    dimangle1: widget.outil.dimangle1,
-                                    dimangle2: widget.outil.dimangle2,
-                                    complement: widget.outil.complement,
-                                    emplacement: widget.outil.emplacement,
-                                    etat: widget.outil.etat,
-                                    login: widget.outil.login,
-                                    status: "Emprunté",
-                                    nameImg: widget.outil.nameImg,
-                                    arborescence: widget.outil.arborescence,
-                                    categorie: widget.outil.categorie,
-                                  ),
-                                ),
-                              );
-                            }
-                            Navigator.of(context).pop();
-                          });
-                        },
-                        label: widget.outil.status == "Emprunté"
-                            ? const Text("Rendre l'outil")
-                            : const Text("Emprunter"),
-                        backgroundColor: Colors.blueGrey,
-                        foregroundColor: Colors.white,
-                      )
-                    : const Text(""),
+                if (widget.user.currentUser!.email!.contains("eleve")) ...[
+                  FloatingActionButton.extended(
+                    onPressed: () {
+                      setState(() {
+                        if (widget.outil.status == "Emprunté") {
+                          if (isBrocken) {
+                            etat = "Usagé";
+                          }
+                          BlocProvider.of<OutilActorBloc>(context).add(
+                            OutilActorEvent.update(
+                              widget.outil
+                                  .copyWith(etat: etat, status: "Disponible"),
+                            ),
+                          );
+                        } else if (widget.outil.status == "Disponible") {
+                          BlocProvider.of<OutilActorBloc>(context).add(
+                            OutilActorEvent.create(
+                              widget.outil.copyWith(
+                                id: widget.outil.id,
+                                noInventaire: widget.outil.noInventaire,
+                                designation: widget.outil.designation,
+                                dimmm1: widget.outil.dimmm1,
+                                dimmm2: widget.outil.dimmm2,
+                                dimangle1: widget.outil.dimangle1,
+                                dimangle2: widget.outil.dimangle2,
+                                complement: widget.outil.complement,
+                                emplacement: widget.outil.emplacement,
+                                etat: widget.outil.etat,
+                                login: widget.outil.login,
+                                status: "Emprunté",
+                                nameImg: widget.outil.nameImg,
+                                arborescence: widget.outil.arborescence,
+                                categorie: widget.outil.categorie,
+                              ),
+                            ),
+                          );
+                        }
+                        Navigator.of(context).pop();
+                      });
+                    },
+                    label: widget.outil.status == "Emprunté"
+                        ? const Text("Rendre l'outil")
+                        : const Text("Emprunter"),
+                    backgroundColor: Colors.blueGrey,
+                    foregroundColor: Colors.white,
+                  ),
+                  // ]
+                ] else ...[
+                  if (widget.user.currentUser!.email!.contains("prof")) ...[
+                    FloatingActionButton.extended(
+                      onPressed: () {
+                        setState(() {
+                          isBrocken = !isBrocken;
+                        });
+                      },
+                      label:
+                          Text(isBrocken ? "Fonctionnel" : "Non-Fonctionnel"),
+                      backgroundColor:
+                          !isBrocken ? Colors.orange.shade200 : Colors.orange,
+                      foregroundColor: Colors.black,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    FloatingActionButton.extended(
+                      onPressed: () {
+                        setState(() {
+                          if (widget.outil.etat == "Usagé") {
+                            etat = "Neuf";
+                            BlocProvider.of<OutilActorBloc>(context).add(
+                              OutilActorEvent.update(
+                                widget.outil.copyWith(etat: etat),
+                              ),
+                            );
+                          } else if (widget.outil.etat == "Neuf") {
+                            etat = "Usagé";
+                            BlocProvider.of<OutilActorBloc>(context).add(
+                              OutilActorEvent.update(
+                                widget.outil.copyWith(etat: etat),
+                              ),
+                            );
+                          }
+                          Navigator.of(context).pop();
+                        });
+                      },
+                      label: const Text("Sauvegarder"),
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                    ),
+                  ]
+                ]
               ],
             )
           : null,
-      // :
-      // Row(
-      //     mainAxisAlignment: MainAxisAlignment.end,
-      //     children: [
-      //       FloatingActionButton.extended(
-      //         onPressed: () {
-      //           setState(() {
-      //             // edit = false;
-      //             BlocProvider.of<OutilActorBloc>(context).add(
-      //               OutilActorEvent.create(outilborrowed),
-      //             );
-      //           });
-      //         },
-      //         label: Text("Annuler"),
-      //         icon: Icon(Icons.close),
-      //         backgroundColor: Colors.red,
-      //       ),
-      //       SizedBox(
-      //         width: 20,
-      //       ),
-      //       FloatingActionButton.extended(
-      //         onPressed: () {
-      //           setState(() {
-      //             edit = false;
-      //           });
-      //         },
-      //         label: Text("Sauvegarder"),
-      //         icon: Icon(Icons.save),
-      //         backgroundColor: Colors.green,
-      //       )
-      //     ],
-      //   ),
       body: Container(
           color: Colors.black12,
           width: MediaQuery.of(context).size.width,
@@ -378,95 +365,94 @@ class _OutilsMesureListDetailPageState
                     // if (!widget.user.currentUser!.email
                     //     .toString()
                     //     .contains("prof")) ...[
-                      Column(
-                        children: [
-                          widget.outil.etat != ""
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 100),
-                                      child: Text(
-                                        "Etat",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                    Column(
+                      children: [
+                        widget.outil.etat != ""
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 100),
+                                    child: Text(
+                                      "Etat",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
                                     ),
+                                  ),
 
-                                    edit == false
-                                        ? chipInfo(widget.outil.etat, "")
-                                        : Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                ChoiceChipItemEtat(
-                                                    "Neuf",
-                                                    Colors.green,
-                                                    widget.outil.etat),
-                                                ChoiceChipItemEtat(
-                                                    "Usagé",
-                                                    Colors.amber,
-                                                    widget.outil.etat),
-                                                ChoiceChipItemEtat(
-                                                    "Défectueux",
-                                                    Colors.red,
-                                                    widget.outil.etat),
-                                              ],
-                                            ),
+                                  edit == false
+                                      ? chipInfo(widget.outil.etat, "")
+                                      : Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ChoiceChipItemEtat(
+                                                  "Neuf",
+                                                  Colors.green,
+                                                  widget.outil.etat),
+                                              ChoiceChipItemEtat(
+                                                  "Usagé",
+                                                  Colors.amber,
+                                                  widget.outil.etat),
+                                              ChoiceChipItemEtat(
+                                                  "Défectueux",
+                                                  Colors.red,
+                                                  widget.outil.etat),
+                                            ],
                                           ),
+                                        ),
 
-                                    // actionButton(designation, context),
-                                  ],
-                                )
-                              : Container(),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 100),
-                                child: const Text(
-                                  "Statut",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                  // actionButton(designation, context),
+                                ],
+                              )
+                            : Container(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 100),
+                              child: const Text(
+                                "Statut",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              edit == false
-                                  ? chipInfo("", widget.outil.status)
-                                  : Container(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          ChoiceChipItemStatut(
-                                              "Disponible",
-                                              Colors.green,
-                                              widget.outil.etat,
-                                              widget.outil.status),
-                                          ChoiceChipItemStatut(
-                                            "Emprunté",
-                                            Colors.amber,
+                            ),
+                            edit == false
+                                ? chipInfo("", widget.outil.status)
+                                : Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ChoiceChipItemStatut(
+                                            "Disponible",
+                                            Colors.green,
                                             widget.outil.etat,
-                                            widget.outil.status,
-                                          ),
-                                        ],
-                                      ),
+                                            widget.outil.status),
+                                        ChoiceChipItemStatut(
+                                          "Emprunté",
+                                          Colors.amber,
+                                          widget.outil.etat,
+                                          widget.outil.status,
+                                        ),
+                                      ],
                                     ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 100,
-                          ),
-                        ],
-                      ),
+                                  ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 100,
+                        ),
+                      ],
+                    ),
                     // ]
                   ],
                 ),

@@ -140,6 +140,35 @@ class Outilsrepository implements IOutilsRepository {
       throw Exception('Failed to load outils');
     }
   }
+    @override
+  Stream<Either<OutilsFailure, KtList<Outils>>> watchOutilFromFirebase() async* {
+    final userOption = await getIt<IAuthFacade>().getSignedInUser();
+    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
+    final userDoc = user.id.getOrCrash();
+
+    yield* _firestore
+        .collection("outils_empruntées")
+        .snapshots()
+        .map(
+          (snapshot) => right<OutilsFailure, KtList<Outils>>(
+            snapshot.docs
+                .map((doc) => OutilsDto.fromFirestore(doc).toDomain())
+                .toImmutableList(),
+          ),
+        )
+        .onErrorReturnWith(
+      (e, s) {
+        if (e is FirebaseException &&
+            e.message!.contains('PERMISSION DENIED')) {
+          return left(const OutilsFailure.insufficientPermission());
+        } else {
+          return left(
+            const OutilsFailure.unexpected(),
+          );
+        }
+      },
+    );
+  }
 
   @override
   Stream<Either<OutilsFailure, KtList<Outils>>> watchBorrowedOutils() async* {
@@ -148,7 +177,7 @@ class Outilsrepository implements IOutilsRepository {
     final userDoc = user.id.getOrCrash();
 
     yield* _firestore
-        .collection("users/$userDoc/outils_empruntées")
+        .collection("outils_empruntées")
         .where("status", isEqualTo: "Emprunté")
         .snapshots()
         .map(
@@ -206,7 +235,7 @@ class Outilsrepository implements IOutilsRepository {
       final outilDto = OutilsDto.fromDomain(outil);
 
       await _firestore
-          .collection("users/$userDoc/outils_empruntées/")
+          .collection("outils_empruntées/")
           .doc(outilDto.id)
           .set(outilDto.toJson());
 
@@ -254,7 +283,7 @@ class Outilsrepository implements IOutilsRepository {
     try {
       final outilDto = OutilsDto.fromDomain(outil);
       await _firestore
-          .collection("users/$userDoc/outils_empruntées/")
+          .collection("outils_empruntées/")
           .doc(outilDto.id)
           .set(outilDto.toJson());
 

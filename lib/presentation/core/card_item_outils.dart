@@ -150,12 +150,12 @@ class CardItemOuils extends StatelessWidget {
                 ),
               ),
               if (user.currentUser!.email.toString().contains("prof") ||
-                  user.currentUser == null) ...[
+                  user.currentUser == null) ...[ //afficher l'état de l'outil sur la card
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     margin: const EdgeInsets.only(top: 10),
-                    width: 80,
+                    width: 120,
                     height: 30,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -164,12 +164,15 @@ class CardItemOuils extends StatelessWidget {
                             ? Colors.orange
                             : Colors.green,
                         child: Center(
-                          child: Text(
-                            outil.etat == "Usagé"?"Non-fonctionnel":"Fonctionnel",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              outil.etat == "Usagé"?"Non-fonctionnel":"Fonctionnel",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              // textAlign: TextAlign.left,
                             ),
-                            // textAlign: TextAlign.left,
                           ),
                         ),
                       ),
