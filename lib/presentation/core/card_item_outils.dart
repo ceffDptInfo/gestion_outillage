@@ -28,10 +28,7 @@ class CardItemOuils extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OutilsMesureListDetailPage(
-            outil,
-            user
-          ),
+          builder: (context) => OutilsMesureListDetailPage(outil, user),
         ),
       ),
       onLongPress: () {
@@ -133,12 +130,18 @@ class CardItemOuils extends StatelessWidget {
                       const Divider(),
                       outil.dimmm1 != "0" || outil.dimmm2 != "0"
                           ? Text(
-                              "Dim [mm]: " + outil.dimmm1! + " / " + outil.dimmm2!,
+                              "Dim [mm]: " +
+                                  outil.dimmm1! +
+                                  " / " +
+                                  outil.dimmm2!,
                             )
                           : Container(),
                       outil.dimangle1 != "0" || outil.dimangle2 != "0"
                           ? Text(
-                              "Dim angle: " + outil.dimangle1! + " / " + outil.dimangle2!,
+                              "Dim angle: " +
+                                  outil.dimangle1! +
+                                  " / " +
+                                  outil.dimangle2!,
                             )
                           : Container(),
                     ],
@@ -146,29 +149,34 @@ class CardItemOuils extends StatelessWidget {
                   // ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: 80,
-                  height: 30,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    child: Container(
-                      color: outil.etat == "Usagé" ? Colors.orange : Colors.green,
-                      child: Center(
-                        child: Text(
-                          outil.etat,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
+              if (user.currentUser!.email.toString().contains("prof") ||
+                  user.currentUser == null) ...[
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: 80,
+                    height: 30,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      child: Container(
+                        color: outil.etat == "Usagé"
+                            ? Colors.orange
+                            : Colors.green,
+                        child: Center(
+                          child: Text(
+                            outil.etat == "Usagé"?"Non-fonctionnel":"Fonctionnel",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            // textAlign: TextAlign.left,
                           ),
-                          // textAlign: TextAlign.left,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
+              ],
               const SizedBox(
                 height: 10,
               ),

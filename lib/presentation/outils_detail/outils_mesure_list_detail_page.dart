@@ -18,12 +18,8 @@ import 'package:gestion_outillage/presentation/outils_add/widgets/outils_choice_
 class OutilsMesureListDetailPage extends StatefulWidget {
   Outils outil;
   FirebaseAuth user;
-  
 
-  OutilsMesureListDetailPage(
-    this.outil,
-    this.user
-  );
+  OutilsMesureListDetailPage(this.outil, this.user);
 
   @override
   State<OutilsMesureListDetailPage> createState() =>
@@ -83,8 +79,11 @@ class _OutilsMesureListDetailPageState
     // emplacementSub = widget.emplacement.substring(9);
   }
 
+  bool isBrocken = false;
+  String etat = "Usagé";
   @override
   Widget build(BuildContext context) {
+    // bool isBrocken = false;
     File? _pickedImageFile;
 
     Future _pickImage(ImageSource source) async {
@@ -143,50 +142,77 @@ class _OutilsMesureListDetailPageState
         preferredSize: const Size.fromHeight(50),
         child: appBarReturn(context),
       ),
-      floatingActionButton:
-          // edit == false
-          // ?
-          FloatingActionButton.extended(
-        onPressed: () {
-          setState(() {
-            // edit = true;
-            if (widget.outil.status == "Emprunté") {
-              BlocProvider.of<OutilActorBloc>(context).add(
-                OutilActorEvent.deleted(widget.outil),
-              );
-            } else if (widget.outil.status == "Disponible") {
-              BlocProvider.of<OutilActorBloc>(context).add(
-                OutilActorEvent.create(
-                  widget.outil.copyWith(
-                    id: widget.outil.id,
-                    noInventaire: widget.outil.noInventaire,
-                    designation: widget.outil.designation,
-                    dimmm1: widget.outil.dimmm1,
-                    dimmm2: widget.outil.dimmm2,
-                    dimangle1: widget.outil.dimangle1,
-                    dimangle2: widget.outil.dimangle2,
-                    complement: widget.outil.complement,
-                    emplacement: widget.outil.emplacement,
-                    etat: widget.outil.etat,
-                    login: widget.outil.login,
-                    status: "Emprunté",
-                    nameImg: widget.outil.nameImg,
-                    arborescence: widget.outil.arborescence,
-                    categorie: widget.outil.categorie,
-                  ),
+      floatingActionButton: widget.user.currentUser != null
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                widget.outil.etat != "Usagé"
+                    ? FloatingActionButton.extended(
+                        onPressed: () {
+                          setState(() {
+                            isBrocken = !isBrocken;
+                          });
+                        },
+                        label:
+                            Text(isBrocken ? "Fonctionnel" : "Non-fonctionnel"),
+                        backgroundColor:
+                            !isBrocken ? Colors.orange.shade200 : Colors.orange,
+                        elevation: 0,
+                      )
+                    : const Text(""),
+                const SizedBox(
+                  width: 20,
                 ),
-              );
-            }
-            Navigator.of(context).pop();
-          });
-        },
-        label: widget.outil.status == "Emprunté"
-            ? Text("Rendre l'outil")
-            : Text("Emprunter"),
-        // icon: Icon(Icons.edit),
-        backgroundColor: Colors.blueGrey,
-        foregroundColor: Colors.white,
-      ),
+                widget.outil.etat != "Usagé"
+                    ? FloatingActionButton.extended(
+                        onPressed: () {
+                          setState(() {
+                            if (widget.outil.status == "Emprunté") {
+                              if (isBrocken) {
+                                etat = "Usagé";
+                              }
+                              BlocProvider.of<OutilActorBloc>(context).add(
+                                OutilActorEvent.update(
+                                  widget.outil.copyWith(
+                                      etat: etat, status: "Disponible"),
+                                ),
+                              );
+                            } else if (widget.outil.status == "Disponible") {
+                              BlocProvider.of<OutilActorBloc>(context).add(
+                                OutilActorEvent.create(
+                                  widget.outil.copyWith(
+                                    id: widget.outil.id,
+                                    noInventaire: widget.outil.noInventaire,
+                                    designation: widget.outil.designation,
+                                    dimmm1: widget.outil.dimmm1,
+                                    dimmm2: widget.outil.dimmm2,
+                                    dimangle1: widget.outil.dimangle1,
+                                    dimangle2: widget.outil.dimangle2,
+                                    complement: widget.outil.complement,
+                                    emplacement: widget.outil.emplacement,
+                                    etat: widget.outil.etat,
+                                    login: widget.outil.login,
+                                    status: "Emprunté",
+                                    nameImg: widget.outil.nameImg,
+                                    arborescence: widget.outil.arborescence,
+                                    categorie: widget.outil.categorie,
+                                  ),
+                                ),
+                              );
+                            }
+                            Navigator.of(context).pop();
+                          });
+                        },
+                        label: widget.outil.status == "Emprunté"
+                            ? const Text("Rendre l'outil")
+                            : const Text("Emprunter"),
+                        backgroundColor: Colors.blueGrey,
+                        foregroundColor: Colors.white,
+                      )
+                    : const Text(""),
+              ],
+            )
+          : null,
       // :
       // Row(
       //     mainAxisAlignment: MainAxisAlignment.end,
@@ -277,7 +303,7 @@ class _OutilsMesureListDetailPageState
                         ],
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                     ),
                     Row(
@@ -349,96 +375,99 @@ class _OutilsMesureListDetailPageState
                             ],
                           ),
                     Divider(),
-                    Column(
-                      children: [
-                        widget.outil.etat != ""
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 100),
-                                    child: Text(
-                                      "Etat",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                    // if (!widget.user.currentUser!.email
+                    //     .toString()
+                    //     .contains("prof")) ...[
+                      Column(
+                        children: [
+                          widget.outil.etat != ""
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 100),
+                                      child: Text(
+                                        "Etat",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
 
-                                  edit == false
-                                      ? chipInfo(widget.outil.etat, "")
-                                      : Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              ChoiceChipItemEtat(
-                                                  "Neuf",
-                                                  Colors.green,
-                                                  widget.outil.etat),
-                                              ChoiceChipItemEtat(
-                                                  "Usagé",
-                                                  Colors.amber,
-                                                  widget.outil.etat),
-                                              ChoiceChipItemEtat(
-                                                  "Défectueux",
-                                                  Colors.red,
-                                                  widget.outil.etat),
-                                            ],
+                                    edit == false
+                                        ? chipInfo(widget.outil.etat, "")
+                                        : Container(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                ChoiceChipItemEtat(
+                                                    "Neuf",
+                                                    Colors.green,
+                                                    widget.outil.etat),
+                                                ChoiceChipItemEtat(
+                                                    "Usagé",
+                                                    Colors.amber,
+                                                    widget.outil.etat),
+                                                ChoiceChipItemEtat(
+                                                    "Défectueux",
+                                                    Colors.red,
+                                                    widget.outil.etat),
+                                              ],
+                                            ),
                                           ),
-                                        ),
 
-                                  // actionButton(designation, context),
-                                ],
-                              )
-                            : Container(),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 100),
-                              child: Text(
-                                "Statut",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                    // actionButton(designation, context),
+                                  ],
+                                )
+                              : Container(),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(left: 100),
+                                child: const Text(
+                                  "Statut",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                            edit == false
-                                ? chipInfo("", widget.outil.status)
-                                : Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ChoiceChipItemStatut(
-                                            "Disponible",
-                                            Colors.green,
+                              edit == false
+                                  ? chipInfo("", widget.outil.status)
+                                  : Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          ChoiceChipItemStatut(
+                                              "Disponible",
+                                              Colors.green,
+                                              widget.outil.etat,
+                                              widget.outil.status),
+                                          ChoiceChipItemStatut(
+                                            "Emprunté",
+                                            Colors.amber,
                                             widget.outil.etat,
-                                            widget.outil.status),
-                                        ChoiceChipItemStatut(
-                                          "Emprunté",
-                                          Colors.amber,
-                                          widget.outil.etat,
-                                          widget.outil.status,
-                                        ),
-                                      ],
+                                            widget.outil.status,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-
-                            // actionButton(designation, context),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 100,
-                        ),
-                      ],
-                    ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 100,
+                          ),
+                        ],
+                      ),
+                    // ]
                   ],
                 ),
               ),

@@ -11,9 +11,10 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:firebase_auth/firebase_auth.dart' as _i13;
 import 'package:flutter/material.dart' as _i12;
 
-import '../../domain/outils/outils.dart' as _i13;
+import '../../domain/outils/outils.dart' as _i14;
 import '../categories/categories_page.dart' as _i8;
 import '../dashboard/dashboard_page.dart' as _i6;
 import '../home.dart' as _i3;
@@ -54,16 +55,22 @@ class AppRouter extends _i11.RootStackRouter {
           barrierDismissible: false);
     },
     HomeStartRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeStartRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.HomeStartPage());
+          routeData: routeData,
+          child: _i4.HomeStartPage(key: args.key, user: args.user));
     },
     LayetteRoute.name: (routeData) {
+      final args = routeData.argsAs<LayetteRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.LayettePage());
+          routeData: routeData,
+          child: _i5.LayettePage(key: args.key, user: args.user));
     },
     DashboardRoute.name: (routeData) {
+      final args = routeData.argsAs<DashboardRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.DashboardPage());
+          routeData: routeData,
+          child: _i6.DashboardPage(key: args.key, user: args.user));
     },
     TiroirRoute.name: (routeData) {
       final args = routeData.argsAs<TiroirRouteArgs>(
@@ -79,7 +86,7 @@ class AppRouter extends _i11.RootStackRouter {
       final args = routeData.argsAs<OutilsMesureListDetailRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i9.OutilsMesureListDetailPage(args.outil));
+          child: _i9.OutilsMesureListDetailPage(args.outil, args.user));
     },
     OutilsAddRoute.name: (routeData) {
       return _i11.MaterialPageX<dynamic>(
@@ -139,26 +146,73 @@ class HomeRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.HomeStartPage]
-class HomeStartRoute extends _i11.PageRouteInfo<void> {
-  const HomeStartRoute() : super(HomeStartRoute.name, path: 'home-start-page');
+class HomeStartRoute extends _i11.PageRouteInfo<HomeStartRouteArgs> {
+  HomeStartRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+      : super(HomeStartRoute.name,
+            path: 'home-start-page',
+            args: HomeStartRouteArgs(key: key, user: user));
 
   static const String name = 'HomeStartRoute';
 }
 
+class HomeStartRouteArgs {
+  const HomeStartRouteArgs({this.key, required this.user});
+
+  final _i12.Key? key;
+
+  final _i13.FirebaseAuth user;
+
+  @override
+  String toString() {
+    return 'HomeStartRouteArgs{key: $key, user: $user}';
+  }
+}
+
 /// generated route for
 /// [_i5.LayettePage]
-class LayetteRoute extends _i11.PageRouteInfo<void> {
-  const LayetteRoute() : super(LayetteRoute.name, path: 'layette-page');
+class LayetteRoute extends _i11.PageRouteInfo<LayetteRouteArgs> {
+  LayetteRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+      : super(LayetteRoute.name,
+            path: 'layette-page', args: LayetteRouteArgs(key: key, user: user));
 
   static const String name = 'LayetteRoute';
 }
 
+class LayetteRouteArgs {
+  const LayetteRouteArgs({this.key, required this.user});
+
+  final _i12.Key? key;
+
+  final _i13.FirebaseAuth user;
+
+  @override
+  String toString() {
+    return 'LayetteRouteArgs{key: $key, user: $user}';
+  }
+}
+
 /// generated route for
 /// [_i6.DashboardPage]
-class DashboardRoute extends _i11.PageRouteInfo<void> {
-  const DashboardRoute() : super(DashboardRoute.name, path: 'dashboard-page');
+class DashboardRoute extends _i11.PageRouteInfo<DashboardRouteArgs> {
+  DashboardRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+      : super(DashboardRoute.name,
+            path: 'dashboard-page',
+            args: DashboardRouteArgs(key: key, user: user));
 
   static const String name = 'DashboardRoute';
+}
+
+class DashboardRouteArgs {
+  const DashboardRouteArgs({this.key, required this.user});
+
+  final _i12.Key? key;
+
+  final _i13.FirebaseAuth user;
+
+  @override
+  String toString() {
+    return 'DashboardRouteArgs{key: $key, user: $user}';
+  }
 }
 
 /// generated route for
@@ -196,22 +250,26 @@ class CategoriesOutilsMesureRoute extends _i11.PageRouteInfo<void> {
 /// [_i9.OutilsMesureListDetailPage]
 class OutilsMesureListDetailRoute
     extends _i11.PageRouteInfo<OutilsMesureListDetailRouteArgs> {
-  OutilsMesureListDetailRoute({required _i13.Outils outil})
+  OutilsMesureListDetailRoute(
+      {required _i14.Outils outil, required _i13.FirebaseAuth user})
       : super(OutilsMesureListDetailRoute.name,
             path: 'outils-mesure-list-detail-page',
-            args: OutilsMesureListDetailRouteArgs(outil: outil));
+            args: OutilsMesureListDetailRouteArgs(outil: outil, user: user));
 
   static const String name = 'OutilsMesureListDetailRoute';
 }
 
 class OutilsMesureListDetailRouteArgs {
-  const OutilsMesureListDetailRouteArgs({required this.outil});
+  const OutilsMesureListDetailRouteArgs(
+      {required this.outil, required this.user});
 
-  final _i13.Outils outil;
+  final _i14.Outils outil;
+
+  final _i13.FirebaseAuth user;
 
   @override
   String toString() {
-    return 'OutilsMesureListDetailRouteArgs{outil: $outil}';
+    return 'OutilsMesureListDetailRouteArgs{outil: $outil, user: $user}';
   }
 }
 

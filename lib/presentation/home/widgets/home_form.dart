@@ -96,46 +96,6 @@ class HomeStartForm extends StatelessWidget {
           },
           orElse: () => Container(),
         );
-
-        //   return Container();
-        //   StreamBuilder<List<OutilsDto>>(
-        //       stream: value.listOutils,
-        //       builder: (context, AsyncSnapshot<List<OutilsDto>> snapshot) {
-        //         if (snapshot.hasData) {
-        //           return SingleChildScrollView(
-        //             child: Column(
-        //               children: [
-        //             Padding(
-        //               padding: const EdgeInsets.all(8.0),
-        //               child: Align(
-        //                 alignment: Alignment.centerRight,
-        //                 child: ElevatedButton(
-        //                   onPressed: (){print("login");},
-        //                   child: Text('Se connecter'),
-        //                 ),
-        //               ),
-        //             ),
-        //             // listViewItems(
-        //             //     empruntes, context, snapshot, width, height),
-        //             Divider(
-        //               height: height * 0.05,
-        //             ),
-        //             listViewItems(
-        //                 usages, context, snapshot, width, height),
-        //             Divider(
-        //               height: height * 0.05,
-        //             ),
-        //             listViewItems(
-        //                 recents, context, snapshot, width, height),
-        //           ],
-        //         ),
-        //       );
-        //     } else {
-        //       return const Center(child: CircularProgressIndicator());
-        //     }
-        //   }),
-        //   orElse: () => Container(),
-        // );
       },
     );
   }
@@ -146,19 +106,19 @@ class HomeStartForm extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.4,
         child: Stack(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: width * 0.05),
-              // color: Colors.green,
-              width: width * 0.8,
-              height: height * 0.08,
-              child: Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.only(left: width * 0.05),
+            //   // color: Colors.green,
+            //   width: width * 0.8,
+            //   height: height * 0.08,
+            //   child: Text(
+            //     title,
+            //     style: const TextStyle(
+            //         fontSize: 45,
+            //         fontWeight: FontWeight.bold,
+            //         color: Colors.grey),
+            //   ),
+            // ),
             Positioned(
               bottom: 0,
               left: 0,

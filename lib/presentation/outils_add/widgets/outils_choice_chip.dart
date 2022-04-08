@@ -111,7 +111,7 @@ class _ChoiceChipItemStatutState extends State<ChoiceChipItemStatut> {
 
 Widget chipInfo(etat, statut) => Container(
       margin: EdgeInsets.only(left: 100),
-      width: 100,
+      width: 200,
       height: 50,
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -130,7 +130,7 @@ Widget chipInfo(etat, statut) => Container(
           child: Center(
             child: Text(
               etat != ""
-                  ? etat
+                  ? etat =="Usagé"?"Non-Fonctionnel":"Fonctionnel"
                   : statut != ""
                       ? statut
                       : "",
