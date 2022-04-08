@@ -9,6 +9,7 @@ class Outils with _$Outils {
 
   const factory Outils({
     required UniqueId id,
+    required String? userId,
     required String? noInventaire,
     required String designation,
     required String? dimmm1,
@@ -29,6 +30,7 @@ class Outils with _$Outils {
   factory Outils.fromJson(Map<String, dynamic> json) {
     return Outils(
       id: UniqueId(),
+      userId: "",
       noInventaire: json['no_inventaire'],
       designation: json['designation'],
       dimmm1: json['dim_mm_1'],

@@ -51,6 +51,7 @@ class _OutilsMesureListDetailPageState
 
   Outils outilborrowed = Outils(
       id: UniqueId(),
+      userId:"",
       noInventaire: "",
       designation: "",
       dimmm1: "",
@@ -154,6 +155,7 @@ class _OutilsMesureListDetailPageState
                             OutilActorEvent.create(
                               widget.outil.copyWith(
                                 id: widget.outil.id,
+                                userId: widget.user.currentUser!.uid,
                                 noInventaire: widget.outil.noInventaire,
                                 designation: widget.outil.designation,
                                 dimmm1: widget.outil.dimmm1,

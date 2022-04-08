@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gestion_outillage/presentation/outils_add/outils_add_page.dart';
@@ -8,12 +9,14 @@ class CardItemCategoryTest extends StatefulWidget {
   var snapshot;
   int index;
   String title;
+  FirebaseAuth user;
 
   CardItemCategoryTest(
     Key? key,
     this.snapshot,
     this.index,
     this.title,
+    this.user,
   ) : super(key: key);
 
   @override
@@ -91,7 +94,7 @@ class CardItemCategoryState extends State<CardItemCategoryTest> {
             ),
           ],
           title: Text(widget.title),
-          content: MyDialogContent(snapshot, activeIndex),
+          content: MyDialogContent(widget.user, snapshot, activeIndex,title),
           // ),
         ),
       );

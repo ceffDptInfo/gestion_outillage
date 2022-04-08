@@ -1,24 +1,29 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 
+import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/categories/widgets/search_widget.dart';
 import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 
 // ignore: must_be_immutable
 class TiroirPage extends StatelessWidget {
-  TiroirPage({Key? key}) : super(key: key);
+  FirebaseAuth user;
+  TiroirPage({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
   TextEditingController controller = TextEditingController();
   String query = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: appbar(context),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(50),
+      //   child: appbar(context),
+      // ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Column(
@@ -51,7 +56,7 @@ class TiroirPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const CategoriesOutilsMesurePage()));
+                                      CategoriesOutilsMesurePage(user: user,)));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(

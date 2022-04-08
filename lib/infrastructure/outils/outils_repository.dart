@@ -178,6 +178,7 @@ class Outilsrepository implements IOutilsRepository {
 
     yield* _firestore
         .collection("outils_empruntées")
+        .where("userId", isEqualTo: userDoc)
         .where("status", isEqualTo: "Emprunté")
         .snapshots()
         .map(

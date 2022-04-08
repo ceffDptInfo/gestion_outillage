@@ -16,6 +16,7 @@ abstract class OutilsDto implements _$OutilsDto {
   const factory OutilsDto({
     // ignore: invalid_annotation_target
     @JsonKey(ignore: true) String? id,
+    required String? userId,
     required String? noInventaire,
     required String designation,
     // ignore: non_constant_identifier_names
@@ -41,6 +42,7 @@ abstract class OutilsDto implements _$OutilsDto {
   Outils toDomain() {
     return Outils(
       id: UniqueId.fromUniqueString(id!),
+      userId: userId,
       noInventaire: noInventaire,
       designation: designation,
       dimmm1: dim_mm_1,
@@ -66,9 +68,9 @@ abstract class OutilsDto implements _$OutilsDto {
   }
 
   factory OutilsDto.fromDomain(Outils outil) {
-    print(outil.id.getOrCrash());
     return OutilsDto(
       id: outil.id.getOrCrash(),
+      userId: outil.userId,
       name_img: outil.nameImg,
       dim_mm_1: outil.dimmm1,
       dim_mm_2: outil.dimmm2,

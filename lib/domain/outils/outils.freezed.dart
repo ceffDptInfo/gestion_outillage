@@ -19,6 +19,7 @@ class _$OutilsTearOff {
 
   _Outils call(
       {required UniqueId id,
+      required String? userId,
       required String? noInventaire,
       required String designation,
       required String? dimmm1,
@@ -35,6 +36,7 @@ class _$OutilsTearOff {
       required String categorie}) {
     return _Outils(
       id: id,
+      userId: userId,
       noInventaire: noInventaire,
       designation: designation,
       dimmm1: dimmm1,
@@ -59,6 +61,7 @@ const $Outils = _$OutilsTearOff();
 /// @nodoc
 mixin _$Outils {
   UniqueId get id => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   String? get noInventaire => throw _privateConstructorUsedError;
   String get designation => throw _privateConstructorUsedError;
   String? get dimmm1 => throw _privateConstructorUsedError;
@@ -85,6 +88,7 @@ abstract class $OutilsCopyWith<$Res> {
       _$OutilsCopyWithImpl<$Res>;
   $Res call(
       {UniqueId id,
+      String? userId,
       String? noInventaire,
       String designation,
       String? dimmm1,
@@ -112,6 +116,7 @@ class _$OutilsCopyWithImpl<$Res> implements $OutilsCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
     Object? dimmm1 = freezed,
@@ -132,6 +137,10 @@ class _$OutilsCopyWithImpl<$Res> implements $OutilsCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
       noInventaire: noInventaire == freezed
           ? _value.noInventaire
           : noInventaire // ignore: cast_nullable_to_non_nullable
@@ -199,6 +208,7 @@ abstract class _$OutilsCopyWith<$Res> implements $OutilsCopyWith<$Res> {
   @override
   $Res call(
       {UniqueId id,
+      String? userId,
       String? noInventaire,
       String designation,
       String? dimmm1,
@@ -227,6 +237,7 @@ class __$OutilsCopyWithImpl<$Res> extends _$OutilsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
     Object? dimmm1 = freezed,
@@ -247,6 +258,10 @@ class __$OutilsCopyWithImpl<$Res> extends _$OutilsCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
       noInventaire: noInventaire == freezed
           ? _value.noInventaire
           : noInventaire // ignore: cast_nullable_to_non_nullable
@@ -312,6 +327,7 @@ class __$OutilsCopyWithImpl<$Res> extends _$OutilsCopyWithImpl<$Res>
 class _$_Outils extends _Outils {
   const _$_Outils(
       {required this.id,
+      required this.userId,
       required this.noInventaire,
       required this.designation,
       required this.dimmm1,
@@ -330,6 +346,8 @@ class _$_Outils extends _Outils {
 
   @override
   final UniqueId id;
+  @override
+  final String? userId;
   @override
   final String? noInventaire;
   @override
@@ -361,7 +379,7 @@ class _$_Outils extends _Outils {
 
   @override
   String toString() {
-    return 'Outils(id: $id, noInventaire: $noInventaire, designation: $designation, dimmm1: $dimmm1, dimmm2: $dimmm2, dimangle1: $dimangle1, dimangle2: $dimangle2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, nameImg: $nameImg, arborescence: $arborescence, categorie: $categorie)';
+    return 'Outils(id: $id, userId: $userId, noInventaire: $noInventaire, designation: $designation, dimmm1: $dimmm1, dimmm2: $dimmm2, dimangle1: $dimangle1, dimangle2: $dimangle2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, nameImg: $nameImg, arborescence: $arborescence, categorie: $categorie)';
   }
 
   @override
@@ -370,6 +388,8 @@ class _$_Outils extends _Outils {
         (other is _Outils &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.noInventaire, noInventaire) ||
                 const DeepCollectionEquality()
                     .equals(other.noInventaire, noInventaire)) &&
@@ -413,6 +433,7 @@ class _$_Outils extends _Outils {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(noInventaire) ^
       const DeepCollectionEquality().hash(designation) ^
       const DeepCollectionEquality().hash(dimmm1) ^
@@ -437,6 +458,7 @@ class _$_Outils extends _Outils {
 abstract class _Outils extends Outils {
   const factory _Outils(
       {required UniqueId id,
+      required String? userId,
       required String? noInventaire,
       required String designation,
       required String? dimmm1,
@@ -455,6 +477,8 @@ abstract class _Outils extends Outils {
 
   @override
   UniqueId get id => throw _privateConstructorUsedError;
+  @override
+  String? get userId => throw _privateConstructorUsedError;
   @override
   String? get noInventaire => throw _privateConstructorUsedError;
   @override

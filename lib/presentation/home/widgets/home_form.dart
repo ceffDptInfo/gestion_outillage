@@ -45,43 +45,43 @@ class HomeStartForm extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      _auth.currentUser != null
-                          ? PopupMenuButton(
-                              onSelected: (value) {
-                                context
-                                    .read<AuthBloc>()
-                                    .add(const AuthEvent.signedOut());
-                              },
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.logout_rounded),
-                                      Text("Se déconnecter"),
-                                    ],
-                                  ),
-                                  value: 2,
-                                ),
-                              ],
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    print("login");
-                                    context.router.replace(const SignInRoute());
-                                  },
-                                  child: const Text('Se connecter'),
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     _auth.currentUser != null
+                  //         ? PopupMenuButton(
+                  //             onSelected: (value) {
+                  //               context
+                  //                   .read<AuthBloc>()
+                  //                   .add(const AuthEvent.signedOut());
+                  //             },
+                  //             itemBuilder: (context) => [
+                  //               PopupMenuItem(
+                  //                 child: Row(
+                  //                   children: const [
+                  //                     Icon(Icons.logout_rounded),
+                  //                     Text("Se déconnecter"),
+                  //                   ],
+                  //                 ),
+                  //                 value: 2,
+                  //               ),
+                  //             ],
+                  //           )
+                  //         : Padding(
+                  //             padding: const EdgeInsets.all(8.0),
+                  //             child: Align(
+                  //               alignment: Alignment.centerRight,
+                  //               child: ElevatedButton(
+                  //                 onPressed: () {
+                  //                   print("login");
+                  //                   context.router.replace(const SignInRoute());
+                  //                 },
+                  //                 child: const Text('Se connecter'),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //   ],
+                  // ),
                   Divider(
                     height: height * 0.05,
                   ),
@@ -191,7 +191,7 @@ class HomeStartForm extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CategoriesOutilsMesurePage(),
+                                    CategoriesOutilsMesurePage(user: user,),
                               ),
                             );
                           }
@@ -199,7 +199,7 @@ class HomeStartForm extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TiroirPage(),
+                                builder: (context) => TiroirPage(user: user,),
                               ),
                             );
                           }

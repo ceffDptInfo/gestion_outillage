@@ -137,9 +137,9 @@ class _HomePageState extends State<HomePage> {
         case NavItem.layettePage:
           return  LayettePage(user: _user,);
         case NavItem.categoryPage:
-          return const CategoriesOutilsMesurePage();
+          return  CategoriesOutilsMesurePage(user: _user,);
         default:
-          return const CategoriesOutilsMesurePage();
+          return  CategoriesOutilsMesurePage(user: _user,);
       }
     } else if (_user.currentUser!.email == "prof@ceff.ch") {
       switch (state) {
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
         case NavItem.layettePage:
           return  LayettePage(user: _user,);
         case NavItem.categoryPage:
-          return const CategoriesOutilsMesurePage();
+          return  CategoriesOutilsMesurePage(user: _user,);
         default:
           return  HomeStartPage(user: _user,);
       }
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
         case NavItem.layettePage:
           return  LayettePage(user: _user,);
         case NavItem.categoryPage:
-          return const CategoriesOutilsMesurePage();
+          return  CategoriesOutilsMesurePage(user: _user,);
         default:
           return  DashboardPage(user: _user,);
       }

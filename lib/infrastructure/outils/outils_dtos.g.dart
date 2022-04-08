@@ -7,6 +7,7 @@ part of 'outils_dtos.dart';
 // **************************************************************************
 
 _$_OutilsDto _$$_OutilsDtoFromJson(Map<String, dynamic> json) => _$_OutilsDto(
+      userId: json['userId'] as String?,
       noInventaire: json['noInventaire'] as String?,
       designation: json['designation'] as String,
       dim_mm_1: json['dim_mm_1'] as String?,
@@ -25,6 +26,7 @@ _$_OutilsDto _$$_OutilsDtoFromJson(Map<String, dynamic> json) => _$_OutilsDto(
 
 Map<String, dynamic> _$$_OutilsDtoToJson(_$_OutilsDto instance) =>
     <String, dynamic>{
+      'userId': instance.userId,
       'noInventaire': instance.noInventaire,
       'designation': instance.designation,
       'dim_mm_1': instance.dim_mm_1,

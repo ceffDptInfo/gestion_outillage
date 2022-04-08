@@ -23,6 +23,7 @@ class _$OutilsDtoTearOff {
 
   _OutilsDto call(
       {@JsonKey(ignore: true) String? id,
+      required String? userId,
       required String? noInventaire,
       required String designation,
       required String? dim_mm_1,
@@ -39,6 +40,7 @@ class _$OutilsDtoTearOff {
       required String categorie}) {
     return _OutilsDto(
       id: id,
+      userId: userId,
       noInventaire: noInventaire,
       designation: designation,
       dim_mm_1: dim_mm_1,
@@ -69,6 +71,7 @@ mixin _$OutilsDto {
 // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   String? get noInventaire => throw _privateConstructorUsedError;
   String get designation =>
       throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
@@ -102,6 +105,7 @@ abstract class $OutilsDtoCopyWith<$Res> {
       _$OutilsDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(ignore: true) String? id,
+      String? userId,
       String? noInventaire,
       String designation,
       String? dim_mm_1,
@@ -129,6 +133,7 @@ class _$OutilsDtoCopyWithImpl<$Res> implements $OutilsDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
     Object? dim_mm_1 = freezed,
@@ -148,6 +153,10 @@ class _$OutilsDtoCopyWithImpl<$Res> implements $OutilsDtoCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       noInventaire: noInventaire == freezed
           ? _value.noInventaire
@@ -217,6 +226,7 @@ abstract class _$OutilsDtoCopyWith<$Res> implements $OutilsDtoCopyWith<$Res> {
   @override
   $Res call(
       {@JsonKey(ignore: true) String? id,
+      String? userId,
       String? noInventaire,
       String designation,
       String? dim_mm_1,
@@ -245,6 +255,7 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
     Object? dim_mm_1 = freezed,
@@ -264,6 +275,10 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       noInventaire: noInventaire == freezed
           ? _value.noInventaire
@@ -330,6 +345,7 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
 class _$_OutilsDto extends _OutilsDto {
   const _$_OutilsDto(
       {@JsonKey(ignore: true) this.id,
+      required this.userId,
       required this.noInventaire,
       required this.designation,
       required this.dim_mm_1,
@@ -352,6 +368,8 @@ class _$_OutilsDto extends _OutilsDto {
   @override // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   final String? id;
+  @override
+  final String? userId;
   @override
   final String? noInventaire;
   @override
@@ -383,7 +401,7 @@ class _$_OutilsDto extends _OutilsDto {
 
   @override
   String toString() {
-    return 'OutilsDto(id: $id, noInventaire: $noInventaire, designation: $designation, dim_mm_1: $dim_mm_1, dim_mm_2: $dim_mm_2, dim_angle_1: $dim_angle_1, dim_angle_2: $dim_angle_2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, name_img: $name_img, arborescence: $arborescence, categorie: $categorie)';
+    return 'OutilsDto(id: $id, userId: $userId, noInventaire: $noInventaire, designation: $designation, dim_mm_1: $dim_mm_1, dim_mm_2: $dim_mm_2, dim_angle_1: $dim_angle_1, dim_angle_2: $dim_angle_2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, name_img: $name_img, arborescence: $arborescence, categorie: $categorie)';
   }
 
   @override
@@ -392,6 +410,8 @@ class _$_OutilsDto extends _OutilsDto {
         (other is _OutilsDto &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.noInventaire, noInventaire) ||
                 const DeepCollectionEquality()
                     .equals(other.noInventaire, noInventaire)) &&
@@ -437,6 +457,7 @@ class _$_OutilsDto extends _OutilsDto {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(noInventaire) ^
       const DeepCollectionEquality().hash(designation) ^
       const DeepCollectionEquality().hash(dim_mm_1) ^
@@ -466,6 +487,7 @@ class _$_OutilsDto extends _OutilsDto {
 abstract class _OutilsDto extends OutilsDto {
   const factory _OutilsDto(
       {@JsonKey(ignore: true) String? id,
+      required String? userId,
       required String? noInventaire,
       required String designation,
       required String? dim_mm_1,
@@ -488,6 +510,8 @@ abstract class _OutilsDto extends OutilsDto {
   @override // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
+  @override
+  String? get userId => throw _privateConstructorUsedError;
   @override
   String? get noInventaire => throw _privateConstructorUsedError;
   @override
