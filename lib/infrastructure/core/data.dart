@@ -1,7 +1,3 @@
-List<String> outilsList = [];
-
-List<String> outilsEmpruntes = [];
-
 final List<String> listLay = [
   'Layette n° 1',
   'Layette n° 2',
@@ -15,11 +11,11 @@ final List<String> listTir = [
 ];
 
 final List<String> listCat = [
-  'Outillage métrologie',
-  'Outillage de fraise',
-  'Outillage de tournage',
-  'Outillage de perçage',
-  'Outillage à main',
+  'Outils de métrologie',
+  'Outils de fraisage',
+  // 'Outils de tournage',
+  'Outils de perçage',
+  // 'Outillage à main',
 ];
 
 List<String> listTiroir = [
@@ -41,6 +37,9 @@ List<String> listLayette = [
   'Layette 2',
   'Layette 3',
 ];
+
+String nonFonctionnel = "Les non-fonctionnels";
+// String nonFonctionnel = "Les non-fonctionnels";
 
 String empruntes = 'LES EMPRUNTÉS';
 String usages = 'LES USAGÉS';

@@ -57,29 +57,29 @@ class DashboardForm extends StatelessWidget {
                       //       MediaQuery.of(context).size.width * 0.05,
                       //     ),
                       //     child: appbar(context)),
-                      appBar: AppBar(
-                        backgroundColor: Colors.grey[200],
-                        actions: [
-                          PopupMenuButton(
-                            onSelected: (value) {
-                              context
-                                  .read<AuthBloc>()
-                                  .add(const AuthEvent.signedOut());
-                            },
-                            itemBuilder: (context) => [
-                              PopupMenuItem(
-                                child: Row(
-                                  children: const [
-                                    Icon(Icons.logout_rounded),
-                                    Text("Se déconnecter"),
-                                  ],
-                                ),
-                                value: 2,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      // appBar: AppBar(
+                      //   backgroundColor: Colors.grey[200],
+                      //   actions: [
+                      //     PopupMenuButton(
+                      //       onSelected: (value) {
+                      //         context
+                      //             .read<AuthBloc>()
+                      //             .add(const AuthEvent.signedOut());
+                      //       },
+                      //       itemBuilder: (context) => [
+                      //         PopupMenuItem(
+                      //           child: Row(
+                      //             children: const [
+                      //               Icon(Icons.logout_rounded),
+                      //               Text("Se déconnecter"),
+                      //             ],
+                      //           ),
+                      //           value: 2,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
                       body: SingleChildScrollView(
                         child: Column(
                           children: [
