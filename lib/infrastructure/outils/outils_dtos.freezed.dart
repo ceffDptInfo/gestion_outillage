@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'outils_dtos.dart';
@@ -58,7 +59,7 @@ class _$OutilsDtoTearOff {
     );
   }
 
-  OutilsDto fromJson(Map<String, Object> json) {
+  OutilsDto fromJson(Map<String, Object?> json) {
     return OutilsDto.fromJson(json);
   }
 }
@@ -407,71 +408,52 @@ class _$_OutilsDto extends _OutilsDto {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OutilsDto &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.userId, userId) ||
-                const DeepCollectionEquality().equals(other.userId, userId)) &&
-            (identical(other.noInventaire, noInventaire) ||
-                const DeepCollectionEquality()
-                    .equals(other.noInventaire, noInventaire)) &&
-            (identical(other.designation, designation) ||
-                const DeepCollectionEquality()
-                    .equals(other.designation, designation)) &&
-            (identical(other.dim_mm_1, dim_mm_1) ||
-                const DeepCollectionEquality()
-                    .equals(other.dim_mm_1, dim_mm_1)) &&
-            (identical(other.dim_mm_2, dim_mm_2) ||
-                const DeepCollectionEquality()
-                    .equals(other.dim_mm_2, dim_mm_2)) &&
-            (identical(other.dim_angle_1, dim_angle_1) ||
-                const DeepCollectionEquality()
-                    .equals(other.dim_angle_1, dim_angle_1)) &&
-            (identical(other.dim_angle_2, dim_angle_2) ||
-                const DeepCollectionEquality()
-                    .equals(other.dim_angle_2, dim_angle_2)) &&
-            (identical(other.complement, complement) ||
-                const DeepCollectionEquality()
-                    .equals(other.complement, complement)) &&
-            (identical(other.emplacement, emplacement) ||
-                const DeepCollectionEquality()
-                    .equals(other.emplacement, emplacement)) &&
-            (identical(other.etat, etat) ||
-                const DeepCollectionEquality().equals(other.etat, etat)) &&
-            (identical(other.login, login) ||
-                const DeepCollectionEquality().equals(other.login, login)) &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)) &&
-            (identical(other.name_img, name_img) ||
-                const DeepCollectionEquality()
-                    .equals(other.name_img, name_img)) &&
-            (identical(other.arborescence, arborescence) ||
-                const DeepCollectionEquality()
-                    .equals(other.arborescence, arborescence)) &&
-            (identical(other.categorie, categorie) ||
-                const DeepCollectionEquality()
-                    .equals(other.categorie, categorie)));
+        (other.runtimeType == runtimeType &&
+            other is _OutilsDto &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.noInventaire, noInventaire) &&
+            const DeepCollectionEquality()
+                .equals(other.designation, designation) &&
+            const DeepCollectionEquality().equals(other.dim_mm_1, dim_mm_1) &&
+            const DeepCollectionEquality().equals(other.dim_mm_2, dim_mm_2) &&
+            const DeepCollectionEquality()
+                .equals(other.dim_angle_1, dim_angle_1) &&
+            const DeepCollectionEquality()
+                .equals(other.dim_angle_2, dim_angle_2) &&
+            const DeepCollectionEquality()
+                .equals(other.complement, complement) &&
+            const DeepCollectionEquality()
+                .equals(other.emplacement, emplacement) &&
+            const DeepCollectionEquality().equals(other.etat, etat) &&
+            const DeepCollectionEquality().equals(other.login, login) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.name_img, name_img) &&
+            const DeepCollectionEquality()
+                .equals(other.arborescence, arborescence) &&
+            const DeepCollectionEquality().equals(other.categorie, categorie));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(userId) ^
-      const DeepCollectionEquality().hash(noInventaire) ^
-      const DeepCollectionEquality().hash(designation) ^
-      const DeepCollectionEquality().hash(dim_mm_1) ^
-      const DeepCollectionEquality().hash(dim_mm_2) ^
-      const DeepCollectionEquality().hash(dim_angle_1) ^
-      const DeepCollectionEquality().hash(dim_angle_2) ^
-      const DeepCollectionEquality().hash(complement) ^
-      const DeepCollectionEquality().hash(emplacement) ^
-      const DeepCollectionEquality().hash(etat) ^
-      const DeepCollectionEquality().hash(login) ^
-      const DeepCollectionEquality().hash(status) ^
-      const DeepCollectionEquality().hash(name_img) ^
-      const DeepCollectionEquality().hash(arborescence) ^
-      const DeepCollectionEquality().hash(categorie);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(noInventaire),
+      const DeepCollectionEquality().hash(designation),
+      const DeepCollectionEquality().hash(dim_mm_1),
+      const DeepCollectionEquality().hash(dim_mm_2),
+      const DeepCollectionEquality().hash(dim_angle_1),
+      const DeepCollectionEquality().hash(dim_angle_2),
+      const DeepCollectionEquality().hash(complement),
+      const DeepCollectionEquality().hash(emplacement),
+      const DeepCollectionEquality().hash(etat),
+      const DeepCollectionEquality().hash(login),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(name_img),
+      const DeepCollectionEquality().hash(arborescence),
+      const DeepCollectionEquality().hash(categorie));
 
   @JsonKey(ignore: true)
   @override
@@ -509,37 +491,37 @@ abstract class _OutilsDto extends OutilsDto {
 
   @override // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String? get userId => throw _privateConstructorUsedError;
+  String? get userId;
   @override
-  String? get noInventaire => throw _privateConstructorUsedError;
+  String? get noInventaire;
   @override
-  String get designation => throw _privateConstructorUsedError;
+  String get designation;
   @override // ignore: non_constant_identifier_names
-  String? get dim_mm_1 => throw _privateConstructorUsedError;
+  String? get dim_mm_1;
   @override // ignore: non_constant_identifier_names
-  String? get dim_mm_2 => throw _privateConstructorUsedError;
+  String? get dim_mm_2;
   @override // ignore: non_constant_identifier_names
-  String? get dim_angle_1 => throw _privateConstructorUsedError;
+  String? get dim_angle_1;
   @override // ignore: non_constant_identifier_names
-  String? get dim_angle_2 => throw _privateConstructorUsedError;
+  String? get dim_angle_2;
   @override
-  String get complement => throw _privateConstructorUsedError;
+  String get complement;
   @override
-  String get emplacement => throw _privateConstructorUsedError;
+  String get emplacement;
   @override
-  String get etat => throw _privateConstructorUsedError;
+  String get etat;
   @override
-  String? get login => throw _privateConstructorUsedError;
+  String? get login;
   @override
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override // ignore: non_constant_identifier_names
-  String get name_img => throw _privateConstructorUsedError;
+  String get name_img;
   @override // ignore: non_constant_identifier_names
-  String get arborescence => throw _privateConstructorUsedError;
+  String get arborescence;
   @override
-  String get categorie => throw _privateConstructorUsedError;
+  String get categorie;
   @override
   @JsonKey(ignore: true)
   _$OutilsDtoCopyWith<_OutilsDto> get copyWith =>

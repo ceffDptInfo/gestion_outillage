@@ -135,40 +135,60 @@ class _HomePageState extends State<HomePage> {
         // case NavItem.dashboadPage:
         //   return const DashboardPage();
         case NavItem.layettePage:
-          return  LayettePage(user: _user,);
+          return LayettePage(
+            user: _user,
+          );
         case NavItem.categoryPage:
-          return  CategoriesOutilsMesurePage(user: _user,);
+          return CategoriesOutilsMesurePage(
+            user: _user,
+          );
         default:
-          return  CategoriesOutilsMesurePage(user: _user,);
+          return CategoriesOutilsMesurePage(
+            user: _user,
+          );
       }
     } else if (_user.currentUser!.email == "prof@ceff.ch") {
       switch (state) {
         case NavItem.homePage:
-          return  HomeStartPage(user: _user,);
+          return HomeStartPage(
+            user: _user,
+          );
         // case NavItem.dashboadPage:
         //   return const DashboardPage();
         case NavItem.layettePage:
-          return  LayettePage(user: _user,);
+          return LayettePage(
+            user: _user,
+          );
         case NavItem.categoryPage:
-          return  CategoriesOutilsMesurePage(user: _user,);
+          return CategoriesOutilsMesurePage(
+            user: _user,
+          );
         default:
-          return  HomeStartPage(user: _user,);
+          return HomeStartPage(
+            user: _user,
+          );
       }
     } else if (_user.currentUser!.email == "eleve@ceff.ch") {
       switch (state) {
         // case NavItem.homePage:
         //   return const HomeStartPage();
         case NavItem.dashboadPage:
-          return  DashboardPage(user: _user,);
+          return DashboardPage(
+            user: _user,
+          );
         case NavItem.layettePage:
-          return  LayettePage(user: _user,);
+          return LayettePage(
+            user: _user,
+          );
         case NavItem.categoryPage:
-          return  CategoriesOutilsMesurePage(user: _user,);
+          return CategoriesOutilsMesurePage(
+            user: _user,
+          );
         default:
-          return  DashboardPage(user: _user,);
+          return DashboardPage(
+            user: _user,
+          );
       }
     }
   }
-
-
 }

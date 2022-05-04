@@ -13,31 +13,25 @@ part 'auth_state.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc(this._authFacade) : super(const _Initial());
-
   final IAuthFacade _authFacade;
+  AuthBloc(this._authFacade) : super(const _Initial()) {
+    on<_AuthCheckRequested>((event, emit) async {
+      final userOption = await _authFacade.getSignedInUser();
+      emit(userOption.fold(
+        () => const AuthState.unauthenticated(),
+        (user) => AuthState.authenticated(user),
+        // (_) => const AuthState.authenticated(),
+      ));
+    });
 
-  @override
-  Stream<AuthState> mapEventToState(
-    AuthEvent event,
-  ) async* {
-    yield* event.map(
-      authCheckRequested: (e) async* {
-        final userOption = await _authFacade.getSignedInUser();
-        yield userOption.fold(
-          () => const AuthState.unauthenticated(),
-          (user) => AuthState.authenticated(user),
-          // (_) => const AuthState.authenticated(),
-        );
-      },
-      signedOut: (e) async* {
-        await _authFacade.signOut();
-        yield const AuthState.unauthenticated();
-      },
-      signAsVisitor: (e) async* {
-        print("auth-bloc sign as visitor");
-        yield const AuthState.authAsVisitor();
-      },
-    );
+    on<_SignedOut>((event, emit) async {
+      await _authFacade.signOut();
+      emit(const AuthState.unauthenticated());
+    });
+
+    on<_SignAsVisitor>((event, emit) async {
+      print("auth-bloc sign as visitor");
+      emit(const AuthState.authAsVisitor());
+    });
   }
 }

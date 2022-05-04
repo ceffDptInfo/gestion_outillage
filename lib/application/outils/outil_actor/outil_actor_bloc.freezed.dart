@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'outil_actor_bloc.dart';
@@ -182,14 +183,14 @@ class _$_Deleted implements _Deleted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Deleted &&
-            (identical(other.outils, outils) ||
-                const DeepCollectionEquality().equals(other.outils, outils)));
+        (other.runtimeType == runtimeType &&
+            other is _Deleted &&
+            const DeepCollectionEquality().equals(other.outils, outils));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(outils);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(outils));
 
   @JsonKey(ignore: true)
   @override
@@ -269,7 +270,7 @@ abstract class _Deleted implements OutilActorEvent {
   const factory _Deleted(Outils outils) = _$_Deleted;
 
   @override
-  Outils get outils => throw _privateConstructorUsedError;
+  Outils get outils;
   @override
   @JsonKey(ignore: true)
   _$DeletedCopyWith<_Deleted> get copyWith =>
@@ -326,14 +327,14 @@ class _$_Update implements _Update {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Update &&
-            (identical(other.outils, outils) ||
-                const DeepCollectionEquality().equals(other.outils, outils)));
+        (other.runtimeType == runtimeType &&
+            other is _Update &&
+            const DeepCollectionEquality().equals(other.outils, outils));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(outils);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(outils));
 
   @JsonKey(ignore: true)
   @override
@@ -413,7 +414,7 @@ abstract class _Update implements OutilActorEvent {
   const factory _Update(Outils outils) = _$_Update;
 
   @override
-  Outils get outils => throw _privateConstructorUsedError;
+  Outils get outils;
   @override
   @JsonKey(ignore: true)
   _$UpdateCopyWith<_Update> get copyWith => throw _privateConstructorUsedError;
@@ -469,14 +470,14 @@ class _$_Create implements _Create {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Create &&
-            (identical(other.outils, outils) ||
-                const DeepCollectionEquality().equals(other.outils, outils)));
+        (other.runtimeType == runtimeType &&
+            other is _Create &&
+            const DeepCollectionEquality().equals(other.outils, outils));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(outils);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(outils));
 
   @JsonKey(ignore: true)
   @override
@@ -556,7 +557,7 @@ abstract class _Create implements OutilActorEvent {
   const factory _Create(Outils outils) = _$_Create;
 
   @override
-  Outils get outils => throw _privateConstructorUsedError;
+  Outils get outils;
   @override
   @JsonKey(ignore: true)
   _$CreateCopyWith<_Create> get copyWith => throw _privateConstructorUsedError;
@@ -725,7 +726,8 @@ class _$_Initial implements _Initial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Initial);
   }
 
   @override
@@ -865,7 +867,8 @@ class _$_ActionInProgress implements _ActionInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ActionInProgress);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ActionInProgress);
   }
 
   @override
@@ -1005,7 +1008,8 @@ class _$_DeletedFailure implements _DeletedFailure {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _DeletedFailure);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DeletedFailure);
   }
 
   @override
@@ -1145,7 +1149,8 @@ class _$_DeletedSuccess implements _DeletedSuccess {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _DeletedSuccess);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _DeletedSuccess);
   }
 
   @override
@@ -1285,7 +1290,8 @@ class _$_UpdatedFailure implements _UpdatedFailure {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UpdatedFailure);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _UpdatedFailure);
   }
 
   @override
@@ -1425,7 +1431,8 @@ class _$_UpdatedSuccess implements _UpdatedSuccess {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UpdatedSuccess);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _UpdatedSuccess);
   }
 
   @override
@@ -1565,7 +1572,8 @@ class _$_CreateSuccess implements _CreateSuccess {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _CreateSuccess);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _CreateSuccess);
   }
 
   @override
@@ -1705,7 +1713,8 @@ class _$_CreateFailure implements _CreateFailure {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _CreateFailure);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _CreateFailure);
   }
 
   @override

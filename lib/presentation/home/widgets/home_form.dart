@@ -22,8 +22,6 @@ class HomeStartForm extends StatelessWidget {
   FirebaseAuth user;
   HomeStartForm(this.user);
 
-  
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -86,12 +84,22 @@ class HomeStartForm extends StatelessWidget {
                     height: height * 0.05,
                   ),
                   listViewItems(
-                      usages, context, outils.listOutils.filter((outils) => outils.etat =="Usagé"), width, height),
+                      usages,
+                      context,
+                      outils.listOutils
+                          .filter((outils) => outils.etat == "Usagé"),
+                      width,
+                      height),
                   Divider(
                     height: height * 0.05,
                   ),
                   listViewItems(
-                      empruntes, context, outils.listOutils.filter((outils) => outils.status =="Emprunté"), width, height),
+                      empruntes,
+                      context,
+                      outils.listOutils
+                          .filter((outils) => outils.status == "Emprunté"),
+                      width,
+                      height),
                 ],
               ),
             );
@@ -136,7 +144,7 @@ class HomeStartForm extends StatelessWidget {
                         // if(title==usages){
                         //   return cardItem(context, index, outils[index],user);
                         // }
-                        return cardItem(context, index, outils[index],user);
+                        return cardItem(context, index, outils[index], user);
                         // title == 'LES RÉCENTS'
                         //     ? cardItem(context, index,  outils[index],user,)
                         // //     :
@@ -191,7 +199,9 @@ class HomeStartForm extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CategoriesOutilsMesurePage(user: user,),
+                                    CategoriesOutilsMesurePage(
+                                  user: user,
+                                ),
                               ),
                             );
                           }
@@ -199,7 +209,9 @@ class HomeStartForm extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TiroirPage(user: user,),
+                                builder: (context) => TiroirPage(
+                                  user: user,
+                                ),
                               ),
                             );
                           }

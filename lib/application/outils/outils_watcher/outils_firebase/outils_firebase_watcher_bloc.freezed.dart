@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'outils_firebase_watcher_bloc.dart';
@@ -126,7 +127,8 @@ class _$_WatchOutilsStarted implements _WatchOutilsStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchOutilsStarted);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _WatchOutilsStarted);
   }
 
   @override
@@ -251,16 +253,15 @@ class _$_OutilsReceived implements _OutilsReceived {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OutilsReceived &&
-            (identical(other.failuresOrOutils, failuresOrOutils) ||
-                const DeepCollectionEquality()
-                    .equals(other.failuresOrOutils, failuresOrOutils)));
+        (other.runtimeType == runtimeType &&
+            other is _OutilsReceived &&
+            const DeepCollectionEquality()
+                .equals(other.failuresOrOutils, failuresOrOutils));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(failuresOrOutils);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failuresOrOutils));
 
   @JsonKey(ignore: true)
   @override
@@ -339,8 +340,7 @@ abstract class _OutilsReceived implements OutilsFirebaseWatcherEvent {
           Either<OutilsFailure, KtList<Outils>> failuresOrOutils) =
       _$_OutilsReceived;
 
-  Either<OutilsFailure, KtList<Outils>> get failuresOrOutils =>
-      throw _privateConstructorUsedError;
+  Either<OutilsFailure, KtList<Outils>> get failuresOrOutils;
   @JsonKey(ignore: true)
   _$OutilsReceivedCopyWith<_OutilsReceived> get copyWith =>
       throw _privateConstructorUsedError;
@@ -474,7 +474,8 @@ class _$_Initial implements _Initial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Initial);
   }
 
   @override
@@ -590,7 +591,8 @@ class _$_LoadInProgress implements _LoadInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadInProgress);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _LoadInProgress);
   }
 
   @override
@@ -723,15 +725,15 @@ class _$_LoadSuccess implements _LoadSuccess {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadSuccess &&
-            (identical(other.listOutils, listOutils) ||
-                const DeepCollectionEquality()
-                    .equals(other.listOutils, listOutils)));
+        (other.runtimeType == runtimeType &&
+            other is _LoadSuccess &&
+            const DeepCollectionEquality()
+                .equals(other.listOutils, listOutils));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(listOutils);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(listOutils));
 
   @JsonKey(ignore: true)
   @override
@@ -816,7 +818,7 @@ class _$_LoadSuccess implements _LoadSuccess {
 abstract class _LoadSuccess implements OutilsFirebaseWatcherState {
   const factory _LoadSuccess(KtList<Outils> listOutils) = _$_LoadSuccess;
 
-  KtList<Outils> get listOutils => throw _privateConstructorUsedError;
+  KtList<Outils> get listOutils;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -879,15 +881,15 @@ class _$_LoadFailure implements _LoadFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadFailure &&
-            (identical(other.outilsFailure, outilsFailure) ||
-                const DeepCollectionEquality()
-                    .equals(other.outilsFailure, outilsFailure)));
+        (other.runtimeType == runtimeType &&
+            other is _LoadFailure &&
+            const DeepCollectionEquality()
+                .equals(other.outilsFailure, outilsFailure));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(outilsFailure);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(outilsFailure));
 
   @JsonKey(ignore: true)
   @override
@@ -972,7 +974,7 @@ class _$_LoadFailure implements _LoadFailure {
 abstract class _LoadFailure implements OutilsFirebaseWatcherState {
   const factory _LoadFailure(OutilsFailure outilsFailure) = _$_LoadFailure;
 
-  OutilsFailure get outilsFailure => throw _privateConstructorUsedError;
+  OutilsFailure get outilsFailure;
   @JsonKey(ignore: true)
   _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
       throw _privateConstructorUsedError;

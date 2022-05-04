@@ -47,9 +47,9 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
     return BlocBuilder<AddOutilsFormBloc, AddOutilsFormState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: appBarReturn(context),
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: AppBarReturn(),
           ),
           body: SizedBox(
             height: MediaQuery.of(context).size.height,

@@ -17,47 +17,43 @@ part 'sign_in_form_state.dart';
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
 
-  SignInFormBloc(this._authFacade) : super(SignInFormState.initial());
+  SignInFormBloc(this._authFacade) : super(SignInFormState.initial()) {
+    on<_EmailChanged>((event, emit) async {
+      final userOption = await _authFacade.getSignedInUser();
+      emit(state.copyWith(
+        emailAddress: EmailAddress(event.emailStr),
+        authFailureOrSuccessOption: none(),
+      ));
+    });
 
-  @override
-  Stream<SignInFormState> mapEventToState(
-    SignInFormEvent event,
-  ) async* {
-    yield* event.map(
-      emailChanged: (e) async* {
-        yield state.copyWith(
-          emailAddress: EmailAddress(e.emailStr),
+    on<_PasswordChanged>((event, emit) async {
+      emit(state.copyWith(
+        password: Password(event.passwordStr),
+        authFailureOrSuccessOption: none(),
+      ));
+    });
+
+    on<_SignInWithEmailAndPasswordPressed>((event, emit) async {
+      Either<AuthFailure, Unit>? failureOrSuccess;
+
+      final isEmailValid = state.emailAddress.isValid();
+      final isPasswordValid = state.password.isValid();
+
+      if (isEmailValid && isPasswordValid) {
+        emit(state.copyWith(
+          isSubmitting: true,
           authFailureOrSuccessOption: none(),
-        );
-      },
-      passwordChanged: (e) async* {
-        yield state.copyWith(
-          password: Password(e.passwordStr),
-          authFailureOrSuccessOption: none(),
-        );
-      },
-      signInWithEmailAndPasswordPressed: (e) async* {
-        Either<AuthFailure, Unit>? failureOrSuccess;
+        ));
 
-        final isEmailValid = state.emailAddress.isValid();
-        final isPasswordValid = state.password.isValid();
+        failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
+            emailAddress: state.emailAddress, password: state.password);
+      }
 
-        if (isEmailValid && isPasswordValid) {
-          yield state.copyWith(
-            isSubmitting: true,
-            authFailureOrSuccessOption: none(),
-          );
-
-          failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
-              emailAddress: state.emailAddress, password: state.password);
-        }
-
-        yield state.copyWith(
-          isSubmitting: false,
-          showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess),
-        );
-      },
-    );
+      emit(state.copyWith(
+        isSubmitting: false,
+        showErrorMessages: true,
+        authFailureOrSuccessOption: optionOf(failureOrSuccess),
+      ));
+    });
   }
 }

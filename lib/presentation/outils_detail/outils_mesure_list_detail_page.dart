@@ -1,14 +1,11 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
 import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
-import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -16,10 +13,11 @@ import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 import 'package:gestion_outillage/presentation/outils_add/widgets/outils_choice_chip.dart';
 
 class OutilsMesureListDetailPage extends StatefulWidget {
-  Outils outil;
-  FirebaseAuth user;
+  final Outils outil;
+  final FirebaseAuth user;
 
-  OutilsMesureListDetailPage(this.outil, this.user);
+  // ignore: use_key_in_widget_constructors
+  const OutilsMesureListDetailPage(this.outil, this.user);
 
   @override
   State<OutilsMesureListDetailPage> createState() =>
@@ -30,22 +28,16 @@ class _OutilsMesureListDetailPageState
     extends State<OutilsMesureListDetailPage> {
   bool edit = false;
 
-  final TextEditingController _designationController =
-      new TextEditingController();
+  final TextEditingController _designationController = TextEditingController();
 
-  final TextEditingController _complementController =
-      new TextEditingController();
+  final TextEditingController _complementController = TextEditingController();
 
-  final TextEditingController _statutController = new TextEditingController();
+  final TextEditingController _emplacementController = TextEditingController();
 
-  final TextEditingController _emplacementController =
-      new TextEditingController();
-
-  final TextEditingController _dimensionController =
-      new TextEditingController();
+  final TextEditingController _dimensionController = TextEditingController();
 
   final TextEditingController _dimensionSecondController =
-      new TextEditingController();
+      TextEditingController();
 
   String emplacementSub = "";
 
@@ -76,14 +68,6 @@ class _OutilsMesureListDetailPageState
   @override
   void initState() {
     super.initState();
-    // outils = outilborrowe
-    // _designationController.text = widget.designation;
-    // _complementController.text = widget.complement;
-    // _statutController.text = widget.statut;
-    // _emplacementController.text = widget.emplacement;
-    // _dimensionController.text = widget.dimangle1 + " / " + widget.dimangle2;
-    // _dimensionSecondController.text = widget.dimm1 + " / " + widget.dimm2;
-    // emplacementSub = widget.emplacement.substring(9);
     if (widget.outil.etat == "Usagé") {
       isBrocken = true;
     } else {
@@ -93,6 +77,8 @@ class _OutilsMesureListDetailPageState
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+=======
     File? _pickedImageFile;
 
     Future _pickImage(ImageSource source) async {
@@ -108,11 +94,15 @@ class _OutilsMesureListDetailPageState
       });
     }
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: appBarReturn(context),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBarReturn(),
       ),
       floatingActionButton: widget.user.currentUser != null
           ? Row(
@@ -379,7 +369,7 @@ class _OutilsMesureListDetailPageState
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(left: 100),
-                                    child: Text(
+                                    child: const Text(
                                       "Etat",
                                       style: TextStyle(
                                           fontSize: 18,
@@ -587,12 +577,12 @@ Widget actionButton(String title, context) {
       _show(context);
     },
     child: Container(
-      margin: EdgeInsets.only(left: 100, bottom: 5, top: 5),
+      margin: const EdgeInsets.only(left: 100, bottom: 5, top: 5),
       width: 200,
       height: 50,
       child: Card(
         color: Colors.grey[600],
-        child: Center(
+        child: const Center(
           child: Text(
             "Editer",
             style: TextStyle(
@@ -606,8 +596,8 @@ Widget actionButton(String title, context) {
 }
 
 class DetailScreen extends StatelessWidget {
-  String title;
-  DetailScreen(this.title);
+  final String title;
+  const DetailScreen(this.title, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -616,14 +606,14 @@ class DetailScreen extends StatelessWidget {
             preferredSize: Size.fromHeight(
               MediaQuery.of(context).size.width * 0.05,
             ),
-            child: appBarReturn(context)),
+            child: const AppBarReturn()),
         body: GestureDetector(
           child: Center(
-            child: Hero(
-              tag: 'imageHero',
-              child:
-                  Image.asset('assets/images/image_outils/' + title.toString()),
-            ),
+            // child: Hero(
+            //   tag: title,
+            child:
+                Image.asset('assets/images/image_outils/' + title.toString()),
+            // ),
           ),
           onTap: () {
             Navigator.pop(context);

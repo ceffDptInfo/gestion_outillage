@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'add_outils_form_bloc.dart';
@@ -133,7 +134,8 @@ class _$_Initialized implements _Initialized {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initialized);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Initialized);
   }
 
   @override
@@ -260,15 +262,15 @@ class _$_DesignationChanged implements _DesignationChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _DesignationChanged &&
-            (identical(other.designation, designation) ||
-                const DeepCollectionEquality()
-                    .equals(other.designation, designation)));
+        (other.runtimeType == runtimeType &&
+            other is _DesignationChanged &&
+            const DeepCollectionEquality()
+                .equals(other.designation, designation));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(designation);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(designation));
 
   @JsonKey(ignore: true)
   @override
@@ -347,7 +349,7 @@ class _$_DesignationChanged implements _DesignationChanged {
 abstract class _DesignationChanged implements AddOutilsFormEvent {
   const factory _DesignationChanged(String designation) = _$_DesignationChanged;
 
-  String get designation => throw _privateConstructorUsedError;
+  String get designation;
   @JsonKey(ignore: true)
   _$DesignationChangedCopyWith<_DesignationChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -401,15 +403,15 @@ class _$_ComplementChanged implements _ComplementChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ComplementChanged &&
-            (identical(other.complement, complement) ||
-                const DeepCollectionEquality()
-                    .equals(other.complement, complement)));
+        (other.runtimeType == runtimeType &&
+            other is _ComplementChanged &&
+            const DeepCollectionEquality()
+                .equals(other.complement, complement));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(complement);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(complement));
 
   @JsonKey(ignore: true)
   @override
@@ -488,7 +490,7 @@ class _$_ComplementChanged implements _ComplementChanged {
 abstract class _ComplementChanged implements AddOutilsFormEvent {
   const factory _ComplementChanged(String complement) = _$_ComplementChanged;
 
-  String get complement => throw _privateConstructorUsedError;
+  String get complement;
   @JsonKey(ignore: true)
   _$ComplementChangedCopyWith<_ComplementChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -693,38 +695,29 @@ class _$_AddOutilsFormState implements _AddOutilsFormState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AddOutilsFormState &&
-            (identical(other.designation, designation) ||
-                const DeepCollectionEquality()
-                    .equals(other.designation, designation)) &&
-            (identical(other.complement, complement) ||
-                const DeepCollectionEquality()
-                    .equals(other.complement, complement)) &&
-            (identical(other.showErrorMessages, showErrorMessages) ||
-                const DeepCollectionEquality()
-                    .equals(other.showErrorMessages, showErrorMessages)) &&
-            (identical(other.isEditing, isEditing) ||
-                const DeepCollectionEquality()
-                    .equals(other.isEditing, isEditing)) &&
-            (identical(other.isSaving, isSaving) ||
-                const DeepCollectionEquality()
-                    .equals(other.isSaving, isSaving)) &&
-            (identical(other.saveFailureOrSuccessOption,
-                    saveFailureOrSuccessOption) ||
-                const DeepCollectionEquality().equals(
-                    other.saveFailureOrSuccessOption,
-                    saveFailureOrSuccessOption)));
+        (other.runtimeType == runtimeType &&
+            other is _AddOutilsFormState &&
+            const DeepCollectionEquality()
+                .equals(other.designation, designation) &&
+            const DeepCollectionEquality()
+                .equals(other.complement, complement) &&
+            const DeepCollectionEquality()
+                .equals(other.showErrorMessages, showErrorMessages) &&
+            const DeepCollectionEquality().equals(other.isEditing, isEditing) &&
+            const DeepCollectionEquality().equals(other.isSaving, isSaving) &&
+            const DeepCollectionEquality().equals(
+                other.saveFailureOrSuccessOption, saveFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(designation) ^
-      const DeepCollectionEquality().hash(complement) ^
-      const DeepCollectionEquality().hash(showErrorMessages) ^
-      const DeepCollectionEquality().hash(isEditing) ^
-      const DeepCollectionEquality().hash(isSaving) ^
-      const DeepCollectionEquality().hash(saveFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(designation),
+      const DeepCollectionEquality().hash(complement),
+      const DeepCollectionEquality().hash(showErrorMessages),
+      const DeepCollectionEquality().hash(isEditing),
+      const DeepCollectionEquality().hash(isSaving),
+      const DeepCollectionEquality().hash(saveFailureOrSuccessOption));
 
   @JsonKey(ignore: true)
   @override
@@ -743,18 +736,17 @@ abstract class _AddOutilsFormState implements AddOutilsFormState {
           saveFailureOrSuccessOption}) = _$_AddOutilsFormState;
 
   @override
-  Designation get designation => throw _privateConstructorUsedError;
+  Designation get designation;
   @override
-  Complement get complement => throw _privateConstructorUsedError;
+  Complement get complement;
   @override
-  bool get showErrorMessages => throw _privateConstructorUsedError;
+  bool get showErrorMessages;
   @override
-  bool get isEditing => throw _privateConstructorUsedError;
+  bool get isEditing;
   @override
-  bool get isSaving => throw _privateConstructorUsedError;
+  bool get isSaving;
   @override
-  Option<Either<OutilsFailure, Unit>> get saveFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
+  Option<Either<OutilsFailure, Unit>> get saveFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$AddOutilsFormStateCopyWith<_AddOutilsFormState> get copyWith =>

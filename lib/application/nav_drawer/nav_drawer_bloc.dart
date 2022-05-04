@@ -7,16 +7,11 @@ part 'nav_drawer_state.dart';
 
 @injectable
 class NavDrawerBloc extends Bloc<NavDrawerEvent, NavDrawerState> {
-  NavDrawerBloc() : super(const NavDrawerState(NavItem.homePage));
-
-  @override
-  Stream<NavDrawerState> mapEventToState(
-    NavDrawerEvent event,
-  ) async* {
-    if (event is NavigateTo) {
+  NavDrawerBloc() : super(const NavDrawerState(NavItem.homePage)) {
+    on<NavigateTo>((event, emit) async {
       if (event.destination != state.selectedItem) {
-        yield NavDrawerState(event.destination);
+        emit(NavDrawerState(event.destination));
       }
-    }
+    });
   }
 }
