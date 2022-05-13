@@ -77,8 +77,6 @@ class _OutilsMesureListDetailPageState
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-=======
     File? _pickedImageFile;
 
     Future _pickImage(ImageSource source) async {
@@ -93,11 +91,6 @@ class _OutilsMesureListDetailPageState
         }
       });
     }
-
-<<<<<<< Updated upstream
-=======
->>>>>>> master
->>>>>>> Stashed changes
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
