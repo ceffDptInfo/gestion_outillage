@@ -27,16 +27,16 @@ class _$OutilsDtoTearOff {
       required String? userId,
       required String? noInventaire,
       required String designation,
-      required String? dim_mm_1,
-      required String? dim_mm_2,
-      required String? dim_angle_1,
-      required String? dim_angle_2,
+      required String? dimMm1,
+      required String? dimMm2,
+      required String? dimAngle1,
+      required String? dimAngle2,
       required String complement,
       required String emplacement,
       required String etat,
       required String? login,
       required String status,
-      required String name_img,
+      required String nameImg,
       required String arborescence,
       required String categorie}) {
     return _OutilsDto(
@@ -44,16 +44,16 @@ class _$OutilsDtoTearOff {
       userId: userId,
       noInventaire: noInventaire,
       designation: designation,
-      dim_mm_1: dim_mm_1,
-      dim_mm_2: dim_mm_2,
-      dim_angle_1: dim_angle_1,
-      dim_angle_2: dim_angle_2,
+      dimMm1: dimMm1,
+      dimMm2: dimMm2,
+      dimAngle1: dimAngle1,
+      dimAngle2: dimAngle2,
       complement: complement,
       emplacement: emplacement,
       etat: etat,
       login: login,
       status: status,
-      name_img: name_img,
+      nameImg: nameImg,
       arborescence: arborescence,
       categorie: categorie,
     );
@@ -69,28 +69,21 @@ const $OutilsDto = _$OutilsDtoTearOff();
 
 /// @nodoc
 mixin _$OutilsDto {
-// ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   String? get noInventaire => throw _privateConstructorUsedError;
-  String get designation =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
-  String? get dim_mm_1 =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
-  String? get dim_mm_2 =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
-  String? get dim_angle_1 =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
-  String? get dim_angle_2 => throw _privateConstructorUsedError;
+  String get designation => throw _privateConstructorUsedError;
+  String? get dimMm1 => throw _privateConstructorUsedError;
+  String? get dimMm2 => throw _privateConstructorUsedError;
+  String? get dimAngle1 => throw _privateConstructorUsedError;
+  String? get dimAngle2 => throw _privateConstructorUsedError;
   String get complement => throw _privateConstructorUsedError;
   String get emplacement => throw _privateConstructorUsedError;
   String get etat => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
-  String get status =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
-  String get name_img =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
+  String get status => throw _privateConstructorUsedError;
+  String get nameImg => throw _privateConstructorUsedError;
   String get arborescence => throw _privateConstructorUsedError;
   String get categorie => throw _privateConstructorUsedError;
 
@@ -109,16 +102,16 @@ abstract class $OutilsDtoCopyWith<$Res> {
       String? userId,
       String? noInventaire,
       String designation,
-      String? dim_mm_1,
-      String? dim_mm_2,
-      String? dim_angle_1,
-      String? dim_angle_2,
+      String? dimMm1,
+      String? dimMm2,
+      String? dimAngle1,
+      String? dimAngle2,
       String complement,
       String emplacement,
       String etat,
       String? login,
       String status,
-      String name_img,
+      String nameImg,
       String arborescence,
       String categorie});
 }
@@ -137,16 +130,16 @@ class _$OutilsDtoCopyWithImpl<$Res> implements $OutilsDtoCopyWith<$Res> {
     Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
-    Object? dim_mm_1 = freezed,
-    Object? dim_mm_2 = freezed,
-    Object? dim_angle_1 = freezed,
-    Object? dim_angle_2 = freezed,
+    Object? dimMm1 = freezed,
+    Object? dimMm2 = freezed,
+    Object? dimAngle1 = freezed,
+    Object? dimAngle2 = freezed,
     Object? complement = freezed,
     Object? emplacement = freezed,
     Object? etat = freezed,
     Object? login = freezed,
     Object? status = freezed,
-    Object? name_img = freezed,
+    Object? nameImg = freezed,
     Object? arborescence = freezed,
     Object? categorie = freezed,
   }) {
@@ -167,21 +160,21 @@ class _$OutilsDtoCopyWithImpl<$Res> implements $OutilsDtoCopyWith<$Res> {
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
               as String,
-      dim_mm_1: dim_mm_1 == freezed
-          ? _value.dim_mm_1
-          : dim_mm_1 // ignore: cast_nullable_to_non_nullable
+      dimMm1: dimMm1 == freezed
+          ? _value.dimMm1
+          : dimMm1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_mm_2: dim_mm_2 == freezed
-          ? _value.dim_mm_2
-          : dim_mm_2 // ignore: cast_nullable_to_non_nullable
+      dimMm2: dimMm2 == freezed
+          ? _value.dimMm2
+          : dimMm2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_angle_1: dim_angle_1 == freezed
-          ? _value.dim_angle_1
-          : dim_angle_1 // ignore: cast_nullable_to_non_nullable
+      dimAngle1: dimAngle1 == freezed
+          ? _value.dimAngle1
+          : dimAngle1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_angle_2: dim_angle_2 == freezed
-          ? _value.dim_angle_2
-          : dim_angle_2 // ignore: cast_nullable_to_non_nullable
+      dimAngle2: dimAngle2 == freezed
+          ? _value.dimAngle2
+          : dimAngle2 // ignore: cast_nullable_to_non_nullable
               as String?,
       complement: complement == freezed
           ? _value.complement
@@ -203,9 +196,9 @@ class _$OutilsDtoCopyWithImpl<$Res> implements $OutilsDtoCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      name_img: name_img == freezed
-          ? _value.name_img
-          : name_img // ignore: cast_nullable_to_non_nullable
+      nameImg: nameImg == freezed
+          ? _value.nameImg
+          : nameImg // ignore: cast_nullable_to_non_nullable
               as String,
       arborescence: arborescence == freezed
           ? _value.arborescence
@@ -230,16 +223,16 @@ abstract class _$OutilsDtoCopyWith<$Res> implements $OutilsDtoCopyWith<$Res> {
       String? userId,
       String? noInventaire,
       String designation,
-      String? dim_mm_1,
-      String? dim_mm_2,
-      String? dim_angle_1,
-      String? dim_angle_2,
+      String? dimMm1,
+      String? dimMm2,
+      String? dimAngle1,
+      String? dimAngle2,
       String complement,
       String emplacement,
       String etat,
       String? login,
       String status,
-      String name_img,
+      String nameImg,
       String arborescence,
       String categorie});
 }
@@ -259,16 +252,16 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? noInventaire = freezed,
     Object? designation = freezed,
-    Object? dim_mm_1 = freezed,
-    Object? dim_mm_2 = freezed,
-    Object? dim_angle_1 = freezed,
-    Object? dim_angle_2 = freezed,
+    Object? dimMm1 = freezed,
+    Object? dimMm2 = freezed,
+    Object? dimAngle1 = freezed,
+    Object? dimAngle2 = freezed,
     Object? complement = freezed,
     Object? emplacement = freezed,
     Object? etat = freezed,
     Object? login = freezed,
     Object? status = freezed,
-    Object? name_img = freezed,
+    Object? nameImg = freezed,
     Object? arborescence = freezed,
     Object? categorie = freezed,
   }) {
@@ -289,21 +282,21 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
               as String,
-      dim_mm_1: dim_mm_1 == freezed
-          ? _value.dim_mm_1
-          : dim_mm_1 // ignore: cast_nullable_to_non_nullable
+      dimMm1: dimMm1 == freezed
+          ? _value.dimMm1
+          : dimMm1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_mm_2: dim_mm_2 == freezed
-          ? _value.dim_mm_2
-          : dim_mm_2 // ignore: cast_nullable_to_non_nullable
+      dimMm2: dimMm2 == freezed
+          ? _value.dimMm2
+          : dimMm2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_angle_1: dim_angle_1 == freezed
-          ? _value.dim_angle_1
-          : dim_angle_1 // ignore: cast_nullable_to_non_nullable
+      dimAngle1: dimAngle1 == freezed
+          ? _value.dimAngle1
+          : dimAngle1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      dim_angle_2: dim_angle_2 == freezed
-          ? _value.dim_angle_2
-          : dim_angle_2 // ignore: cast_nullable_to_non_nullable
+      dimAngle2: dimAngle2 == freezed
+          ? _value.dimAngle2
+          : dimAngle2 // ignore: cast_nullable_to_non_nullable
               as String?,
       complement: complement == freezed
           ? _value.complement
@@ -325,9 +318,9 @@ class __$OutilsDtoCopyWithImpl<$Res> extends _$OutilsDtoCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      name_img: name_img == freezed
-          ? _value.name_img
-          : name_img // ignore: cast_nullable_to_non_nullable
+      nameImg: nameImg == freezed
+          ? _value.nameImg
+          : nameImg // ignore: cast_nullable_to_non_nullable
               as String,
       arborescence: arborescence == freezed
           ? _value.arborescence
@@ -349,16 +342,16 @@ class _$_OutilsDto extends _OutilsDto {
       required this.userId,
       required this.noInventaire,
       required this.designation,
-      required this.dim_mm_1,
-      required this.dim_mm_2,
-      required this.dim_angle_1,
-      required this.dim_angle_2,
+      required this.dimMm1,
+      required this.dimMm2,
+      required this.dimAngle1,
+      required this.dimAngle2,
       required this.complement,
       required this.emplacement,
       required this.etat,
       required this.login,
       required this.status,
-      required this.name_img,
+      required this.nameImg,
       required this.arborescence,
       required this.categorie})
       : super._();
@@ -366,7 +359,7 @@ class _$_OutilsDto extends _OutilsDto {
   factory _$_OutilsDto.fromJson(Map<String, dynamic> json) =>
       _$$_OutilsDtoFromJson(json);
 
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(ignore: true)
   final String? id;
   @override
@@ -375,14 +368,14 @@ class _$_OutilsDto extends _OutilsDto {
   final String? noInventaire;
   @override
   final String designation;
-  @override // ignore: non_constant_identifier_names
-  final String? dim_mm_1;
-  @override // ignore: non_constant_identifier_names
-  final String? dim_mm_2;
-  @override // ignore: non_constant_identifier_names
-  final String? dim_angle_1;
-  @override // ignore: non_constant_identifier_names
-  final String? dim_angle_2;
+  @override
+  final String? dimMm1;
+  @override
+  final String? dimMm2;
+  @override
+  final String? dimAngle1;
+  @override
+  final String? dimAngle2;
   @override
   final String complement;
   @override
@@ -393,16 +386,16 @@ class _$_OutilsDto extends _OutilsDto {
   final String? login;
   @override
   final String status;
-  @override // ignore: non_constant_identifier_names
-  final String name_img;
-  @override // ignore: non_constant_identifier_names
+  @override
+  final String nameImg;
+  @override
   final String arborescence;
   @override
   final String categorie;
 
   @override
   String toString() {
-    return 'OutilsDto(id: $id, userId: $userId, noInventaire: $noInventaire, designation: $designation, dim_mm_1: $dim_mm_1, dim_mm_2: $dim_mm_2, dim_angle_1: $dim_angle_1, dim_angle_2: $dim_angle_2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, name_img: $name_img, arborescence: $arborescence, categorie: $categorie)';
+    return 'OutilsDto(id: $id, userId: $userId, noInventaire: $noInventaire, designation: $designation, dimMm1: $dimMm1, dimMm2: $dimMm2, dimAngle1: $dimAngle1, dimAngle2: $dimAngle2, complement: $complement, emplacement: $emplacement, etat: $etat, login: $login, status: $status, nameImg: $nameImg, arborescence: $arborescence, categorie: $categorie)';
   }
 
   @override
@@ -416,12 +409,10 @@ class _$_OutilsDto extends _OutilsDto {
                 .equals(other.noInventaire, noInventaire) &&
             const DeepCollectionEquality()
                 .equals(other.designation, designation) &&
-            const DeepCollectionEquality().equals(other.dim_mm_1, dim_mm_1) &&
-            const DeepCollectionEquality().equals(other.dim_mm_2, dim_mm_2) &&
-            const DeepCollectionEquality()
-                .equals(other.dim_angle_1, dim_angle_1) &&
-            const DeepCollectionEquality()
-                .equals(other.dim_angle_2, dim_angle_2) &&
+            const DeepCollectionEquality().equals(other.dimMm1, dimMm1) &&
+            const DeepCollectionEquality().equals(other.dimMm2, dimMm2) &&
+            const DeepCollectionEquality().equals(other.dimAngle1, dimAngle1) &&
+            const DeepCollectionEquality().equals(other.dimAngle2, dimAngle2) &&
             const DeepCollectionEquality()
                 .equals(other.complement, complement) &&
             const DeepCollectionEquality()
@@ -429,7 +420,7 @@ class _$_OutilsDto extends _OutilsDto {
             const DeepCollectionEquality().equals(other.etat, etat) &&
             const DeepCollectionEquality().equals(other.login, login) &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.name_img, name_img) &&
+            const DeepCollectionEquality().equals(other.nameImg, nameImg) &&
             const DeepCollectionEquality()
                 .equals(other.arborescence, arborescence) &&
             const DeepCollectionEquality().equals(other.categorie, categorie));
@@ -442,16 +433,16 @@ class _$_OutilsDto extends _OutilsDto {
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(noInventaire),
       const DeepCollectionEquality().hash(designation),
-      const DeepCollectionEquality().hash(dim_mm_1),
-      const DeepCollectionEquality().hash(dim_mm_2),
-      const DeepCollectionEquality().hash(dim_angle_1),
-      const DeepCollectionEquality().hash(dim_angle_2),
+      const DeepCollectionEquality().hash(dimMm1),
+      const DeepCollectionEquality().hash(dimMm2),
+      const DeepCollectionEquality().hash(dimAngle1),
+      const DeepCollectionEquality().hash(dimAngle2),
       const DeepCollectionEquality().hash(complement),
       const DeepCollectionEquality().hash(emplacement),
       const DeepCollectionEquality().hash(etat),
       const DeepCollectionEquality().hash(login),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(name_img),
+      const DeepCollectionEquality().hash(nameImg),
       const DeepCollectionEquality().hash(arborescence),
       const DeepCollectionEquality().hash(categorie));
 
@@ -472,16 +463,16 @@ abstract class _OutilsDto extends OutilsDto {
       required String? userId,
       required String? noInventaire,
       required String designation,
-      required String? dim_mm_1,
-      required String? dim_mm_2,
-      required String? dim_angle_1,
-      required String? dim_angle_2,
+      required String? dimMm1,
+      required String? dimMm2,
+      required String? dimAngle1,
+      required String? dimAngle2,
       required String complement,
       required String emplacement,
       required String etat,
       required String? login,
       required String status,
-      required String name_img,
+      required String nameImg,
       required String arborescence,
       required String categorie}) = _$_OutilsDto;
   const _OutilsDto._() : super._();
@@ -489,7 +480,7 @@ abstract class _OutilsDto extends OutilsDto {
   factory _OutilsDto.fromJson(Map<String, dynamic> json) =
       _$_OutilsDto.fromJson;
 
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(ignore: true)
   String? get id;
   @override
@@ -498,14 +489,14 @@ abstract class _OutilsDto extends OutilsDto {
   String? get noInventaire;
   @override
   String get designation;
-  @override // ignore: non_constant_identifier_names
-  String? get dim_mm_1;
-  @override // ignore: non_constant_identifier_names
-  String? get dim_mm_2;
-  @override // ignore: non_constant_identifier_names
-  String? get dim_angle_1;
-  @override // ignore: non_constant_identifier_names
-  String? get dim_angle_2;
+  @override
+  String? get dimMm1;
+  @override
+  String? get dimMm2;
+  @override
+  String? get dimAngle1;
+  @override
+  String? get dimAngle2;
   @override
   String get complement;
   @override
@@ -516,9 +507,9 @@ abstract class _OutilsDto extends OutilsDto {
   String? get login;
   @override
   String get status;
-  @override // ignore: non_constant_identifier_names
-  String get name_img;
-  @override // ignore: non_constant_identifier_names
+  @override
+  String get nameImg;
+  @override
   String get arborescence;
   @override
   String get categorie;

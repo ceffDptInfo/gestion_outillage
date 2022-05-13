@@ -7,9 +7,7 @@ class AppBarReturn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: AppBar(
-        // automaticallyImplyLeading: false,
         centerTitle: true,
-        // foregroundColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         leading: Center(
           child: IconButton(
@@ -20,17 +18,12 @@ class AppBarReturn extends StatelessWidget {
             ),
           ),
         ),
-
         title: Container(),
         elevation: 0.0,
         actions: [
           PopupMenuButton(
             onSelected: (value) {},
             itemBuilder: (context) => [
-              //            PopupMenuItem(
-              //   child: Text("Quitter"),
-              //   value: 1,
-              // ),
               PopupMenuItem(
                 child: Row(
                   children: const [

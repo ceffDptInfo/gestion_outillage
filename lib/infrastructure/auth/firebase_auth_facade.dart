@@ -1,11 +1,7 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:http/http.dart' as http;
 
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_facade.dart';

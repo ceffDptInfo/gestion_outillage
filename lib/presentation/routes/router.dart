@@ -24,11 +24,36 @@ import 'package:gestion_outillage/presentation/tiroir/tiroir_page.dart';
       durationInMilliseconds: 400,
       page: HomePage,
       children: [
-        AutoRoute(page: HomeStartPage),
-        AutoRoute(page: LayettePage),
-        AutoRoute(page: DashboardPage),
-        AutoRoute(page: TiroirPage),
-        AutoRoute(page: CategoriesOutilsMesurePage),
+        AutoRoute(
+          page: HomeStartPage,
+          children: [
+            AutoRoute(page: OutilsMesureListDetailPage),
+          ],
+        ),
+        AutoRoute(
+          page: LayettePage,
+          children: [
+            AutoRoute(page: OutilsMesureListDetailPage),
+          ],
+        ),
+        AutoRoute(
+          page: DashboardPage,
+          children: [
+            AutoRoute(page: OutilsMesureListDetailPage),
+          ],
+        ),
+        AutoRoute(
+          page: TiroirPage,
+          children: [
+            AutoRoute(page: OutilsMesureListDetailPage),
+          ],
+        ),
+        AutoRoute(
+          page: CategoriesOutilsMesurePage,
+          children: [
+            AutoRoute(page: OutilsMesureListDetailPage),
+          ],
+        ),
         AutoRoute(page: OutilsMesureListDetailPage),
         AutoRoute(page: OutilsAddPage, fullscreenDialog: true),
       ],

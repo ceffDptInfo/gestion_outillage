@@ -1,3 +1,29 @@
+List<String> outilsList = [
+  'Outillage métrologie',
+  'Outils de fraisage',
+  'Outils de tournage',
+  'Outils de perçage',
+  'Outils à main'
+];
+
+List<String> outilsNomImg = [
+  'metrologie',
+  'fraiseuse',
+  'tour',
+  'perceuse',
+  'main'
+];
+
+List<String> categories = [
+  "Mesure directe",
+  "Mesure indirecte",
+  "Affichage analogique",
+  "Jauge d'angle",
+  "Micromètre",
+  "Jauges tampon",
+  "Pieds à coulisse",
+];
+
 final List<String> listLay = [
   'Layette n° 1',
   'Layette n° 2',
@@ -45,3 +71,10 @@ String empruntes = 'LES EMPRUNTÉS';
 String usages = 'LES NON-FONCTIONNELS';
 String recents = 'LES RÉCENTS';
 String metrologie = 'Outils de métrologies';
+
+String emailProf = "prof@ceff.ch";
+String emailEleve = "eleve@ceff.ch";
+
+String etat = "Usagé";
+String statue = "Disponible";
+String stateEtat = "Fonctionnel";

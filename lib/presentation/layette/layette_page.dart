@@ -8,20 +8,20 @@ import '../../application/outils/outils_watcher/outils_watcher_bloc.dart';
 import '../../injection.dart';
 
 class LayettePage extends StatelessWidget {
-  FirebaseAuth user;
-   LayettePage({
+  final FirebaseAuth user;
+  const LayettePage({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-          return  BlocProvider(
-          create: (context) => getIt<OutilsWatcherBloc>()
-            ..add(const OutilsWatcherEvent.watchOutilsStarted()),
-          child:
-        LayetteForm(user: user,)
-    ,
+    return BlocProvider(
+      create: (context) => getIt<OutilsWatcherBloc>()
+        ..add(const OutilsWatcherEvent.watchOutilsStarted()),
+      child: LayetteForm(
+        user: user,
+      ),
     );
   }
 }

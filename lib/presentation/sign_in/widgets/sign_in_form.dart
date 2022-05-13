@@ -3,8 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestion_outillage/domain/auth/value_objects.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../application/auth/auth_bloc.dart';
 
 import '../../../application/auth/sign_in_form/sign_in_form_bloc.dart';
@@ -32,7 +31,6 @@ class SignInForm extends StatelessWidget {
           },
           (_) {
             context.router.replace(const SplashRoute());
-            print("AuthCheckRequested");
             BlocProvider.of<AuthBloc>(context, listen: false)
                 .add(const AuthEvent.authCheckRequested());
           },
@@ -41,13 +39,10 @@ class SignInForm extends StatelessWidget {
     }, builder: (context, state) {
       return SafeArea(
         child: SizedBox(
-          // width: MediaQuery.of(context).size.width,
-          // height: MediaQuery.of(context).size.height,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                // color: Colors.green,
                 height: MediaQuery.of(context).size.height,
                 child: CarouselSlider(
                   options: CarouselOptions(autoPlay: true, viewportFraction: 1),
@@ -82,17 +77,6 @@ class SignInForm extends StatelessWidget {
                     ),
                   ],
                 ),
-                // decoration: BoxDecoration(
-                //   color: Colors.grey,
-                //   image: DecorationImage(
-                //     fit: BoxFit.cover,
-                //     colorFilter: ColorFilter.mode(
-                //         Colors.black.withOpacity(0.2), BlendMode.darken),
-                //     image: const NetworkImage(
-                //       'https://www.ceff.ch/fileadmin/media/domaine/industrie-fond-6.jpg',
-                //     ),
-                //   ),
-                // ),
                 width: MediaQuery.of(context).size.width / 2,
               ),
               SizedBox(
@@ -113,7 +97,6 @@ class SignInForm extends StatelessWidget {
                           child: Image.asset('assets/images/ceff.png'),
                         ),
                         Text(
-                          // AppLocalizations.of(context)!.login_string,
                           "Login",
                           style: Theme.of(context).textTheme.headline4,
                         ),
@@ -122,34 +105,12 @@ class SignInForm extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 128, vertical: 16),
                           child: TextFormField(
-                            // initialValue: 'test@ceff.ch',
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.email),
-                              // labelText: AppLocalizations.of(context)!
-                              //     .email_address_string,
-                              labelText:
-                                  // AppLocalizations.of(context)!.password_string,
-                                  "Veuillez ajouter votre email",
+                              labelText: "Veuillez ajouter votre email",
                             ),
                             autocorrect: false,
-                            // onChanged: (value) => context
-                            //     .read<SignInFormBloc>()
-                            //     .add(SignInFormEvent.emailChanged(value)),
-                            // validator: (_) => context
-                            //     .read<SignInFormBloc>()
-                            //     .state
-                            //     .emailAddress
-                            //     .value
-                            //     .fold(
-                            //       (f) => f.maybeMap(
-                            //         invalidEmail: (_) => "Email incorrect",
-                            //         // AppLocalizations.of(context)!
-                            //         // .email_error_message,
-                            //         orElse: () => null,
-                            //       ),
-                            //       (_) => null,
-                            //     ),
                             onChanged: (value) => context
                                 .read<SignInFormBloc>()
                                 .add(SignInFormEvent.emailChanged(value)),
@@ -171,13 +132,10 @@ class SignInForm extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 128, vertical: 16),
                           child: TextFormField(
-                            // initialValue: 'Lol!Lol!1',
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.lock),
-                              labelText:
-                                  // AppLocalizations.of(context)!.password_string,
-                                  "Veuillez ajouter votre mot de passe",
+                              labelText: "Veuillez ajouter votre mot de passe",
                             ),
                             autocorrect: false,
                             obscureText: true,
@@ -193,8 +151,6 @@ class SignInForm extends StatelessWidget {
                                   (f) => f.maybeMap(
                                     invalidPassword: (_) =>
                                         "Mot de passe invalide",
-                                    // AppLocalizations.of(context)!
-                                    //     .password_error_message,
                                     orElse: () => null,
                                   ),
                                   (_) => null,

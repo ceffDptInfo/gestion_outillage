@@ -89,7 +89,8 @@ class AppRouter extends _i11.RootStackRouter {
       final args = routeData.argsAs<OutilsMesureListDetailRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i9.OutilsMesureListDetailPage(args.outil, args.user));
+          child: _i9.OutilsMesureListDetailPage(args.outil, args.user,
+              key: args.key));
     },
     OutilsAddRoute.name: (routeData) {
       return _i11.MaterialPageX<dynamic>(
@@ -105,15 +106,45 @@ class AppRouter extends _i11.RootStackRouter {
         _i11.RouteConfig(SignInRoute.name, path: '/sign-in-page'),
         _i11.RouteConfig(HomeRoute.name, path: '/home-page', children: [
           _i11.RouteConfig(HomeStartRoute.name,
-              path: 'home-start-page', parent: HomeRoute.name),
+              path: 'home-start-page',
+              parent: HomeRoute.name,
+              children: [
+                _i11.RouteConfig(OutilsMesureListDetailRoute.name,
+                    path: 'outils-mesure-list-detail-page',
+                    parent: HomeStartRoute.name)
+              ]),
           _i11.RouteConfig(LayetteRoute.name,
-              path: 'layette-page', parent: HomeRoute.name),
+              path: 'layette-page',
+              parent: HomeRoute.name,
+              children: [
+                _i11.RouteConfig(OutilsMesureListDetailRoute.name,
+                    path: 'outils-mesure-list-detail-page',
+                    parent: LayetteRoute.name)
+              ]),
           _i11.RouteConfig(DashboardRoute.name,
-              path: 'dashboard-page', parent: HomeRoute.name),
+              path: 'dashboard-page',
+              parent: HomeRoute.name,
+              children: [
+                _i11.RouteConfig(OutilsMesureListDetailRoute.name,
+                    path: 'outils-mesure-list-detail-page',
+                    parent: DashboardRoute.name)
+              ]),
           _i11.RouteConfig(TiroirRoute.name,
-              path: 'tiroir-page', parent: HomeRoute.name),
+              path: 'tiroir-page',
+              parent: HomeRoute.name,
+              children: [
+                _i11.RouteConfig(OutilsMesureListDetailRoute.name,
+                    path: 'outils-mesure-list-detail-page',
+                    parent: TiroirRoute.name)
+              ]),
           _i11.RouteConfig(CategoriesOutilsMesureRoute.name,
-              path: 'categories-outils-mesure-page', parent: HomeRoute.name),
+              path: 'categories-outils-mesure-page',
+              parent: HomeRoute.name,
+              children: [
+                _i11.RouteConfig(OutilsMesureListDetailRoute.name,
+                    path: 'outils-mesure-list-detail-page',
+                    parent: CategoriesOutilsMesureRoute.name)
+              ]),
           _i11.RouteConfig(OutilsMesureListDetailRoute.name,
               path: 'outils-mesure-list-detail-page', parent: HomeRoute.name),
           _i11.RouteConfig(OutilsAddRoute.name,
@@ -150,10 +181,14 @@ class HomeRoute extends _i11.PageRouteInfo<void> {
 /// generated route for
 /// [_i4.HomeStartPage]
 class HomeStartRoute extends _i11.PageRouteInfo<HomeStartRouteArgs> {
-  HomeStartRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+  HomeStartRoute(
+      {_i12.Key? key,
+      required _i13.FirebaseAuth user,
+      List<_i11.PageRouteInfo>? children})
       : super(HomeStartRoute.name,
             path: 'home-start-page',
-            args: HomeStartRouteArgs(key: key, user: user));
+            args: HomeStartRouteArgs(key: key, user: user),
+            initialChildren: children);
 
   static const String name = 'HomeStartRoute';
 }
@@ -174,9 +209,14 @@ class HomeStartRouteArgs {
 /// generated route for
 /// [_i5.LayettePage]
 class LayetteRoute extends _i11.PageRouteInfo<LayetteRouteArgs> {
-  LayetteRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+  LayetteRoute(
+      {_i12.Key? key,
+      required _i13.FirebaseAuth user,
+      List<_i11.PageRouteInfo>? children})
       : super(LayetteRoute.name,
-            path: 'layette-page', args: LayetteRouteArgs(key: key, user: user));
+            path: 'layette-page',
+            args: LayetteRouteArgs(key: key, user: user),
+            initialChildren: children);
 
   static const String name = 'LayetteRoute';
 }
@@ -197,10 +237,14 @@ class LayetteRouteArgs {
 /// generated route for
 /// [_i6.DashboardPage]
 class DashboardRoute extends _i11.PageRouteInfo<DashboardRouteArgs> {
-  DashboardRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+  DashboardRoute(
+      {_i12.Key? key,
+      required _i13.FirebaseAuth user,
+      List<_i11.PageRouteInfo>? children})
       : super(DashboardRoute.name,
             path: 'dashboard-page',
-            args: DashboardRouteArgs(key: key, user: user));
+            args: DashboardRouteArgs(key: key, user: user),
+            initialChildren: children);
 
   static const String name = 'DashboardRoute';
 }
@@ -221,9 +265,14 @@ class DashboardRouteArgs {
 /// generated route for
 /// [_i7.TiroirPage]
 class TiroirRoute extends _i11.PageRouteInfo<TiroirRouteArgs> {
-  TiroirRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+  TiroirRoute(
+      {_i12.Key? key,
+      required _i13.FirebaseAuth user,
+      List<_i11.PageRouteInfo>? children})
       : super(TiroirRoute.name,
-            path: 'tiroir-page', args: TiroirRouteArgs(key: key, user: user));
+            path: 'tiroir-page',
+            args: TiroirRouteArgs(key: key, user: user),
+            initialChildren: children);
 
   static const String name = 'TiroirRoute';
 }
@@ -245,10 +294,14 @@ class TiroirRouteArgs {
 /// [_i8.CategoriesOutilsMesurePage]
 class CategoriesOutilsMesureRoute
     extends _i11.PageRouteInfo<CategoriesOutilsMesureRouteArgs> {
-  CategoriesOutilsMesureRoute({_i12.Key? key, required _i13.FirebaseAuth user})
+  CategoriesOutilsMesureRoute(
+      {_i12.Key? key,
+      required _i13.FirebaseAuth user,
+      List<_i11.PageRouteInfo>? children})
       : super(CategoriesOutilsMesureRoute.name,
             path: 'categories-outils-mesure-page',
-            args: CategoriesOutilsMesureRouteArgs(key: key, user: user));
+            args: CategoriesOutilsMesureRouteArgs(key: key, user: user),
+            initialChildren: children);
 
   static const String name = 'CategoriesOutilsMesureRoute';
 }
@@ -271,25 +324,30 @@ class CategoriesOutilsMesureRouteArgs {
 class OutilsMesureListDetailRoute
     extends _i11.PageRouteInfo<OutilsMesureListDetailRouteArgs> {
   OutilsMesureListDetailRoute(
-      {required _i14.Outils outil, required _i13.FirebaseAuth user})
+      {required _i14.Outils outil,
+      required _i13.FirebaseAuth user,
+      _i12.Key? key})
       : super(OutilsMesureListDetailRoute.name,
             path: 'outils-mesure-list-detail-page',
-            args: OutilsMesureListDetailRouteArgs(outil: outil, user: user));
+            args: OutilsMesureListDetailRouteArgs(
+                outil: outil, user: user, key: key));
 
   static const String name = 'OutilsMesureListDetailRoute';
 }
 
 class OutilsMesureListDetailRouteArgs {
   const OutilsMesureListDetailRouteArgs(
-      {required this.outil, required this.user});
+      {required this.outil, required this.user, this.key});
 
   final _i14.Outils outil;
 
   final _i13.FirebaseAuth user;
 
+  final _i12.Key? key;
+
   @override
   String toString() {
-    return 'OutilsMesureListDetailRouteArgs{outil: $outil, user: $user}';
+    return 'OutilsMesureListDetailRouteArgs{outil: $outil, user: $user, key: $key}';
   }
 }
 

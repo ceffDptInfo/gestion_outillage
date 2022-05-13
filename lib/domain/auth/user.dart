@@ -9,7 +9,5 @@ class User with _$User {
   const factory User({
     required UniqueId id,
     required EmailAddress? emailAddress,
-    // required String name,
-    // required int driverLicense,
   }) = _User;
 }

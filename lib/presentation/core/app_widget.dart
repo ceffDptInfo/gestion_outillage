@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gestion_outillage/application/auth/auth_bloc.dart';
 
 import 'package:gestion_outillage/application/nav_drawer/nav_drawer_bloc.dart';
@@ -43,14 +42,11 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (context) => getIt<AddOutilsFormBloc>()),
-        // BlocProvider(create: (context) => getIt<CameraBloc>()),
-        // BlocProvider(create: (context) => getIt<OutilsWatcherBloc>()),
         BlocProvider(
           create: (context) => getIt<OutilsWatcherBloc>()
             ..add(const OutilsWatcherEvent.watchOutilsStarted()),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => getIt<OutilsFirebaseWatcherBloc>()
             ..add(const OutilsFirebaseWatcherEvent.watchOutilsStarted()),
         ),
@@ -71,8 +67,6 @@ class AppWidget extends StatelessWidget {
         routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
         title: 'Gestion Outillage',
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
-        // supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
         localeListResolutionCallback: (locales, supportedLocales) {
           if (locales != null) {

@@ -10,11 +10,12 @@ import 'package:gestion_outillage/infrastructure/outils/outils_repository.dart';
 import 'package:gestion_outillage/presentation/home/home_page.dart';
 
 import 'package:gestion_outillage/presentation/layette/layette_page.dart';
+import '../infrastructure/core/data.dart';
 import 'categories/categories_page.dart';
-import 'core/drawer.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'dashboard/dashboard_page.dart';
+import 'drawer/drawer.dart';
 import 'routes/router.gr.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,9 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Outils
   Outilsrepository outilsrepository = Outilsrepository();
-  // Nav
   late NavDrawerBloc _bloc;
   late Widget _content;
   bool isMenuFixed = false;
@@ -44,11 +43,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
         listeners: [
@@ -56,15 +50,12 @@ class _HomePageState extends State<HomePage> {
             listener: (context, state) {
               state.maybeMap(
                 unauthenticated: (_) {
-                  print("unauthentificated");
-
                   context.router.replace(const SignInRoute());
                 },
                 authenticated: (_) {
                   isAuth = true;
                 },
                 authAsVisitor: (_) {
-                  print("AuthAsVisitor");
                   context.router.replace(const HomeRoute());
                 },
                 orElse: () {},
@@ -126,14 +117,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getContentForState(NavItem state) {
-    FirebaseAuth _user = FirebaseAuth.instance;
+    final FirebaseAuth _user = FirebaseAuth.instance;
 
     if (_user.currentUser == null) {
       switch (state) {
-        // case NavItem.homePage:
-        //   return const HomeStartPage();
-        // case NavItem.dashboadPage:
-        //   return const DashboardPage();
         case NavItem.layettePage:
           return LayettePage(
             user: _user,
@@ -147,14 +134,12 @@ class _HomePageState extends State<HomePage> {
             user: _user,
           );
       }
-    } else if (_user.currentUser!.email == "prof@ceff.ch") {
+    } else if (_user.currentUser!.email == emailProf) {
       switch (state) {
         case NavItem.homePage:
           return HomeStartPage(
             user: _user,
           );
-        // case NavItem.dashboadPage:
-        //   return const DashboardPage();
         case NavItem.layettePage:
           return LayettePage(
             user: _user,
@@ -168,10 +153,8 @@ class _HomePageState extends State<HomePage> {
             user: _user,
           );
       }
-    } else if (_user.currentUser!.email == "eleve@ceff.ch") {
+    } else if (_user.currentUser!.email == emailEleve) {
       switch (state) {
-        // case NavItem.homePage:
-        //   return const HomeStartPage();
         case NavItem.dashboadPage:
           return DashboardPage(
             user: _user,
