@@ -3,19 +3,14 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestion_outillage/application/outils/outil_actor/outil_actor_bloc.dart';
 
 import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../../application/add_outils_form/add_outils_form_bloc.dart';
-
-@immutable
 class OutilsAddForm extends StatefulWidget {
   const OutilsAddForm({Key? key}) : super(key: key);
-
-  // final void Function(File pickedImage) imagePickFunction;
-  // OutilsAddForm(this.imagePickFunction);
   @override
   State<OutilsAddForm> createState() => _OutilsAddFormState();
 }
@@ -35,16 +30,13 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
     setState(() {
       if (pickedImage != null) {
         _pickedImageFile = File(pickedImage.path);
-        // widget.imagePickFunction(_pickedImageFile);
-      } else {
-        // print('No image selected');
-      }
+      } else {}
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddOutilsFormBloc, AddOutilsFormState>(
+    return BlocBuilder<OutilActorBloc, OutilActorState>(
       builder: (context, state) {
         return Scaffold(
           appBar: const PreferredSize(
@@ -55,17 +47,9 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Form(
-              autovalidateMode:
-                  context.read<AddOutilsFormBloc>().state.showErrorMessages
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Container(
-                    //   child: FileImage(_pickedImageFile!),
-                    // ),
-
                     GestureDetector(
                       onTap: () {
                         _pickImage(ImageSource.camera);
@@ -74,15 +58,11 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                         fit: BoxFit.fill,
                         child: Container(
                           decoration: BoxDecoration(
-                            // color: Colors.red,
                             image: DecorationImage(
-                              // image: FileImage(_pickedImageFile!),
                               image: _pickedImageFile == null
                                   ? MemoryImage(kTransparentImage)
                                   : FileImage(_pickedImageFile!)
-                                      // : AssetImage('assets/images/0.JPG')
                                       as ImageProvider,
-                              // fit: BoxFit.fill,
                             ),
                           ),
                           margin: const EdgeInsets.symmetric(vertical: 20),
@@ -94,8 +74,6 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                                   strokeWidth: 1,
                                   dashPattern: const [2, 4],
                                   child: const Center(
-                                    // icon: Icon(Icons.image),
-                                    // label: Text('Add Image'),
                                     child: Icon(
                                       Icons.photo_camera,
                                     ),
@@ -105,7 +83,6 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                         ),
                       ),
                     ),
-                    // textColor: Theme.of(context).primaryColor,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,14 +109,14 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
+                          child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.3,
                             child: buildEmplacement(),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.3,
                             child: buildNoInventaire(),
                           ),
@@ -154,7 +131,7 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               "Etat",
                               style: TextStyle(fontSize: 30),
                             ),
@@ -185,7 +162,7 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               "Statut",
                               style: TextStyle(fontSize: 30),
                             ),
@@ -197,19 +174,10 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                                   "Disponible",
                                   Colors.green,
                                 ),
-                                // ),
                                 choiceChipStatut(
                                   "Emprunté",
                                   Colors.red,
                                 ),
-                                // Container(
-                                //   width: 200,
-                                //   child:
-                                // choiceChipStatut("Disponible", Colors.green,
-                                //     selectStatut, _selectedStatut),
-                                // // ),
-                                // choiceChipStatut("Emprunté", Colors.red,
-                                //     selectStatut, _selectedStatut),
                               ],
                             ),
                           ],
@@ -222,27 +190,29 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
                       children: [
                         ActionChip(
                           onPressed: () {},
-                          shape: StadiumBorder(side: BorderSide()),
-                          label: Text('Ajouter',
+                          shape: const StadiumBorder(side: BorderSide()),
+                          label: const Text('Ajouter',
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(color: Colors.black, fontSize: 15)),
-                          labelPadding: EdgeInsets.symmetric(horizontal: 50),
-                          avatar: Icon(Icons.add),
+                          labelPadding:
+                              const EdgeInsets.symmetric(horizontal: 50),
+                          avatar: const Icon(Icons.add),
                           backgroundColor: Colors.green,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 50,
                         ),
                         ActionChip(
                           onPressed: () => Navigator.pop(context, true),
-                          avatar: Icon(Icons.close),
-                          shape: StadiumBorder(side: BorderSide()),
-                          label: Text('Annuler',
+                          avatar: const Icon(Icons.close),
+                          shape: const StadiumBorder(side: BorderSide()),
+                          label: const Text('Annuler',
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(color: Colors.black, fontSize: 15)),
-                          labelPadding: EdgeInsets.symmetric(horizontal: 50),
+                          labelPadding:
+                              const EdgeInsets.symmetric(horizontal: 50),
                           backgroundColor: Colors.red,
                         ),
                       ],
@@ -262,54 +232,45 @@ class _OutilsAddFormState extends State<OutilsAddForm> {
       padding: const EdgeInsets.all(8.0),
       child: ChoiceChip(
         avatar: _selectedEtat == title
-            ? Icon(Icons.check)
-            : Icon(Icons.indeterminate_check_box),
-        shape: StadiumBorder(side: BorderSide()),
+            ? const Icon(Icons.check)
+            : const Icon(Icons.indeterminate_check_box),
+        shape: const StadiumBorder(side: BorderSide()),
         label: Text(title,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black, fontSize: 15)),
-        labelPadding: EdgeInsets.symmetric(horizontal: 50),
+            style: const TextStyle(color: Colors.black, fontSize: 15)),
+        labelPadding: const EdgeInsets.symmetric(horizontal: 50),
         selected: _selectedEtat == title,
         onSelected: (bool selected) {
           setState(() {
             _selectedEtat = selected ? title : '';
             color = Colors.black;
-            print(_selectedEtat);
           });
         },
         backgroundColor: Colors.black26,
         selectedColor: color,
-        // shape: ContinuousRectangleBorder(
-        //     borderRadius: BorderRadius.circular(5.0))
       ),
     );
   }
 
   Widget choiceChipStatut(String title, Color color) {
-    return Container(
-      // width: MediaQuery.of(context).size.width * 0.2,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ChoiceChip(
-          avatar: _selectedEtat == title ? Icon(Icons.check) : null,
-          shape: StadiumBorder(side: BorderSide()),
-          label: Text(title,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: 15)),
-          labelPadding: EdgeInsets.symmetric(horizontal: 50),
-          selected: _selectedStatut == title,
-          onSelected: (bool selected) {
-            setState(() {
-              _selectedStatut = selected ? title : '';
-              color = Colors.black;
-              // print("test");
-            });
-          },
-          backgroundColor: Colors.black26,
-          selectedColor: color,
-          // shape: ContinuousRectangleBorder(
-          //     borderRadius: BorderRadius.circular(5.0))
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ChoiceChip(
+        avatar: _selectedEtat == title ? const Icon(Icons.check) : null,
+        shape: const StadiumBorder(side: BorderSide()),
+        label: Text(title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.black, fontSize: 15)),
+        labelPadding: const EdgeInsets.symmetric(horizontal: 50),
+        selected: _selectedStatut == title,
+        onSelected: (bool selected) {
+          setState(() {
+            _selectedStatut = selected ? title : '';
+            color = Colors.black;
+          });
+        },
+        backgroundColor: Colors.black26,
+        selectedColor: color,
       ),
     );
   }
@@ -324,10 +285,6 @@ Widget buildDesignation() => TextFormField(
       validator: (value) {
         return null;
       },
-      // onChanged: (){},
-      // initialValue:
-      //     stations.singleWhere((element) => element.id == start).name,
-      // readOnly: true,
       style: const TextStyle(fontSize: 20),
     );
 
@@ -340,10 +297,6 @@ Widget buildComplement() => TextFormField(
       validator: (value) {
         return null;
       },
-      // onChanged: (){},
-      // initialValue:
-      //     stations.singleWhere((element) => element.id == start).name,
-      // readOnly: true,
       style: const TextStyle(fontSize: 20),
     );
 
@@ -356,10 +309,6 @@ Widget buildEmplacement() => TextFormField(
       validator: (value) {
         return null;
       },
-      // onChanged: (){},
-      // initialValue:
-      //     stations.singleWhere((element) => element.id == start).name,
-      // readOnly: true,
       style: const TextStyle(fontSize: 20),
     );
 
@@ -372,9 +321,5 @@ Widget buildNoInventaire() => TextFormField(
       validator: (value) {
         return null;
       },
-      // onChanged: (){},
-      // initialValue:
-      //     stations.singleWhere((element) => element.id == start).name,
-      // readOnly: true,
       style: const TextStyle(fontSize: 20),
     );

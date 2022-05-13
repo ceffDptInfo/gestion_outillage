@@ -7,18 +7,20 @@ import '../../injection.dart';
 import 'widgets/dashboad_form.dart';
 
 class DashboardPage extends StatelessWidget {
-  FirebaseAuth user;
-  DashboardPage({
+  final FirebaseAuth user;
+  const DashboardPage({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return        BlocProvider(
-          create: (context) => getIt<OutilsWatcherBloc>()
-            ..add(const OutilsWatcherEvent.watchOutilsStarted()),
-          child:
-         DashboardForm(auth: user,),);
+    return BlocProvider(
+      create: (context) => getIt<OutilsWatcherBloc>()
+        ..add(const OutilsWatcherEvent.watchOutilsStarted()),
+      child: DashboardForm(
+        auth: user,
+      ),
+    );
   }
 }

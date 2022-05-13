@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -30,7 +28,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<_SignAsVisitor>((event, emit) async {
-      print("auth-bloc sign as visitor");
       emit(const AuthState.authAsVisitor());
     });
   }

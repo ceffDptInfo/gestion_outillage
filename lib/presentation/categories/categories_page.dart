@@ -7,18 +7,20 @@ import '../../injection.dart';
 import 'widgets/categories_page_form.dart';
 
 class CategoriesOutilsMesurePage extends StatelessWidget {
-  FirebaseAuth user;
-   CategoriesOutilsMesurePage({
+  final FirebaseAuth user;
+  const CategoriesOutilsMesurePage({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return        BlocProvider(
-          create: (context) => getIt<OutilsWatcherBloc>()
-            ..add(const OutilsWatcherEvent.watchOutilsStarted()),
-          child:
-         CategoriesOutilsMesureForm(user: user,),);
+    return BlocProvider(
+      create: (context) => getIt<OutilsWatcherBloc>()
+        ..add(const OutilsWatcherEvent.watchOutilsStarted()),
+      child: CategoriesOutilsMesureForm(
+        user: user,
+      ),
+    );
   }
 }

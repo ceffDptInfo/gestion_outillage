@@ -21,7 +21,6 @@ class Outils with _$Outils {
     required String etat,
     required String? login,
     required String status,
-    // ignore: non_constant_identifier_names
     required String nameImg,
     required String arborescence,
     required String categorie,
@@ -50,7 +49,6 @@ class Outils with _$Outils {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    // data['id'] = id;
     data['no_inventaire'] = noInventaire;
     data['designation'] = designation;
     data['dim_mm_1'] = dimmm1;

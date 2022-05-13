@@ -18,26 +18,6 @@ import 'outils_dtos.dart';
 class Outilsrepository implements IOutilsRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Outilsrepository(this._firestore);
-
-  Future<List<OutilsDto>> fetchOutilsByMicro() async {
-    String url = "https://monceff.cidisi.ch/json/outillage_micro.json.php";
-    final response = await http.get(Uri.parse(url));
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      return list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-
   Future<List<OutilsDto>> fetchOutils() async {
     const url = "https://monceff.cidisi.ch/json/outillage.json.php";
     final response = await http.get(Uri.parse(url));
@@ -59,93 +39,9 @@ class Outilsrepository implements IOutilsRepository {
     }
   }
 
-  Future<List<OutilsDto>> fetchOutilsByTiroirAndCat(
-      String tiroir, String query) async {
-    String url = "https://monceff.cidisi.ch/json/outillage_by_tiroir" +
-        tiroir +
-        "_" +
-        query +
-        ".php";
-    final response = await http.get(Uri.parse(url));
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      // print(responsebody);
-      return list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-
   @override
-  Future<List<OutilsDto>> fetchOutilsTiroir1() async {
-    const url = "https://monceff.cidisi.ch/json/outillage_by_tiroir1.php";
-    final response = await http.get(Uri.parse(url));
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      // print(responsebody);
-      return list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-
-  @override
-  Future<List<OutilsDto>> fetchOutilsTiroir4() async {
-    const url = "https://monceff.cidisi.ch/json/outillage_by_tiroir4.php";
-    final response = await http.get(Uri.parse(url));
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      // print(responsebody);
-      return list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-
-  Future<List<OutilsDto>> fetchOutilsCategory() async {
-    const url = "https://monceff.cidisi.ch/json/outillage_by_cat.json.php";
-    final response = await http.get(Uri.parse(url));
-    List<OutilsDto> list = [];
-    if (response.statusCode == 200) {
-      String responsebody = response.body;
-      var jsonresponse = json.decode(responsebody);
-      var outilsResponse =
-          jsonresponse.map((outilsI) => OutilsDto.fromJson(outilsI)).toList();
-      outilsResponse.forEach((outils) {
-        list.add(outils);
-      });
-      return list;
-    } else {
-      throw Exception('Failed to load outils');
-    }
-  }
-    @override
-  Stream<Either<OutilsFailure, KtList<Outils>>> watchOutilFromFirebase() async* {
-    final userOption = await getIt<IAuthFacade>().getSignedInUser();
-    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    final userDoc = user.id.getOrCrash();
-
+  Stream<Either<OutilsFailure, KtList<Outils>>>
+      watchOutilFromFirebase() async* {
     yield* _firestore
         .collection("outils_empruntées")
         .snapshots()
@@ -229,9 +125,6 @@ class Outilsrepository implements IOutilsRepository {
 
   @override
   Future<Either<OutilsFailure, Unit>> create(Outils outil) async {
-    final userOption = await getIt<IAuthFacade>().getSignedInUser();
-    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    final userDoc = user.id.getOrCrash();
     try {
       final outilDto = OutilsDto.fromDomain(outil);
 
@@ -278,9 +171,6 @@ class Outilsrepository implements IOutilsRepository {
 
   @override
   Future<Either<OutilsFailure, Unit>> update(Outils outil) async {
-    final userOption = await getIt<IAuthFacade>().getSignedInUser();
-    final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    final userDoc = user.id.getOrCrash();
     try {
       final outilDto = OutilsDto.fromDomain(outil);
       await _firestore

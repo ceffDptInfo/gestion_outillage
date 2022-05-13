@@ -73,8 +73,7 @@ mixin _$Outils {
   String get emplacement => throw _privateConstructorUsedError;
   String get etat => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
-  String get status =>
-      throw _privateConstructorUsedError; // ignore: non_constant_identifier_names
+  String get status => throw _privateConstructorUsedError;
   String get nameImg => throw _privateConstructorUsedError;
   String get arborescence => throw _privateConstructorUsedError;
   String get categorie => throw _privateConstructorUsedError;
@@ -371,7 +370,7 @@ class _$_Outils extends _Outils {
   final String? login;
   @override
   final String status;
-  @override // ignore: non_constant_identifier_names
+  @override
   final String nameImg;
   @override
   final String arborescence;
@@ -483,7 +482,7 @@ abstract class _Outils extends Outils {
   String? get login;
   @override
   String get status;
-  @override // ignore: non_constant_identifier_names
+  @override
   String get nameImg;
   @override
   String get arborescence;

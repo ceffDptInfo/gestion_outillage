@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 Widget buildSearch() => SearchWidget(
       text: "query",
-      // hintText: 'Vous pouvez chercher l\'outils ici',
       hintText: '',
       onChanged: (String value) {},
     );
@@ -30,24 +27,17 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final styleActive = TextStyle(color: Colors.black);
-    final styleHint = TextStyle(color: Colors.black54);
+    const styleActive = TextStyle(color: Colors.black);
+    const styleHint = TextStyle(color: Colors.black54);
     final style = widget.text.isEmpty ? styleHint : styleActive;
 
     return Container(
-      // height: 100,
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      decoration: BoxDecoration(
-          // borderRadius: BorderRadius.circular(12),
-          // color: Colors.white,
-          // border: Border.all(color: Colors.black26),
-          ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
           labelText: 'Chercher un outil',
-          labelStyle: TextStyle(color: Colors.black, fontSize: 18),
           icon: Icon(Icons.search, color: style.color),
           suffixIcon: widget.text.isNotEmpty
               ? GestureDetector(

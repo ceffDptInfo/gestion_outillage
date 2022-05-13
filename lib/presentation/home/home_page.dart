@@ -8,21 +8,18 @@ import '../../injection.dart';
 import 'widgets/home_form.dart';
 
 class HomeStartPage extends StatelessWidget {
-   FirebaseAuth user;
-   HomeStartPage({
+  final FirebaseAuth user;
+  const HomeStartPage({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return
-        BlocProvider(
-          create: (context) => getIt<OutilsWatcherBloc>()
-            ..add(const OutilsWatcherEvent.watchOutilsStarted()),
-          child:
-         HomeStartForm(user)
-    ,
+    return BlocProvider(
+      create: (context) => getIt<OutilsWatcherBloc>()
+        ..add(const OutilsWatcherEvent.watchOutilsStarted()),
+      child: HomeStartForm(user),
     );
   }
 }

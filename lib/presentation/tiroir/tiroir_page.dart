@@ -1,29 +1,21 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/categories/widgets/search_widget.dart';
-import 'package:gestion_outillage/presentation/core/appbar_widget.dart';
 
-// ignore: must_be_immutable
+import '../../infrastructure/core/data.dart';
+
 class TiroirPage extends StatelessWidget {
-  FirebaseAuth user;
-  TiroirPage({
+  final FirebaseAuth user;
+  const TiroirPage({
     Key? key,
     required this.user,
   }) : super(key: key);
-  TextEditingController controller = TextEditingController();
-  String query = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: PreferredSize(
-      //   preferredSize: const Size.fromHeight(50),
-      //   child: appbar(context),
-      // ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Column(
@@ -45,7 +37,7 @@ class TiroirPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: GridView.builder(
-                  itemCount: outils.length,
+                  itemCount: outilsList.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: 200,
@@ -56,7 +48,9 @@ class TiroirPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      CategoriesOutilsMesurePage(user: user,)));
+                                      CategoriesOutilsMesurePage(
+                                        user: user,
+                                      )));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -84,7 +78,7 @@ class TiroirPage extends StatelessWidget {
                                     top: 15,
                                   ),
                                   child: Text(
-                                    outils[index],
+                                    outilsList[index],
                                     style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
@@ -97,13 +91,6 @@ class TiroirPage extends StatelessWidget {
                   },
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 5),
-
-                  // SliverGridDelegateWithMaxCrossAxisExtent(
-                  // maxCrossAxisExtent: 200.0,
-                  // // mainAxisSpacing: 10.0,
-                  // // crossAxisSpacing: 10.0,
-                  // childAspectRatio: 4.0,
-                  // ),
                 ),
               ),
             ),

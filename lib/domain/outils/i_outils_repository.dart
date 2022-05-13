@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:gestion_outillage/domain/outils/outils_failure.dart';
-import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:kt_dart/kt.dart';
 
 import 'outils.dart';

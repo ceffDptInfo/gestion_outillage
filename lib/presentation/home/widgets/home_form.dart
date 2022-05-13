@@ -2,31 +2,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_outillage/application/outils/outils_watcher/outils_firebase/outils_firebase_watcher_bloc.dart';
-import 'package:gestion_outillage/application/outils/outils_watcher/outils_watcher_bloc.dart';
-import 'package:gestion_outillage/application/outils/outils_watcher/user_outils_watcher/user_outils_watcher_bloc.dart';
-import 'package:gestion_outillage/domain/core/value_objects.dart';
 import 'package:gestion_outillage/domain/outils/outils.dart';
 import 'package:gestion_outillage/infrastructure/core/data.dart';
-import 'package:gestion_outillage/infrastructure/core/outilsData.dart';
-import 'package:gestion_outillage/infrastructure/outils/outils_dtos.dart';
 import 'package:gestion_outillage/presentation/categories/categories_page.dart';
 import 'package:gestion_outillage/presentation/core/card_item_outils.dart';
-import 'package:gestion_outillage/presentation/routes/router.gr.dart';
 import 'package:gestion_outillage/presentation/tiroir/tiroir_page.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:auto_route/auto_route.dart';
-
-import '../../../application/auth/auth_bloc.dart';
 
 class HomeStartForm extends StatelessWidget {
-  FirebaseAuth user;
-  HomeStartForm(this.user);
+  final FirebaseAuth user;
+  const HomeStartForm(this.user, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
     return BlocBuilder<OutilsFirebaseWatcherBloc, OutilsFirebaseWatcherState>(
       builder: (context, state) {
         return state.maybeMap(
@@ -34,7 +24,6 @@ class HomeStartForm extends StatelessWidget {
             child: Text("Erreur de chargement"),
           ),
           loadInProgress: (value) {
-            // print("non");
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -43,43 +32,6 @@ class HomeStartForm extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     _auth.currentUser != null
-                  //         ? PopupMenuButton(
-                  //             onSelected: (value) {
-                  //               context
-                  //                   .read<AuthBloc>()
-                  //                   .add(const AuthEvent.signedOut());
-                  //             },
-                  //             itemBuilder: (context) => [
-                  //               PopupMenuItem(
-                  //                 child: Row(
-                  //                   children: const [
-                  //                     Icon(Icons.logout_rounded),
-                  //                     Text("Se déconnecter"),
-                  //                   ],
-                  //                 ),
-                  //                 value: 2,
-                  //               ),
-                  //             ],
-                  //           )
-                  //         : Padding(
-                  //             padding: const EdgeInsets.all(8.0),
-                  //             child: Align(
-                  //               alignment: Alignment.centerRight,
-                  //               child: ElevatedButton(
-                  //                 onPressed: () {
-                  //                   print("login");
-                  //                   context.router.replace(const SignInRoute());
-                  //                 },
-                  //                 child: const Text('Se connecter'),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //   ],
-                  // ),
                   Divider(
                     height: height * 0.05,
                   ),
@@ -118,7 +70,6 @@ class HomeStartForm extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(left: width * 0.05),
-              // color: Colors.green,
               width: width * 0.8,
               height: height * 0.08,
               child: Text(
@@ -141,24 +92,10 @@ class HomeStartForm extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: outils.size < 20 ? outils.size : 20,
                       itemBuilder: (context, index) {
-                        // if(title==usages){
-                        //   return cardItem(context, index, outils[index],user);
-                        // }
-                        return cardItem(context, index, outils[index], user);
-                        // title == 'LES RÉCENTS'
-                        //     ? cardItem(context, index,  outils[index],user,)
-                        // //     :
-                        //      title == 'LES USAGÉS'
-                        //         // ? outils[index].etat.toString() == 'Usagé'
-                        //             ? cardItem(context, index, outils[index],user)
-                        //             : Container()
-                        //         : title == 'LES EMPRUNTÉS'
-                        //             ? outils[index].status.toString() ==
-                        //                     'Emprunté'
-                        //                 ? cardItem(
-                        //                     context, index, outils[index],user)
-                        //                 : Container()
-                        //             : Container();
+                        return CardItemOuils(
+                          outil: outils[index],
+                          user: user,
+                        );
                       }),
                 ),
               ),
@@ -249,11 +186,4 @@ class HomeStartForm extends StatelessWidget {
           ),
         ],
       );
-
-  Widget cardItem(context, index, Outils outil, FirebaseAuth user) {
-    return CardItemOuils(
-      outil: outil,
-      user: user,
-    );
-  }
 }

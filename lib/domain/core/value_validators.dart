@@ -1,24 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'failures.dart';
 
-Either<ValueFailure<String>, String> validateDesignation(String input) {
-  const emailRegex = r"^[a-zA-Z\s]*$";
-  if (RegExp(emailRegex).hasMatch(input)) {
-    return right(input);
-  } else {
-    return left(ValueFailure.invalidDesignation(failedValue: input));
-  }
-}
-
-Either<ValueFailure<String>, String> validateComplement(String input) {
-  const emailRegex = r"^[a-zA-Z\s]*$";
-  if (RegExp(emailRegex).hasMatch(input)) {
-    return right(input);
-  } else {
-    return left(ValueFailure.invalidComplement(failedValue: input));
-  }
-}
-
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   const emailRegex =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
